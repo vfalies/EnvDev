@@ -41,3 +41,8 @@ Pour installer ces alias, utiliser la commande suivante :
 ```
 source .bash_aliases
 ```
+# Utilisation
+
+L'utilisation du serveur web se fait via le port 81. Un phpinfo() est disponible à l'adresse :
+
+http://localhost:81/phpinfo.php
