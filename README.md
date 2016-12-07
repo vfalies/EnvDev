@@ -45,4 +45,6 @@ source .bash_aliases
 
 L'utilisation du serveur web se fait via le port 81. Un phpinfo() est disponible à l'adresse :
 
+```
 http://localhost:81/phpinfo.php
+```
