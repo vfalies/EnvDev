@@ -2,8 +2,8 @@
 
 Les pré-requis sur la machine hôte sont les suivants :
 
-- docker
-- docker-compose
+- [docker](https://www.docker.com/products/overview)
+- [docker-compose](https://docs.docker.com/compose/install/)
 
 ## Windows
 
