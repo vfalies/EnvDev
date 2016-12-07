@@ -1,0 +1,5 @@
+alias composer='docker run -ti --rm -v $(pwd):/var/www/html composer/composer'
+alias php='docker exec -ti dev_web_1 php'
+alias bower='docker run -ti --rm -v $(pwd):/var/www/html digitallyseamless/nodejs-bower-grunt bower'
+alias nodejs='docker run -ti --rm -v $(pwd):/var/www/html digitallyseamless/nodejs-bower-grunt nodejs'
+alias grunt='docker run -ti --rm -v $(pwd):/var/www/html digitallyseamless/nodejs-bower-grunt grunt'

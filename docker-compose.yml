@@ -1,0 +1,68 @@
+# Environnement Web de developpement en PHP 7.0.13 avec Apache
+version: '2'
+services:
+
+  # Web Server PHP 7 + Apache 2
+  # web:
+  #   restart: always
+  #   build: docker/php7apache
+  #   ports:
+  #     - "81:80" # Redirection des portes entre l'hote et Docker
+  #   volumes:
+  #     - ./projects:/var/www/html
+  #     - ./vhosts:/etc/apache2/sites-enabled # Emplacement de VHOST Apache
+  #     - ./docker/php7apache/php.ini:/usr/local/etc/php/conf.d/30-custom.ini # PHP ini custom
+  #   environment:
+  #     - ALLOW_OVERRIDE=true
+  #   links:
+  #     - db:db
+  #     - maildev:maildev
+  #     - composer:composer
+
+  # Web Server NGinx
+  web:
+    image: nginx
+    ports:
+        - "81:80"
+    volumes:
+        - ./docker/nginx:/etc/nginx/conf.d
+        - ./projects:/var/www/html
+    links:
+        - php:php
+
+  # PHP 7.0.13 FPM
+  php:
+    build: docker/php7fpm
+    volumes:
+        - ./projects:/var/www/html
+        - ./docker/php7fpm/php.ini:/usr/local/etc/php/php.ini
+    links:
+        - db:db
+        - maildev:maildev
+        - composer:composer
+
+  # Database MySQL
+  db:
+      restart: always
+      image: mysql
+      volumes:
+        - ./db/mysql:/var/lib/mysql
+      environment:
+       - MYSQL_ROOT_PASSWORD=root # Mot de passe par defaut pour l'utisateur root
+
+  # To create email during devloppement
+  maildev:
+      restart: always
+      image: djfarrelly/maildev
+      ports:
+        - "1080:80"
+
+  # PHP Package management
+  composer:
+    restart: always
+    image: composer/composer
+
+  # Node / Bower / Grunt
+  nodejs-grunt-bower:
+    restart: always
+    image: digitallyseamless/nodejs-bower-grunt
