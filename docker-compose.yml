@@ -3,21 +3,21 @@ version: '2'
 services:
 
   # Web Server PHP 7 + Apache 2
-  # web:
-  #   restart: always
-  #   build: docker/php7apache
-  #   ports:
-  #     - "81:80" # Redirection des portes entre l'hote et Docker
-  #   volumes:
-  #     - ./projects:/var/www/html
-  #     - ./vhosts:/etc/apache2/sites-enabled # Emplacement de VHOST Apache
-  #     - ./docker/php7apache/php.ini:/usr/local/etc/php/conf.d/30-custom.ini # PHP ini custom
-  #   environment:
-  #     - ALLOW_OVERRIDE=true
-  #   links:
-  #     - db:db
-  #     - maildev:maildev
-  #     - composer:composer
+#  web:
+#    restart: always
+#    build: docker/php7apache
+#    ports:
+#       - "81:80" # Redirection des portes entre l'hote et Docker
+#    volumes:
+#       - ./projects:/var/www/html
+#       - ./conf/apache/vhosts:/etc/apache2/sites-enabled # Emplacement de VHOST Apache
+#       - ./conf/php/php.ini:/usr/local/etc/php/conf.d/30-custom.ini # PHP ini custom
+#    environment:
+#       - ALLOW_OVERRIDE=true
+#    links:
+#       - db:db
+#       - maildev:maildev
+#       - composer:composer
 
   # Web Server NGinx
   web:
@@ -25,7 +25,7 @@ services:
     ports:
         - "81:80"
     volumes:
-        - ./docker/nginx:/etc/nginx/conf.d
+        - ./conf/nginx:/etc/nginx/conf.d
         - ./projects:/var/www/html
     links:
         - php:php
@@ -35,18 +35,29 @@ services:
     build: docker/php7fpm
     volumes:
         - ./projects:/var/www/html
-        - ./docker/php7fpm/php.ini:/usr/local/etc/php/php.ini
+        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
     links:
         - db:db
         - maildev:maildev
         - composer:composer
+
+  # PHP 5.6 FPM
+#  php:
+#    build: docker/php5.6fpm
+#    volumes:
+#        - ./projects:/var/www/html
+#        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+#    links:
+#        - db:db
+#        - maildev:maildev
+#        - composer:composer
 
   # Database MySQL
   db:
       restart: always
       image: mysql
       volumes:
-        - ./db/mysql:/var/lib/mysql
+        - ./db/mysql:/var/lib/mysql # Commenter la ligne des volumes pour une base de données non persistente
       environment:
        - MYSQL_ROOT_PASSWORD=root # Mot de passe par defaut pour l'utisateur root
 

@@ -1,0 +1,5 @@
+projects/*
+!projects/phpinfo.php
+vhosts/*
+!vhosts/000-default.php
+db/mysql/*
