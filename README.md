@@ -44,22 +44,30 @@ source .bash_aliases
 ```
 # Utilisation
 
+Sous Windows, `localhost` devra être remplacé par l'adresse IP de la machine virtuelle Docker Toolbox.
+
+## Accès web
+
 L'utilisation du serveur web se fait via le port 81. Un phpinfo() est disponible à l'adresse :
 
 ```
 http://localhost:81/phpinfo.php
 ```
 
-Sous Windows, `localhost` devra être remplacé par l'adresse IP de la machine virtuelle Docker Toolbox.
+## Maildev
 
-# PhpMyAdmin
+L'outil Maildev permettant de développer de manière les mails avec un serveur de mails local est disponible à l'adresse :
+
+```
+http://localhost:1080
+```
+
+## PhpMyAdmin
 
 PhpMyAdmin est disponible via le port 8080.
 
 ```
 http://localhost:8080/
 ```
-
-Sous Windows, `localhost` devra être remplacé par l'adresse IP de la machine virtuelle Docker Toolbox.
 
 L'utilsateur par défaut est `root`, le mot de passe étant défini directement dans le fichier `docker-compose.yml` (`root` par défaut)
