@@ -1,5 +1,7 @@
 projects/*
 !projects/phpinfo.php
-vhosts/*
-!vhosts/000-default.php
+conf/apache/vhosts/*
+conf/nginx/*
+!conf/apache/vhosts/000-default.conf
+!conf/nginx/default.conf
 db/mysql/*
