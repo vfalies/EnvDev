@@ -6,6 +6,7 @@ services:
   web:
     restart: always
     build: docker/php7apache
+    container_name: web
     ports:
        - "81:80" # Redirection des portes entre l'hote et Docker
     volumes:
@@ -23,6 +24,7 @@ services:
 #    image: nginx
 #    ports:
 #        - "81:80"
+#    container_name: web
 #    volumes:
 #        - ./conf/nginx:/etc/nginx/conf.d
 #        - ./projects:/var/www/html
@@ -32,6 +34,7 @@ services:
 #  # PHP 7.0.13 FPM
 #  php:
 #    build: docker/php7fpm
+#    container_name: php
 #    volumes:
 #        - ./projects:/var/www/html
 #        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
@@ -42,6 +45,7 @@ services:
   # PHP 5.6 FPM
 #  php:
 #    build: docker/php5.6fpm
+#    container_name: php
 #    volumes:
 #        - ./projects:/var/www/html
 #        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
@@ -53,6 +57,7 @@ services:
   db:
       restart: always
       image: mysql
+      container_name: db
       volumes:
         - ./db/mysql:/var/lib/mysql # Commenter la ligne des volumes pour une base de données non persistente
       environment:
@@ -62,6 +67,7 @@ services:
   maildev:
       restart: always
       image: djfarrelly/maildev
+      container_name: maildev
       ports:
         - "1080:80"
 
