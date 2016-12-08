@@ -35,6 +35,7 @@ Permet de créer les alias nécessaires à l'utilisation des outils suivants :
   - bower
   - grunt
   - nodejs
+  - npm
 
 Pour installer ces alias, utiliser la commande suivante :
 
