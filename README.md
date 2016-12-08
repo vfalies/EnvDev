@@ -48,9 +48,18 @@ L'utilisation du serveur web se fait via le port 81. Un phpinfo() est disponible
 
 ```
 http://localhost:81/phpinfo.php
-
 ```
 
-## Sous Windows
+Sous Windows, `localhost` devra être remplacé par l'adresse IP de la machine virtuelle Docker Toolbox.
 
-`localhost` devra être remplacé par l'adresse IP de la machine virtuelle Docker Toolbox
+# PhpMyAdmin
+
+PhpMyAdmin est disponible via le port 8080.
+
+```
+http://localhost:8080/
+```
+
+Sous Windows, `localhost` devra être remplacé par l'adresse IP de la machine virtuelle Docker Toolbox.
+
+L'utilsateur par défaut est `root`, le mot de passe étant défini directement dans le fichier `docker-compose.yml` (`root` par défaut)

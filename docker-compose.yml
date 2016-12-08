@@ -74,3 +74,15 @@ services:
   nodejs-grunt-bower:
     restart: always
     image: digitallyseamless/nodejs-bower-grunt
+
+  # PhpMyAdmin
+  phpmyadmin:
+    restart: always
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - db
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
