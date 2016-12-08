@@ -48,4 +48,9 @@ L'utilisation du serveur web se fait via le port 81. Un phpinfo() est disponible
 
 ```
 http://localhost:81/phpinfo.php
+
 ```
+
+## Sous Windows
+
+`localhost` devra être remplacé par l'adresse IP de la machine virtuelle Docker Toolbox
