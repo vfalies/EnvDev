@@ -3,45 +3,41 @@ version: '2'
 services:
 
   # Web Server PHP 7 + Apache 2
-#  web:
-#    restart: always
-#    build: docker/php7apache
-#    ports:
-#       - "81:80" # Redirection des portes entre l'hote et Docker
-#    volumes:
-#       - ./projects:/var/www/html
-#       - ./conf/apache/vhosts:/etc/apache2/sites-enabled # Emplacement de VHOST Apache
-#       - ./conf/php/php.ini:/usr/local/etc/php/conf.d/30-custom.ini # PHP ini custom
-#    environment:
-#       - ALLOW_OVERRIDE=true
-#    links:
-#       - db:db
-#       - maildev:maildev
-#       - composer:composer
-#       - nodejs-grunt-bower
-
-  # Web Server NGinx
   web:
-    image: nginx
+    restart: always
+    build: docker/php7apache
     ports:
-        - "81:80"
+       - "81:80" # Redirection des portes entre l'hote et Docker
     volumes:
-        - ./conf/nginx:/etc/nginx/conf.d
-        - ./projects:/var/www/html
+       - ./projects:/var/www/html
+       - ./conf/apache/vhosts:/etc/apache2/sites-enabled # Emplacement de VHOST Apache
+       - ./conf/php/php.ini:/usr/local/etc/php/conf.d/30-custom.ini # PHP ini custom
+    environment:
+       - ALLOW_OVERRIDE=true
     links:
-        - php:php
+       - db:db
+       - maildev:maildev
 
-  # PHP 7.0.13 FPM
-  php:
-    build: docker/php7fpm
-    volumes:
-        - ./projects:/var/www/html
-        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
-    links:
-        - db:db
-        - maildev:maildev
-        - composer:composer
-        - nodejs-grunt-bower
+#  # Web Server NGinx
+#  web:
+#    image: nginx
+#    ports:
+#        - "81:80"
+#    volumes:
+#        - ./conf/nginx:/etc/nginx/conf.d
+#        - ./projects:/var/www/html
+#    links:
+#        - php:php
+#
+#  # PHP 7.0.13 FPM
+#  php:
+#    build: docker/php7fpm
+#    volumes:
+#        - ./projects:/var/www/html
+#        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+#    links:
+#        - db:db
+#        - maildev:maildev
 
   # PHP 5.6 FPM
 #  php:
@@ -52,7 +48,6 @@ services:
 #    links:
 #        - db:db
 #        - maildev:maildev
-#        - composer:composer
 
   # Database MySQL
   db:
