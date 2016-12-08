@@ -18,6 +18,7 @@ services:
 #       - db:db
 #       - maildev:maildev
 #       - composer:composer
+#       - nodejs-grunt-bower
 
   # Web Server NGinx
   web:
@@ -40,6 +41,7 @@ services:
         - db:db
         - maildev:maildev
         - composer:composer
+        - nodejs-grunt-bower
 
   # PHP 5.6 FPM
 #  php:
