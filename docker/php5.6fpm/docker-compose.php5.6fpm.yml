@@ -1,0 +1,13 @@
+version: '2'
+services:
+    # PHP 5.6 FPM
+      php:
+        build: docker/php5.6fpm
+        container_name: php
+        volumes:
+            - ./projects:/var/www/html
+            - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+        links:
+            - db:db
+            - maildev:maildev
+            

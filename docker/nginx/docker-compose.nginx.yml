@@ -1,0 +1,13 @@
+version: '2'
+services:
+    # Web Server NGinx
+    web:
+      image: nginx
+      ports:
+          - "81:80"
+      container_name: web
+      volumes:
+          - ./conf/nginx:/etc/nginx/conf.d
+          - ./projects:/var/www/html
+      links:
+          - php:php

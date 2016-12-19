@@ -22,6 +22,12 @@ Plusieurs scripts sont a disposition pour facilité l'utilisation courante des c
 
 Lance le build, puis le démarrage de l'environnement de développement.
 
+Par défaut, le profile PHP 7 FPM avec Nginx est lancé. Pour visualiser les profiles possibles, lancer la commande suivante :
+
+```
+./start.sh help
+```
+
 - stop.sh
 
 Arrête l'ensemble des containers et les supprime.

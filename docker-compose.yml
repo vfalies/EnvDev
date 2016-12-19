@@ -1,58 +1,6 @@
 # Environnement Web de developpement en PHP 7.0.13 avec Apache
 version: '2'
 services:
-
-  # Web Server PHP 7 + Apache 2
-  web:
-    restart: always
-    build: docker/php7apache
-    container_name: web
-    ports:
-       - "81:80" # Redirection des portes entre l'hote et Docker
-    volumes:
-       - ./projects:/var/www/html
-       - ./conf/apache/vhosts:/etc/apache2/sites-enabled # Emplacement de VHOST Apache
-       - ./conf/php/php.ini:/usr/local/etc/php/conf.d/30-custom.ini # PHP ini custom
-    environment:
-       - ALLOW_OVERRIDE=true
-    links:
-       - db:db
-       - maildev:maildev
-
-#  # Web Server NGinx
-#  web:
-#    image: nginx
-#    ports:
-#        - "81:80"
-#    container_name: web
-#    volumes:
-#        - ./conf/nginx:/etc/nginx/conf.d
-#        - ./projects:/var/www/html
-#    links:
-#        - php:php
-#
-#  # PHP 7.0.13 FPM
-#  php:
-#    build: docker/php7fpm
-#    container_name: php
-#    volumes:
-#        - ./projects:/var/www/html
-#        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
-#    links:
-#        - db:db
-#        - maildev:maildev
-
-  # PHP 5.6 FPM
-#  php:
-#    build: docker/php5.6fpm
-#    container_name: php
-#    volumes:
-#        - ./projects:/var/www/html
-#        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
-#    links:
-#        - db:db
-#        - maildev:maildev
-
   # Database MySQL
   db:
       restart: always
@@ -66,6 +14,7 @@ services:
   # To create email during devloppement
   maildev:
       restart: always
+      container_name: maildev
       image: djfarrelly/maildev
       container_name: maildev
       ports:
@@ -75,11 +24,13 @@ services:
   composer:
     restart: always
     image: composer/composer
+    container_name: composer
 
   # Node / Bower / Grunt
   nodejs-grunt-bower:
     restart: always
     image: digitallyseamless/nodejs-bower-grunt
+    container_name: nodejs-bower-grunt
 
   # PhpMyAdmin
   phpmyadmin:
