@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<project name="EnvDev_CI" basedir="." default="ci" description="Environment development continuous integration">
+
+    <!-- *****
+    Properties
+    ***** -->
+    <property name="phpcs_standard" value="EnvDev" />
+    <property name="log_path" value="/app/logs/build" />
+    <property name="phpunit_conf_exist" value="false" />
+
+    <!-- *****
+    Meta targets
+    ***** -->
+
+    <!-- *****
+    Main continuous integration target
+    ***** -->
+    <target name="ci" description="Full continuous integration process">
+        <phingcall target="prepare" />          <!-- Prepare environment to receive all reports -->
+        <phingcall target="lint" />             <!-- Verify PHP syntax for all PHP files of the project -->
+        <phingcall target="phpunit" />          <!-- Run Unit tests by PHPUnit if phpunit.xml file configuration is present -->
+        <phingcall target="newman" />           <!-- Run Newman tests collection if config file is present -->
+        <phingcall target="phpcs">              <!-- Code standards verification with PHPCodeSniffer for all PHP files of the project -->
+            <property name="scope" value="all" />
+        </phingcall>
+        <phingcall target="pdepend" />          <!-- Static analyse with PDepend for all PHP files of the project -->
+        <phingcall target="phpmd">            <!-- Code quality verification with MessDetector for all PHP files -->
+            <property name="scope" value="all" />
+        </phingcall>
+        <phingcall target="phpcpd" />           <!-- Copy/Paste detection with PHPCPD for all PHP files -->
+        <phingcall target="phpmetrics" />       <!-- Static analyse with PHPMetrics -->
+        <phingcall target="clean" />            <!-- Cleaning works -->
+    </target>
+
+    <!-- *****
+    Pre-Push target, call by pre-push hook
+    ***** -->
+    <target name="pre-push" description="Pre-Push process">
+        <phingcall target="prepare" />          <!-- Prepare environment to receive all reports -->
+        <phingcall target="lint" />             <!-- Verify PHP syntax for all PHP files of the project -->
+        <phingcall target="phpunit" />          <!-- Run Unit tests by PHPUnit if phpunit.xml file configuration is present -->
+        <phingcall target="newman" />           <!-- Run Newman tests collection if config file is present -->
+        <phingcall target="push_selection" />   <!-- Generate PHP files list will be pushed -->
+        <phingcall target="phpcs">              <!-- Code standards verification with PHPCodeSniffer for PHP files will be pushed -->
+           <property name="scope" value="selection" />
+           <property name="haltonerror" value="true" />
+           <property name="haltonwarning" value="true" />
+        </phingcall>
+        <phingcall target="clean" />            <!-- Cleaning works -->
+    </target>
+
+    <!-- *****
+    Pre-Commit target, call by pre-commit hook
+    ***** -->
+    <target name="pre-commit" description="Pre-Commit process">
+        <phingcall target="prepare" />                          <!-- Prepare environment to receive all reports -->
+        <phingcall target="lint" />                             <!-- Verify PHP syntax for all PHP files of the project -->
+        <phingcall target="commit_selection" />                 <!-- Generate PHP files list will be commited -->
+        <phingcall target="phpcs">                              <!-- Code standards verification with PHPCodeSniffer for all PHP files will be committed -->
+            <property name="scope" value="selection" />
+        </phingcall>
+        <phingcall target="clean" />                            <!-- Cleaning works -->
+    </target>
+
+    <!-- *****
+    Prepare environment to receive all reports
+    ***** -->
+    <target name="prepare" description="Clean artefact's directories">
+        <echo msg="Clean artefact's directories" />
+        <delete dir="${log_path}" />
+
+        <echo msg="Artefact's directories creation" />
+        <mkdir dir="${log_path}/working" />
+        <mkdir dir="${log_path}/logs" />
+        <mkdir dir="${log_path}/phpcs" />
+        <mkdir dir="${log_path}/code-browser" />
+        <mkdir dir="${log_path}/coverage" />
+        <mkdir dir="${log_path}/pdepend" />
+        <mkdir dir="${log_path}/phpmetrics" />
+    </target>
+
+    <!-- *****
+    Verify PHP syntax for all PHP files of the project
+    ***** -->
+    <target name="lint" description="Check PHP syntax">
+        <echo msg="Check PHP syntax" />
+        <mkdir dir="${log_path}/logs" />
+        <phplint haltonfailure="true" deprecatedAsError="true" tofile="${log_path}/lint.log">
+            <fileset dir=".">
+                <patternset>
+                  <include name="**/*.php" />
+                  <exclude name="vendor/**" />
+                </patternset>
+            </fileset>
+        </phplint>
+        <echo msg="Report at: ${log_path}/lint.log" />
+    </target>
+
+    <!-- *****
+    Targets
+    ***** -->
+
+    <!-- *****
+    Static analyse with PDepend for all PHP files of the project
+    Creation of XML reports
+    ***** -->
+    <target name="pdepend" description="Static analyse of PHP files">
+        <echo msg="Static analyse of code" />
+        <mkdir dir="${log_path}/logs" />
+        <mkdir dir="${log_path}/pdepend" />
+        <phpdepend>
+            <fileset dir=".">
+              <patternset>
+                <include name="**/*.php" />
+                <exclude name="vendor/**" />
+              </patternset>
+            </fileset>
+            <logger type="jdepend-xml" outfile="${log_path}/logs/jdepend.xml" />
+            <logger type="jdepend-chart" outfile="${log_path}/pdepend/dependencies.svg" />
+            <logger type="overview-pyramid" outfile="${log_path}/pdepend/overview-pyramid.svg" />
+        </phpdepend>
+        <echo msg="Reports at : " />
+        <echo msg="${log_path}/logs/jdepend.xml" />
+        <echo msg="${log_path}/pdepend/dependencies.svg" />
+        <echo msg="${log_path}/pdepend/overview-pyramid.svg" />
+    </target>
+
+    <!-- *****
+    Code quality verification with MessDetector for all PHP files
+    ***** -->
+    <target name="phpmd" description="Check PHP quality code">
+        <echo msg="Quality analyse of code" />
+        <mkdir dir="${log_path}/logs" />
+        <mkdir dir="${log_path}/working" />
+        <!-- Default properties definition -->
+        <if>
+            <not><isset property="scope" /></not>
+            <then>
+                <property name="scope" value="all" />
+            </then>
+        </if>
+        <if>
+            <not><isset property="haltonerror" /></not>
+            <then>
+                <property name="haltonerror" value="false" />
+            </then>
+        </if>
+        <if>
+            <not><isset property="haltonwarning" /></not>
+            <then>
+                <property name="haltonwarning" value="false" />
+            </then>
+        </if>
+        <if>
+            <isset property="file" />
+            <then>
+                <exec command="echo ${file} > ${log_path}/working/php_files.log" />
+            </then>
+        </if>
+        <switch value="${scope}">
+            <case value="all">
+                <phpmd>
+                    <fileset dir=".">
+                      <patternset>
+                        <include name="**/*.php" />
+                        <exclude name="vendor/**" />
+                      </patternset>
+                    </fileset>
+                    <formatter type="xml" outfile="${log_path}/logs/phpmd.xml" />
+                    <formatter type="text" usefile="false" outfile="" />
+                </phpmd>
+                <echo msg="Report at : ${log_path}/logs/phpmd.xml" />
+            </case>
+            <case value="selection">
+                <echo msg="Standard code verification on currents files" />
+                <exec command="wc -l ${log_path}/working/php_files.log" outputProperty="phpcbf_files_lines" />
+                <if>
+                    <equals arg1="${phpcbf_files_lines}" arg2="0 ${log_path}/working/php_files.log" />
+                    <then>
+                        <echo msg="No PHP file found" />
+                    </then>
+                    <else>
+                        <echo msg="Files found" />
+                        <exec command="cat ${log_path}/working/php_files.log" passthru="true" />
+                        <phpmd>
+                            <fileset dir=".">
+                                <includesfile name="${log_path}/working/php_files.log" />
+                            </fileset>
+                            <formatter type="xml" outfile="${log_path}/logs/phpmd.xml" />
+                            <formatter type="text" usefile="false" outfile="" />
+                        </phpmd>
+                        <echo msg="Report at : ${log_path}/logs/phpmd.xml" />
+                    </else>
+                </if>
+            </case>
+            <default>
+                <fail message="Unknown Scope value" />
+            </default>
+        </switch>
+    </target>
+
+    <!-- *****
+    Copy/Paste detection with PHPCPD for all PHP files
+    ***** -->
+    <target name="phpcpd" description="Copy/Paster detection">
+        <mkdir dir="${log_path}/logs" />
+        <phpcpd>
+            <fileset dir=".">
+              <patternset>
+                <include name="**/*.php" />
+                <exclude name="vendor/**" />
+              </patternset>
+            </fileset>
+            <formatter type="pmd" outfile="${log_path}/logs/pmd-cpd.xml"/>
+            <formatter type="default" usefile="false"/>
+        </phpcpd>
+        <echo msg="Report at : ${log_path}/logs/pmd-cpd.xml" />
+    </target>
+
+    <!-- *****
+    Run Newman tests collection if config file is present
+    ***** -->
+    <target name="newman" description="Newman tests collection">
+        <echo msg="Newman's configuration verification" />
+        <mkdir dir="${log_path}/logs" />
+        <exec command="if [ -f 'postman_collection.json' ]; then echo 'true'; else echo 'false'; fi;" outputProperty="newman_conf_exist" />
+
+        <if>
+            <equals arg1="${newman_conf_exist}" arg2="true" />
+            <then>
+                <echo msg="Tests collection starting" />
+                <exec command="${waf_ci_path}/node_modules/newman/bin/newman.js run postman_collection.json --reporter-junit-export ${log_path}/logs/newman-testsuites.xml" passthru="true" checkreturn="true" />
+                <exec command="rm npm-debug.log.*" />
+            </then>
+            <else>
+                <echo msg="No Newman's test found" />
+            </else>
+        </if>
+
+    </target>
+
+    <!-- *****
+    Run Unit tests by PHPUnit if phpunit.xml file configuration is present
+    ***** -->
+    <target name="phpunit" description="Unit tests process">
+        <echo msg="PHPUnit configuration verification" />
+        <exec command="if [ -f 'phpunit.xml' ]; then echo 'true'; else echo 'false'; fi;" outputProperty="phpunit_conf_exist" />
+
+        <if>
+            <equals arg1="${phpunit_conf_exist}" arg2="true" />
+            <then>
+                <mkdir dir="${log_path}/logs" />
+                <mkdir dir="${log_path}/coverage" />
+                <echo msg="Unitary tests starting" />
+                <exec logoutput="true" dir="." command="phpunit --coverage-html ${log_path}/coverage --coverage-clover ${log_path}/logs/clover.xml --log-junit ${log_path}/logs/junit.xml" escape="false" checkreturn="true" passthru="true" />
+                <echo msg="Reports at: " />
+                <echo msg="${log_path}/logs/junit.xml" />
+                <echo msg="${log_path}/logs/clover.xml" />
+            </then>
+            <else>
+                <echo msg="No unitary test found" />
+            </else>
+        </if>
+
+    </target>
+
+    <!-- *****
+    Generate PHP files list will be commited
+    ***** -->
+    <target name="commit_selection">
+        <echo msg="Getting files will be commited" />
+        <mkdir dir="${log_path}/working" />
+        <exec command="git diff --cached --summary --name-only | grep .php > ${log_path}/working/php_files.log" />
+    </target>
+
+    <!-- *****
+    Generate PHP files list will be pushed
+    ***** -->
+    <target name="push_selection">
+      <mkdir dir="${log_path}/working" />
+      <exec command="git rev-parse --abbrev-ref --symbolic-full-name @{u}  2> /dev/null |grep origin" passthru="true" returnProperty="branch_pushed" />
+
+      <echo msg="Current Git branch detection" />
+      <exec command="git rev-parse --abbrev-ref HEAD" outputProperty="current_branch" />
+      <echo msg="Branche courante : ${current_branch}" />
+
+      <if>
+          <equals arg1="${branch_pushed}" arg2="0" />
+          <then>
+              <echo msg="Branch ${current_branch} WITH branch upstream" />
+
+              <echo msg="Getting PHP files list" />
+              <exec command="git diff --stat --cached --pretty=format: --name-only origin/${current_branch} -- |grep .php |sort -u > ${log_path}/working/php_files.log" />
+          </then>
+          <else>
+              <echo msg="Branch ${current_branch} WITHOUT branch upstream" />
+              <exec command="git reflog show --pretty=format: --name-only ${current_branch} | sort -u > ${log_path}/working/php_files.log" />
+          </else>
+      </if>
+
+      <!-- Delete empty lines -->
+      <exec command="sed -i '/^$/d' ${log_path}/working/php_files.log" />
+      <!-- Remove all not PHP files -->
+      <exec command="sed -i '/\.php$/!d' ${log_path}/working/php_files.log" />
+    </target>
+
+    <!-- *****
+    Cleaning works
+    ***** -->
+    <target name="clean" >
+        <echo msg="Deleting working files" />
+        <delete dir="${log_path}/working" />
+    </target>
+
+    <!-- *****
+    Beautify code with Code Standards for PHP files
+    ***** -->
+    <target name="phpcbf" description="Beautification code process">
+        <mkdir dir="${log_path}/phpcs" />
+        <mkdir dir="${log_path}/working" />
+        <!-- Default properties definition -->
+        <if>
+            <not><isset property="scope" /></not>
+            <then>
+                <property name="scope" value="selection" />
+            </then>
+        </if>
+        <if>
+            <not><isset property="file" /></not>
+            <then>
+                <fail message="A target file must be specify for this task" />
+            </then>
+        </if>
+        <switch value="${scope}">
+            <case value="selection">
+                <exec command="phpcbf --standard=${phpcs_standard} ${file}" passthru="true" />
+            </case>
+        </switch>
+    </target>
+
+    <!-- *****
+    Static analyse with PHPMetrics
+    ***** -->
+    <target name="phpmetrics" description="Analyse by PHPMetrics">
+        <mkdir dir="${log_path}/phpmetrics" />
+        <exec command="phpmetrics --report-html=${log_path}/phpmetrics/report.html ." passthru="true" />
+    </target>
+
+    <!-- *****
+    Code standards verification with PHPCodeSniffer for PHP files
+    Creation of a XML GuideLines report
+    ***** -->
+    <target name="phpcs" description="Code standards verification process">
+        <mkdir dir="${log_path}/phpcs" />
+        <mkdir dir="${log_path}/working" />
+        <!-- Default properties definition -->
+        <if>
+            <not><isset property="scope" /></not>
+            <then>
+                <property name="scope" value="all" />
+            </then>
+        </if>
+        <if>
+            <not><isset property="haltonerror" /></not>
+            <then>
+                <property name="haltonerror" value="false" />
+            </then>
+        </if>
+        <if>
+            <not><isset property="haltonwarning" /></not>
+            <then>
+                <property name="haltonwarning" value="false" />
+            </then>
+        </if>
+        <if>
+            <isset property="file" />
+            <then>
+                <exec command="echo ${file} > ${log_path}/working/php_files.log" />
+            </then>
+        </if>
+        <switch value="${scope}">
+            <case value="all">
+                <echo msg="Standards code verification on all PHP files" />
+                <phpcodesniffer standard="${phpcs_standard}" haltonerror="${haltonerror}" haltonwarning="${haltonwarning}" showWarnings="true">
+                    <fileset dir=".">
+                      <patternset>
+                        <include name="**/*.php" />
+                        <exclude name="vendor/**" />
+                      </patternset>
+                    </fileset>
+                    <formatter type="checkstyle" outfile="${log_path}/phpcs/guidelines.xml"/>
+                    <formatter type="full" outfile="${log_path}/phpcs/guidelines.log" />
+                    <formatter type="full" usefile="false"/>
+                </phpcodesniffer>
+                <echo msg="Reports at: " />
+                <echo msg="${log_path}/phpcs/guidelines.xml" />
+                <echo msg="${log_path}/phpcs/guidelines.log" />
+            </case>
+            <case value="selection">
+                <echo msg="Standards code verification on current files" />
+                <exec command="wc -l ${log_path}/working/php_files.log" outputProperty="phpcbf_files_lines" />
+                <if>
+                    <equals arg1="${phpcbf_files_lines}" arg2="0 ${log_path}/working/php_files.log" />
+                    <then>
+                        <echo msg="No PHP file found" />
+                    </then>
+                    <else>
+                      <echo msg="Files found" />
+                      <exec command="cat ${log_path}/working/php_files.log" passthru="true" />
+                      <phpcodesniffer standard="${phpcs_standard}" haltonerror="${haltonerror}" haltonwarning="${haltonwarning}" showWarnings="true">
+                          <fileset dir=".">
+                              <includesfile name="${log_path}/working/php_files.log" />
+                          </fileset>
+                          <formatter type="checkstyle" outfile="${log_path}/phpcs/guidelines.xml"/>
+                          <formatter type="full" outfile="${log_path}/phpcs/guidelines.log" />
+                          <formatter type="full" usefile="false"/>
+                      </phpcodesniffer>
+                      <echo msg="Reports at: " />
+                      <echo msg="${log_path}/phpcs/guidelines.xml" />
+                      <echo msg="${log_path}/phpcs/guidelines.log" />
+                    </else>
+                </if>
+            </case>
+            <default>
+                <fail message="Unknown Scope value" />
+            </default>
+        </switch>
+    </target>
+
+
+</project>

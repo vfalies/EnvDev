@@ -4,7 +4,7 @@ services:
     web:
       image: nginx
       ports:
-          - "81:80"
+          - ${WEB_PORT}:80
       container_name: web
       volumes:
           - ./conf/nginx:/etc/nginx/conf.d

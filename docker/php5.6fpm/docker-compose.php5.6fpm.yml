@@ -4,10 +4,12 @@ services:
       php:
         build: docker/php5.6fpm
         container_name: php
+        image: php
         volumes:
             - ./projects:/var/www/html
             - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+        env_file:
+            - ./.env
         links:
             - db:db
             - maildev:maildev
-            

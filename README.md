@@ -54,11 +54,21 @@ Sous Windows, `localhost` devra être remplacé par l'adresse IP de la machine v
 
 ## Accès web
 
-L'utilisation du serveur web se fait via le port 81. Un phpinfo() est disponible à l'adresse :
+L'utilisation du serveur web se fait par défaut via le port 81.
+
+```
+http://localhost:81
+```
+
+Un phpinfo() est disponible à l'adresse :
 
 ```
 http://localhost:81/phpinfo.php
 ```
+
+Ce port est modifiable via le fichier `.env` à la racine en changeant la variable `WEB_PORT`.
+
+A noter que pour les VHOST toutes les sources déposées dans `projects` sont montées dans le répertoire `/var/www/html`.
 
 ## Maildev
 
@@ -67,6 +77,8 @@ L'outil Maildev permettant de développer de manière les mails avec un serveur 
 ```
 http://localhost:1080
 ```
+
+Le port 1080 est modifiable via le fichier `.env` à la racine en changeant la variable `MAILDEV_PORT`.
 
 ## PhpMyAdmin
 
@@ -77,3 +89,32 @@ http://localhost:8080/
 ```
 
 L'utilsateur par défaut est `root`, le mot de passe étant défini directement dans le fichier `docker-compose.yml` (`root` par défaut)
+
+Le port 8080 est modifiable via le fichier `.env` à la racine en changeant la variable `PHPMYADMIN_PORT`.
+
+## Intégration continue (CI)
+
+Un ensemble d'outils est disponible afin de mettre en place un processus d'intégration continue.
+
+Les outils disponibles sont les suivants :
+
+* PHP CodeSniffer
+* PHPUnit
+* PHPCPD
+* PHPCBF
+* Phing
+* PHPMD
+* PDepend
+* PHPMetrics
+
+Chacun de ses outils est utilisable directement via la ligne de commande.
+
+A noter qu'un alias global permet de lancer l'ensemble du processus d'intégration continue :
+
+```
+ci
+```
+
+Concernant l'outil PHPCBF le fichier cible est nécessaire lors de l'utilisation de la ligne de commande.
+
+Le fichier décrivant les règles de standard de code est : `docker/ci/ruleset.xml`

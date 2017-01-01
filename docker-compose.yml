@@ -3,7 +3,6 @@ version: '2'
 services:
   # Database MySQL
   db:
-      restart: always
       image: mysql
       container_name: db
       volumes:
@@ -13,33 +12,33 @@ services:
 
   # To create email during devloppement
   maildev:
-      restart: always
       container_name: maildev
       image: djfarrelly/maildev
-      container_name: maildev
       ports:
-        - "1080:80"
-
-  # PHP Package management
-  composer:
-    restart: always
-    image: composer/composer
-    container_name: composer
-
-  # Node / Bower / Grunt
-  nodejs-grunt-bower:
-    restart: always
-    image: digitallyseamless/nodejs-bower-grunt
-    container_name: nodejs-bower-grunt
+        - ${MAILDEV_PORT}:80
+        - 1025:25
 
   # PhpMyAdmin
   phpmyadmin:
-    restart: always
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     links:
       - db
     ports:
-      - 8080:80
+      - ${PHPMYADMIN_PORT}:80
     volumes:
       - /sessions
+
+  # Continuous Integration
+  ci:
+    restart: always
+    build: docker/ci
+    image: vfalies/ci
+    container_name: ci
+
+  # Tools : Composer, Node, Bower, Grunt
+  tools:
+    restart: always
+    build: docker/tools
+    image: vfalies/tools
+    container_name: tools

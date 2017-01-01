@@ -1,4 +1,5 @@
-FROM php:7.0.13-fpm
+FROM php:7.1-fpm
+MAINTAINER Vincent Falies <vincent.falies@gmail.com>
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
