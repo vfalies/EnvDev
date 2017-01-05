@@ -1,9 +1,0 @@
-2017-01-01
-    - Change Tools integration (NodeJs, NPM, Grunt, Bower, Composer) in a custom image, remove old images
-    - Add Continuous Integration (CI) tools
-    - Add Home page for all projects and tools
-    - Remove useless restart option in docker-compose
-    - Add environnement variables
-    - Change NGinx standard image to NGinx alpine image
-    - Add Rewrite module in docker-compose php 7 with Apache image
-    - Update PHP 7 FPM image from 7.0.13 to 7.1

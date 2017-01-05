@@ -427,5 +427,11 @@
         </switch>
     </target>
 
+    <target name="installhook" description="Git Hook installation for continuous integration">
+        <property name="URI.base" value="./"/>
+        <resolvepath propertyName="URI.base" file="${URI.base}"/>
+        <copy file="/ci/git-precommit-hook.sh" tofile="${URI.base}/.git/hooks/pre-commit" overwrite="true" />
+        <copy file="/ci/git-prepush-hook.sh" tofile="${URI.base}/.git/hooks/pre-push" overwrite="true" />
+    </target>
 
 </project>

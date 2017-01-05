@@ -13,6 +13,7 @@ RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - \
 
 RUN wget https://getcomposer.org/composer.phar \
     && chmod +x composer.phar \
-    && mv composer.phar /usr/local/bin/composer
+    && mv composer.phar /usr/local/bin/composer \
+    && composer config --global repo.packagist composer https://packagist.org
 
 WORKDIR /var/www/html

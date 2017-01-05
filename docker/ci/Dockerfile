@@ -22,6 +22,11 @@ ENV PATH /root/.composer/vendor/bin:$PATH
 
 RUN mkdir /ci
 ADD build.xml /ci/build.xml
+ADD ci.sh /ci/ci.sh
+ADD git-precommit-hook.sh /ci/git-precommit-hook.sh
+ADD git-prepush-hook.sh /ci/git-prepush-hook.sh
+RUN chmod +x /ci/ci.sh /ci/git-precommit-hook.sh /ci/git-prepush-hook.sh
+
 RUN mkdir /root/.composer/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/EnvDev
 ADD ruleset.xml /root/.composer/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/EnvDev/ruleset.xml
 

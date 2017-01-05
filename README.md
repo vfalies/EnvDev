@@ -43,11 +43,20 @@ Permet de créer les alias nécessaires à l'utilisation des outils suivants :
   - nodejs
   - npm
 
-Pour installer ces alias, utiliser la commande suivante :
+Pour installer ces alias, utiliser une des commandes suivantes :
+
+de manière temporaire :
 
 ```
 source .bash_aliases
 ```
+
+de manière permanente :
+
+```
+echo .bash_aliases >> ~/.bash_aliases
+```
+
 # Utilisation
 
 Sous Windows, `localhost` devra être remplacé par l'adresse IP de la machine virtuelle Docker Toolbox.
