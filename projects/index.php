@@ -17,7 +17,7 @@
     }
 
     .webblock {
-      margin: 10px;
+      margin-right: 10px;
       line-height: 19px;
     }
 
@@ -35,6 +35,11 @@
       padding-right: 0px;
     }
 
+    .webblock > a.report_link {
+      padding-right: 5px;
+      min
+    }
+
     .webblock > .text,
     .webblock > a > .text {
       padding: 10px;
@@ -42,6 +47,10 @@
       line-height: 19px;
       background-color: white;
       height: 40px;
+    }
+
+    .webblock > .spacer {
+      width: 10px;
     }
 
     </style>
@@ -111,11 +120,12 @@
                     <div class="icon"><i class="glyphicon glyphicon-folder-open"></i></div>
                     <div class="text"><?= $entry; ?></div>
                     <?php if (file_exists($report)):  ?>
-                      <a href="<?= $report; ?>" target="_blank"><div class="icon"><i class="glyphicon glyphicon-stats"></i></div></a>
+                      <a href="<?= $report; ?>" target="_blank">
+                        <div class="icon"><i class="glyphicon glyphicon-stats"></i></div>
+                      </a>
                     <?php endif; ?>
                   </div>
                 </a>
-
               <?php
             endif;
           endforeach;
