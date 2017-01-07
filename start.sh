@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Default profile
-default='php7nginx'
+default_profile='php7nginx'
 
 profile=''
 if [ -z $1 ]
   then
-    profile=$default
+    profile=$default_profile
   else
     profile=$1
 fi

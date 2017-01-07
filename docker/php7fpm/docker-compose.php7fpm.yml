@@ -3,10 +3,13 @@ services:
     # PHP 7.0.13 FPM
     php:
       build: docker/php7fpm
+      image: php
       container_name: php
       volumes:
           - ./projects:/var/www/html
           - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+      env_file:
+          - ./.env
       links:
           - db:db
           - maildev:maildev
