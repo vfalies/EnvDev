@@ -1,4 +1,4 @@
-# Environnement Web de developpement en PHP 7.0.13 avec Apache
+# Environnement Web de developpement
 version: '2'
 services:
   # Database MySQL
