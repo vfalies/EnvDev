@@ -1,5 +1,5 @@
 FROM php:7.1-fpm
-MAINTAINER Vincent Falies <vincent.falies@gmail.com>
+LABEL maintainer "Vincent Falies <vincent.falies@gmail.com>"
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \

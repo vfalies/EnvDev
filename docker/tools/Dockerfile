@@ -1,9 +1,10 @@
-FROM debian:jessie-slim
-MAINTAINER Vincent Falies <vincent.falies@gmail.com>
+FROM php
+LABEL maintainer "Vincent Falies <vincent.falies@gmail.com>"
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     curl \
     php5 \
+    php5-dev \
     wget
 
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - \

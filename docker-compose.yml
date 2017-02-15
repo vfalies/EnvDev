@@ -31,14 +31,14 @@ services:
 
   # Continuous Integration
   ci:
-    restart: always
     build: docker/ci
     image: vfalies/ci
     container_name: ci
+    depends_on:
+      - tools
 
   # Tools : Composer, Node, Bower, Grunt
   tools:
-    restart: always
     build: docker/tools
     image: vfalies/tools
     container_name: tools

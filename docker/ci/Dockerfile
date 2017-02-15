@@ -1,16 +1,7 @@
-FROM debian
-MAINTAINER Vincent Falies <vincent.falies@gmail.com>
+FROM vfalies/tools
+LABEL maintainer "Vincent Falies <vincent.falies@gmail.com>"
 
-RUN apt-get update && apt-get install -y \
-    wget \
-    php5-dev
-
-RUN wget https://getcomposer.org/composer.phar \
-    && chmod +x composer.phar \
-    && mv composer.phar /usr/local/bin/composer
-
-RUN composer config --global repo.packagist composer https://packagist.org \
-    && composer global require squizlabs/php_codesniffer \
+RUN composer global require squizlabs/php_codesniffer \
     && composer global require phpunit/phpunit \
     && composer global require sebastian/phpcpd \
     && composer global require phing/phing \
@@ -31,3 +22,5 @@ RUN mkdir /root/.composer/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards
 ADD ruleset.xml /root/.composer/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/EnvDev/ruleset.xml
 
 WORKDIR /app
+
+ENTRYPOINT ["/ci/ci.sh"]

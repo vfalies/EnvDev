@@ -326,7 +326,13 @@
             </then>
         </if>
         <if>
-            <not><isset property="file" /></not>
+            <or>
+              <not><isset property="file" /></not>
+              <and>
+                <isset property="file" />
+                <equals arg1="${file}" arg2="" />
+              </and>
+            </or>
             <then>
                 <fail message="A target file must be specify for this task" />
             </then>

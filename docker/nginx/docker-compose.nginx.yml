@@ -2,12 +2,12 @@ version: '2'
 services:
     # Web Server NGinx
     web:
-      image: nginx
+      image: nginx:alpine
       ports:
           - ${WEB_PORT}:80
       container_name: web
       volumes:
           - ./conf/nginx:/etc/nginx/conf.d
-          - ./projects:/var/www/html
+          - ${PROJECTS_PATH}:/var/www/html
       links:
           - php:php

@@ -6,7 +6,7 @@ services:
         container_name: php
         image: php
         volumes:
-            - ./projects:/var/www/html
+            - ${PROJECTS_PATH}:/var/www/html
             - ./conf/php/php.ini:/usr/local/etc/php/php.ini
         env_file:
             - ./.env

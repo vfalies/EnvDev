@@ -14,6 +14,16 @@ Attention, les fichiers devant être partagés avec la machine virtuelle doivent
 
 - `C:/Users/[NomUtilisateur]/`
 
+### Git sous Windows
+
+La configuration de GIT suivante est nécessaire sous Windows pour le bon fonctionnement des containers :
+
+```
+git config core.autocrlf false
+```
+
+Sans la conservation des caractères de fin de ligne unix, des comportements anormaux peuvent être rencontrés.
+
 # Installation
 
 Plusieurs scripts sont a disposition pour facilité l'utilisation courante des containers.
@@ -78,6 +88,8 @@ http://localhost:81/phpinfo.php
 Ce port est modifiable via le fichier `.env` à la racine en changeant la variable `WEB_PORT`.
 
 A noter que pour les VHOST toutes les sources déposées dans `projects` sont montées dans le répertoire `/var/www/html`.
+
+Le répertoire `projects` où sont déposées les sources est paramétrable dans le fichier `.env` en changeant la variable `PROJECTS_PATH`.
 
 ## Maildev
 
