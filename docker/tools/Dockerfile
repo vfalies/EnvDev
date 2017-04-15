@@ -10,7 +10,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g bower \
-    && npm install -g grunt
+    && npm install -g grunt \
+    && npm install -g gulp-cli 
 
 RUN wget https://getcomposer.org/composer.phar \
     && chmod +x composer.phar \

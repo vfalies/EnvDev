@@ -4,7 +4,8 @@
     <!-- *****
     Properties
     ***** -->
-    <property name="phpcs_standard" value="EnvDev" />
+    <!--<property name="phpcs_standard" value="EnvDev" />-->
+    <property name="phpcs_standard" value="PSR2" />
     <property name="log_path" value="/app/logs/build" />
     <property name="phpunit_conf_exist" value="false" />
 

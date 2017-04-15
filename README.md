@@ -24,6 +24,20 @@ git config core.autocrlf false
 
 Sans la conservation des caractères de fin de ligne unix, des comportements anormaux peuvent être rencontrés.
 
+### Démarrage
+
+Il est possible que la résolution des chemins sous Windows pose problème. Pour éviter cela, modifier de la manière suivante toutes les occurences suivantes dans le fichier `start.sh`:
+
+```
+docker-compose \
+```
+
+par
+
+```
+COMPOSE_CONVERT_WINDOWS_PATHS=1 docker-compose \
+```
+
 # Installation
 
 Plusieurs scripts sont a disposition pour facilité l'utilisation courante des containers.
@@ -50,6 +64,7 @@ Permet de créer les alias nécessaires à l'utilisation des outils suivants :
   - composer
   - bower
   - grunt
+  - gulp
   - nodejs
   - npm
 
