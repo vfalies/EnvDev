@@ -1,7 +1,9 @@
 FROM php
 LABEL maintainer "Vincent Falies <vincent.falies@gmail.com>"
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y wget
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+	wget \
+	git
 
 RUN wget https://getcomposer.org/composer.phar \
     && chmod +x composer.phar \
