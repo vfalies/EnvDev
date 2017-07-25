@@ -35,6 +35,11 @@
       padding-right: 0px;
     }
 
+
+    .webblock > a:last-child {
+        padding-right: 10px;
+    }
+
     .webblock > a.report_link {
       padding-right: 5px;
       min
@@ -112,17 +117,29 @@
             if ($entry == '.' || $entry == '..' || !is_dir($entry)):
               continue;
             else:
-              $report = $entry.DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR.'build'.DIRECTORY_SEPARATOR.'phpmetrics'.DIRECTORY_SEPARATOR.'report.html';
+              $phpmetrics = $entry.DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR.'build'.DIRECTORY_SEPARATOR.'phpmetrics'.DIRECTORY_SEPARATOR.'report.html';
+              $docs = $entry.DIRECTORY_SEPARATOR.'docs'.DIRECTORY_SEPARATOR.'index.html';
+              $coverage = $entry.DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR.'build'.DIRECTORY_SEPARATOR.'coverage'.DIRECTORY_SEPARATOR.'index.html';
               ?>
 
                 <a href="/<?= $entry; ?>/">
                   <div class="webblock">
                     <div class="icon"><i class="glyphicon glyphicon-folder-open"></i></div>
                     <div class="text"><?= $entry; ?></div>
-                    <?php if (file_exists($report)):  ?>
-                      <a href="<?= $report; ?>" target="_blank">
+                    <?php if (file_exists($phpmetrics)):  ?>
+                      <a href="<?= 'http://'.$host.':'.$port.DIRECTORY_SEPARATOR.$phpmetrics; ?>" target="_blank" title="PhpMetrics">
                         <div class="icon"><i class="glyphicon glyphicon-stats"></i></div>
                       </a>
+                    <?php endif; ?>
+                    <?php if (file_exists($coverage)):  ?>
+                      <a href="<?= 'http://'.$host.':'.$port.DIRECTORY_SEPARATOR.$coverage; ?>" target="_blank" title="Coverage">
+                        <div class="icon"><i class="glyphicon glyphicon-cd"></i></div>
+                      </a>
+                    <?php endif; ?>
+                    <?php if (file_exists($docs)): ?>
+                        <a href="<?= 'http://'.$host.':'.$port.DIRECTORY_SEPARATOR.$docs; ?>" target="_blank" title="Docs">
+                          <div class="icon"><i class="glyphicon glyphicon-book"></i></div>
+                        </a>
                     <?php endif; ?>
                   </div>
                 </a>

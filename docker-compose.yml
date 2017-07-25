@@ -10,6 +10,22 @@ services:
       environment:
        - MYSQL_ROOT_PASSWORD=root # Mot de passe par defaut pour l'utisateur root
 
+  mongodb:
+      image: mongo
+      container_name: mongodb
+      ports:
+        - 27017:27017
+      volumes:
+        - ./db/mongo:/data/db
+
+  mongoexpress:
+      image: mongo-express
+      container_name: mongo-express
+      ports:
+        - ${MONGOEXPRESS_PORT}:8081
+      links:
+        - mongodb:mongo
+
   # To create email during devloppement
   maildev:
       container_name: maildev
@@ -29,16 +45,65 @@ services:
     volumes:
       - /sessions
 
-  # Continuous Integration
-  ci:
-    build: docker/ci
-    image: vfalies/ci
-    container_name: ci
-    depends_on:
-      - tools
 
-  # Tools : Composer, Node, Bower, Grunt
-  tools:
-    build: docker/tools
-    image: vfalies/tools
-    container_name: tools
+  # Doc : apigen
+  apigen:
+    build: docker/apigen
+    image: vfalies/apigen
+    container_name: apigen
+
+  # Deployer
+  deployer:
+    build: docker/deployer
+    image: vfalies/deployer
+    container_name: deployer
+
+  # Composer
+  composer:
+    build: docker/composer
+    image: vfalies/composer
+    container_name: composer
+
+  # NodeJS
+  nodejs:
+    build: docker/nodejs
+    image: vfalies/nodejs
+    container_name: nodejs
+
+  # Web Server NGinx
+  web:
+    image: nginx
+    ports:
+        - ${WEB_PORT}:80
+    container_name: web
+    volumes:
+        - ./conf/nginx/vhosts:/etc/nginx/conf.d
+        - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+        - ${PROJECTS_PATH}:/var/www/html
+    links:
+        - php:php
+
+  # PHP 7.1 FPM
+  php:
+    build:
+      context: docker/php7.1
+      dockerfile: DockerfileFPM
+    image: php
+    container_name: php
+    volumes:
+        - ${PROJECTS_PATH}:/var/www/html
+        - ./php.ini:/usr/local/etc/php/php.ini
+    env_file:
+        - ./.env
+    links:
+        - db:db
+        - maildev:maildev
+        - mongodb:mongo
+
+  # PHP 7.1 CLI
+  php-cli:
+    build:
+      context: docker/php7.1
+      dockerfile: DockerfileCLI
+    image: php-cli
+    container_name: php-cli
