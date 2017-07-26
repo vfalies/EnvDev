@@ -89,6 +89,12 @@
                 <div class="text">PhpMyAdmin</div>
               </div>
             </a>
+            <a href="http://<?= $host.':'.$_ENV["MONGOEXPRESS_PORT"]; ?>" target="_blank">
+              <div class="webblock">
+                <div class="icon"><i class="glyphicon glyphicon-th-list"></i></div>
+                <div class="text">MongoDB Express</div>
+              </div>
+            </a>
             <a href="http://<?= $host.':'.$_ENV["MAILDEV_PORT"]; ?>" target="_blank">
               <div class="webblock">
                 <div class="icon"><i class="glyphicon glyphicon-envelope"></i></div>
