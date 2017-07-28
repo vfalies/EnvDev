@@ -64,6 +64,12 @@ services:
     image: vfalies/composer
     container_name: composer
 
+  # Yarn
+  yarn:
+    build: docker/yarn
+    image: vfalies/yarn
+    container_name: yarn
+
   # NodeJS
   nodejs:
     build: docker/nodejs
