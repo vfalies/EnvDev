@@ -98,7 +98,7 @@ services:
     container_name: php
     volumes:
         - ${PROJECTS_PATH}:/var/www/html
-        - ./php.ini:/usr/local/etc/php/php.ini
+        - ./docker/php7.1/php.ini:/usr/local/etc/php/php.ini
     env_file:
         - ./.env
     links:
