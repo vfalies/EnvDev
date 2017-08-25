@@ -113,3 +113,5 @@ services:
       dockerfile: DockerfileCLI
     image: php-cli
     container_name: php-cli
+    volumes:
+        - ./docker/php7.1/php.ini:/usr/local/etc/php/php.ini
