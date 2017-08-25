@@ -1,4 +1,4 @@
-FROM php
+FROM php-cli
 LABEL maintainer "Vincent Falies <vincent.falies@gmail.com>"
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
