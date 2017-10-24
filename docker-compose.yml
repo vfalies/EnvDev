@@ -52,6 +52,12 @@ services:
     image: vfalies/apigen
     container_name: apigen
 
+  # Doc : phpdoc
+  phpdoc:
+    build: docker/phpdoc
+    image: vfalies/phpdoc
+    container_name: phpdoc
+
   # Deployer
   deployer:
     build: docker/deployer

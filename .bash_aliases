@@ -14,3 +14,4 @@ alias composer='docker run -ti --rm -v ~/.ssh:/root/.ssh -v $(pwd):/var/www/html
 alias nodejs='docker run -ti --rm -v ~/.ssh:/root/.ssh -v $(pwd):/var/www/html vfalies/nodejs nodejs'
 alias dep='docker run --rm -ti -v $(pwd):/app -v ~/.ssh:/root/.ssh vfalies/deployer'
 alias yarn='docker run --rm -ti -v $(pwd):/app -v ~/.ssh:/root/.shh vfalies/yarn yarn'
+alias phpdoc='docker run --rm -ti -v $(pwd):/app vfalies/phpdoc '

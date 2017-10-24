@@ -20,6 +20,9 @@ ENV PATH /composer/vendor/bin:$PATH
 # Allow Composer to be run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN composer global require apigen/apigen:4.1.2
+RUN composer global require roave/better-reflection:dev-master#c87d856
+RUN composer global require apigen/apigen:dev-master
+
+COPY php.ini /usr/local/etc/php/php.ini 
 
 ENTRYPOINT ["/root/.composer/vendor/bin/apigen"]
