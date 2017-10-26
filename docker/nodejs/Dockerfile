@@ -1,5 +1,5 @@
 FROM php
-LABEL maintainer "Vincent Falies <vincent.falies@gmail.com>"
+LABEL maintainer "Vincent Falies <vincent@vfac.fr>"
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y curl
 

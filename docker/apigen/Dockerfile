@@ -1,5 +1,5 @@
 FROM php
-LABEL maintainer "Vincent Falies <vincent.falies@gmail.com>"
+LABEL maintainer "Vincent Falies <vincent@vfac.fr>"
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     curl \
@@ -23,6 +23,6 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer global require roave/better-reflection:dev-master#c87d856
 RUN composer global require apigen/apigen:dev-master
 
-COPY php.ini /usr/local/etc/php/php.ini 
+COPY php.ini /usr/local/etc/php/php.ini
 
 ENTRYPOINT ["/root/.composer/vendor/bin/apigen"]
