@@ -53,13 +53,13 @@ services:
   # Database
   db:
     extends: 
-        file: db_${DB}.yml
+        file: services/${DB}.yml
         service: db
   
   # Database admin
   dbadmin:
     extends:
-        file: db_${DB}.yml
+        file: services/${DB}.yml
         service: dbadmin
     ports:
         - ${DBADMIN_PORT}:80

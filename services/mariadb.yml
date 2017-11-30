@@ -1,14 +1,12 @@
 version: '2.1'
 services:
   db:
-    image: mongo
+    image: mariadb
     container_name: db    
     env_file: 
-      - .env    
+      - ../.env    
     volumes:
-      - dbdata_mongodb:/data/db     
+      - dbdata_mariadb:/var/lib/mysql        
   dbadmin:
-    image: mongo-express
+    image: phpmyadmin/phpmyadmin
     container_name: dbadmin
-
-    

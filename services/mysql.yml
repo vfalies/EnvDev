@@ -4,7 +4,7 @@ services:
     image: mysql
     container_name: db    
     env_file: 
-      - .env    
+      - ../.env    
     volumes:
       - dbdata_mysql:/var/lib/mysql        
   dbadmin:
