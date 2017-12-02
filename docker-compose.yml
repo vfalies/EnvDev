@@ -1,7 +1,7 @@
 # Web development environment
 version: '2.1'
 services:
-  # To create email during devloppement
+  # To create email during development
   maildev:
       container_name: maildev
       image: djfarrelly/maildev
@@ -25,17 +25,14 @@ services:
   nodejs:
     image: node
     container_name: node
-
-  # Web Server NGinx
-  web:
-    image: nginx
-    ports:
-        - ${WEB_PORT}:80
-    container_name: web
     volumes:
-        - ./conf/nginx/vhosts:/etc/nginx/conf.d
-        - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
         - ${PROJECTS_PATH}:/var/www/html
+        
+  # Web Server
+  web:
+    extends:
+        file: services/${WEB_SERVER}.yml
+        service: web
     links:
         - php:php
 
