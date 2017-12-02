@@ -83,16 +83,10 @@
               $port = (isset($http_host[1])) ? $http_host[1] : 80;
             ?>
 
-            <a href="http://<?= $host.':'.$_ENV["PHPMYADMIN_PORT"]; ?>" target="_blank">
+            <a href="http://<?= $host.':'.$_ENV["DBADMIN_PORT"]; ?>" target="_blank">
               <div class="webblock">
                 <div class="icon"><i class="glyphicon glyphicon-th-list"></i></div>
-                <div class="text">PhpMyAdmin</div>
-              </div>
-            </a>
-            <a href="http://<?= $host.':'.$_ENV["MONGOEXPRESS_PORT"]; ?>" target="_blank">
-              <div class="webblock">
-                <div class="icon"><i class="glyphicon glyphicon-th-list"></i></div>
-                <div class="text">MongoDB Express</div>
+                <div class="text">Database Admin</div>
               </div>
             </a>
             <a href="http://<?= $host.':'.$_ENV["MAILDEV_PORT"]; ?>" target="_blank">
@@ -107,53 +101,6 @@
                 <div class="text">PhpInfo</div>
               </div>
             </a>
-        </div>
-
-        <div class="col-md-12">
-          <hr />
-        </div>
-
-        <div class="col-md-12">
-          <h3>Projects</h3>
-
-          <?php
-
-          $entries = scandir('.');
-          foreach ($entries as $entry):
-            if ($entry == '.' || $entry == '..' || !is_dir($entry)):
-              continue;
-            else:
-              $phpmetrics = $entry.DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR.'build'.DIRECTORY_SEPARATOR.'phpmetrics'.DIRECTORY_SEPARATOR.'report.html';
-              $docs = $entry.DIRECTORY_SEPARATOR.'docs'.DIRECTORY_SEPARATOR.'index.html';
-              $coverage = $entry.DIRECTORY_SEPARATOR.'logs'.DIRECTORY_SEPARATOR.'build'.DIRECTORY_SEPARATOR.'coverage'.DIRECTORY_SEPARATOR.'index.html';
-              ?>
-
-                <a href="/<?= $entry; ?>/">
-                  <div class="webblock">
-                    <div class="icon"><i class="glyphicon glyphicon-folder-open"></i></div>
-                    <div class="text"><?= $entry; ?></div>
-                    <?php if (file_exists($phpmetrics)):  ?>
-                      <a href="<?= 'http://'.$host.':'.$port.DIRECTORY_SEPARATOR.$phpmetrics; ?>" target="_blank" title="PhpMetrics">
-                        <div class="icon"><i class="glyphicon glyphicon-stats"></i></div>
-                      </a>
-                    <?php endif; ?>
-                    <?php if (file_exists($coverage)):  ?>
-                      <a href="<?= 'http://'.$host.':'.$port.DIRECTORY_SEPARATOR.$coverage; ?>" target="_blank" title="Coverage">
-                        <div class="icon"><i class="glyphicon glyphicon-cd"></i></div>
-                      </a>
-                    <?php endif; ?>
-                    <?php if (file_exists($docs)): ?>
-                        <a href="<?= 'http://'.$host.':'.$port.DIRECTORY_SEPARATOR.$docs; ?>" target="_blank" title="Docs">
-                          <div class="icon"><i class="glyphicon glyphicon-book"></i></div>
-                        </a>
-                    <?php endif; ?>
-                  </div>
-                </a>
-              <?php
-            endif;
-          endforeach;
-
-          ?>
         </div>
       </div>
     </div>

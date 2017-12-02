@@ -9,18 +9,6 @@ services:
         - ${MAILDEV_PORT}:80
         - 1025:25
 
-  # # Doc : apigen
-  # apigen:
-  #   build: docker/apigen
-  #   image: vfalies/apigen
-  #   container_name: apigen
-
-  # # Deployer
-  # deployer:
-  #   build: docker/deployer
-  #   image: vfalies/deployer
-  #   container_name: deployer
-
   # NodeJS
   nodejs:
     image: node
@@ -35,17 +23,21 @@ services:
         service: web
     links:
         - php:php
+        - nodejs:nodejs
 
   # PHP FPM
   php:
     image: vfac/envdevphpbase:${PHP_VERSION}
     container_name: php
+    env_file: 
+        - .env
     volumes:
         - ${PROJECTS_PATH}:/var/www/html
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
     links:
         - db:db
         - maildev:maildev
+        - nodejs:nodejs
 
   # Database
   db:
