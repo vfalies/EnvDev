@@ -27,10 +27,8 @@ services:
 
   # PHP FPM
   php:
-    #image: vfac/envdevphpbase:${PHP_VERSION}
-    build: ../EnvDevPHPBase/${PHP_VERSION}
+    image: vfac/envdevphpbase:${PHP_VERSION}    
     container_name: php
-    image: php
     env_file: 
         - .env
     volumes:

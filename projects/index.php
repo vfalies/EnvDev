@@ -78,7 +78,6 @@
           <h3>Tools</h3>
 
             <?php
-              var_dump($_ENV, getenv('DBADMIN_PORT'));
               $http_host = explode(':', $_SERVER['HTTP_HOST']);
               $host = $http_host[0];
               $port = (isset($http_host[1])) ? $http_host[1] : 80;
