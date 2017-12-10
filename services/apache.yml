@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   web:
-    image: httpd
+    image: httpd:2.4-alpine
     ports:
         - ${WEB_PORT}:80
     container_name: web

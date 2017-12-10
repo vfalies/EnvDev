@@ -11,7 +11,7 @@ services:
 
   # NodeJS
   nodejs:
-    image: node
+    image: node:9.2-alpine
     container_name: node
     volumes:
         - ${PROJECTS_PATH}:/var/www/html
@@ -27,8 +27,10 @@ services:
 
   # PHP FPM
   php:
-    image: vfac/envdevphpbase:${PHP_VERSION}
+    #image: vfac/envdevphpbase:${PHP_VERSION}
+    build: ../EnvDevPHPBase/${PHP_VERSION}
     container_name: php
+    image: php
     env_file: 
         - .env
     volumes:
