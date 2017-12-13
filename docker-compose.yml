@@ -23,7 +23,6 @@ services:
         service: web
     links:
         - php:php
-        - nodejs:nodejs
 
   # PHP FPM
   php:
@@ -37,7 +36,6 @@ services:
     links:
         - db:db
         - maildev:maildev
-        - nodejs:nodejs
         - cache:cache
 
   # Cache server
