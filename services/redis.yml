@@ -1,0 +1,7 @@
+version: '2.1'
+services:
+  cache:
+    image: redis:4.0-alpine
+    ports:
+        - ${CACHE_PORT}:6379
+    container_name: cache

@@ -38,6 +38,13 @@ services:
         - db:db
         - maildev:maildev
         - nodejs:nodejs
+        - cache:cache
+
+  # Cache server
+  cache:
+    extends:
+        file: services/${CACHE_SERVER}.yml
+        service: cache
 
   # Database
   db:
