@@ -1,32 +1,7 @@
-# Environnement Web de developpement
-version: '2'
+# Web development environment
+version: '2.1'
 services:
-  # Database MySQL
-  db:
-      image: mysql
-      container_name: db
-      volumes:
-        - ./db/mysql:/var/lib/mysql # Commenter la ligne des volumes pour une base de données non persistente
-      environment:
-       - MYSQL_ROOT_PASSWORD=root # Mot de passe par defaut pour l'utisateur root
-
-  mongodb:
-      image: mongo
-      container_name: mongodb
-      ports:
-        - 27017:27017
-      volumes:
-        - ./db/mongo:/data/db
-
-  mongoexpress:
-      image: mongo-express
-      container_name: mongo-express
-      ports:
-        - ${MONGOEXPRESS_PORT}:8081
-      links:
-        - mongodb:mongo
-
-  # To create email during devloppement
+  # To create email during development
   maildev:
       container_name: maildev
       image: djfarrelly/maildev
@@ -34,84 +9,70 @@ services:
         - ${MAILDEV_PORT}:80
         - 1025:25
 
-  # PhpMyAdmin
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    links:
-      - db
-    ports:
-      - ${PHPMYADMIN_PORT}:80
-    volumes:
-      - /sessions
-
-
-  # Doc : apigen
-  apigen:
-    build: docker/apigen
-    image: vfalies/apigen
-    container_name: apigen
-
-  # Deployer
-  deployer:
-    build: docker/deployer
-    image: vfalies/deployer
-    container_name: deployer
-
-  # Composer
-  composer:
-    build: docker/composer
-    image: vfalies/composer
-    container_name: composer
-
-  # Yarn
-  yarn:
-    build: docker/yarn
-    image: vfalies/yarn
-    container_name: yarn
-
   # NodeJS
   nodejs:
-    build: docker/nodejs
-    image: vfalies/nodejs
-    container_name: nodejs
-
-  # Web Server NGinx
-  web:
-    image: nginx
-    ports:
-        - ${WEB_PORT}:80
-    container_name: web
+    image: node:9.2-alpine
+    container_name: node
     volumes:
-        - ./conf/nginx/vhosts:/etc/nginx/conf.d
-        - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
         - ${PROJECTS_PATH}:/var/www/html
+        
+  # Web Server
+  web:
+    extends:
+        file: services/${WEB_SERVER}.yml
+        service: web
     links:
         - php:php
 
-  # PHP 7.1 FPM
+  # PHP FPM
   php:
-    build:
-      context: docker/php7.1
-      dockerfile: DockerfileFPM
-    image: php
+    image: vfac/envdevphpbase:${PHP_VERSION}    
     container_name: php
+    env_file: 
+        - .env
     volumes:
         - ${PROJECTS_PATH}:/var/www/html
-        - ./docker/php7.1/php.ini:/usr/local/etc/php/php.ini
-    env_file:
-        - ./.env
+        - ./conf/php/php.ini:/usr/local/etc/php/php.ini
     links:
         - db:db
         - maildev:maildev
-        - mongodb:mongo
+        - cache:cache
 
-  # PHP 7.1 CLI
-  php-cli:
-    build:
-      context: docker/php7.1
-      dockerfile: DockerfileCLI
-    image: php-cli
-    container_name: php-cli
-    volumes:
-        - ./docker/php7.1/php.ini:/usr/local/etc/php/php.ini
+  # Cache server
+  cache:
+    extends:
+        file: services/${CACHE_SERVER}.yml
+        service: cache
+
+  # Database
+  db:
+    extends: 
+        file: services/${DB}.yml
+        service: db
+  
+  # Database admin
+  dbadmin:
+    extends:
+        file: services/${DB}.yml
+        service: dbadmin
+    ports:
+        - ${DBADMIN_PORT}:80
+    links:
+        - db
+        
+volumes: 
+  dbdata_mariadb:
+    labels: 
+        com.vfac.description: "VFAC EnvDev Database MariaDB volume"
+        com.vfac.owner: "VFAC"
+        com.vfac.url: "https://vfac.fr"
+  dbdata_mysql:
+    labels: 
+        com.vfac.description: "VFAC EnvDev Database MySQL volume"
+        com.vfac.owner: "VFAC"
+        com.vfac.url: "https://vfac.fr"        
+  dbdata_mongodb:
+    labels: 
+        com.vfac.description: "VFAC EnvDev Database MongoDB volume"
+        com.vfac.owner: "VFAC"
+        com.vfac.url: "https://vfac.fr"        
