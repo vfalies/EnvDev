@@ -15,6 +15,7 @@ services:
     container_name: node
     volumes:
         - ${PROJECTS_PATH}:/var/www/html
+        - ${ENVDEV_HOME_PATH}:/var/www/envdev_home
         
   # Web Server
   web:
@@ -32,6 +33,7 @@ services:
         - .env
     volumes:
         - ${PROJECTS_PATH}:/var/www/html
+        - ${ENVDEV_HOME_PATH}:/var/www/envdev_home
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
         - ~/.gitconfig:/root/.gitconfig
         - ~/.ssh:/root/.ssh
