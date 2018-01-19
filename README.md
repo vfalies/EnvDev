@@ -176,14 +176,14 @@ The following versions, paths and ports can be configured :
 | PHP Version | PHP_VERSION | `5.6`, `7.0`, `7.1`, `7.2` | `7.2` |
 | Database type | DB | `mariadb`, `mysql`, `mongodb` | `mysql` |
 | Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
-| Projects Path | PROJECTS_PATH | any | `./projects` |
+| Projects Path | PROJECTS_PATH | any | `/your/projects/directory/path` |
 | HTTP web port | WEB_PORT | any | `80` |
 | MailDev port | MAILDEV_PORT | any | `1080` |
 | PHPMyAdmin port | PHPMYADMIN_PORT | any | `9090` |
 | MongoExpress port | MONGOEXPRESS_PORT | any | `8081` |
 | Cache server port | CACHE_PORT | any | `6380` |
 
-If you access to the url `http://localhost` a page summarizes all projets and propose access link to PHPMyAdmin, MailDev and PHPInfo.
+If you access to the url `http://envdev.localhost` a page summarizes all projets and propose access link to PHPMyAdmin, MailDev and PHPInfo.
 
 ### Nginx configuration
 
