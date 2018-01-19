@@ -33,6 +33,8 @@ services:
     volumes:
         - ${PROJECTS_PATH}:/var/www/html
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+        - ~/.gitconfig:/root/.gitconfig
+        - ~/.ssh:/root/.ssh
     links:
         - db:db
         - maildev:maildev
