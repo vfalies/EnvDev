@@ -14,8 +14,8 @@ services:
     image: node:9.2-alpine
     container_name: node
     volumes:
-        - ${PROJECTS_PATH}:/var/www/html
-        - ${ENVDEV_HOME_PATH}:/var/www/html/envdev_home
+        - ${PROJECTS_PATH}:/var/www/html/projects/
+        - ./home:/var/www/html/envdev_home/
         
   # Web Server
   web:
@@ -32,8 +32,8 @@ services:
     env_file: 
         - .env
     volumes:
-        - ${PROJECTS_PATH}:/var/www/html
-        - ${ENVDEV_HOME_PATH}:/var/www/html/envdev_home
+        - ${PROJECTS_PATH}:/var/www/html/projects/
+        - ./home:/var/www/html/envdev_home/
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
         - ~/.gitconfig:/root/.gitconfig
         - ~/.ssh:/root/.ssh

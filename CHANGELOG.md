@@ -10,8 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Share git config & ssh keys
-- Add ENVDEV_HOME_PATH variable in environment file to differenciate PROJECTS_PATH
 - Add `envdev` vhost configuration for Apache & Nginx
+- Rename `projects` directory to `home`
 
 ### Changed
 
