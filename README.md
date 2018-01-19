@@ -154,9 +154,9 @@ In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host
 ```
 <VirtualHost *:80>
     ServerName localhost
-    DocumentRoot /var/www/html
+    DocumentRoot /var/www/html/projects
 
-    <Directory /var/www/html>
+    <Directory /var/www/html/projects>
         Require all granted
     </Directory>
 
