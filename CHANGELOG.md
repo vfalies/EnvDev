@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add ENVDEV_HOME_PATH variable in environment file to differenciate PROJECTS_PATH
 - Add `envdev` vhost configuration for Apache & Nginx
 
+### Changed
+
+- Rename conf/apache/vhost directory to conf/apache/vhosts
+
 ## [2.0] - 2017-12-20
 
 ### Added

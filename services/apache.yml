@@ -8,4 +8,4 @@ services:
     volumes:
         - ../${PROJECTS_PATH}:/var/www/html
         - ../conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
-        - ../conf/apache/vhost/:/etc/apache2/sites-enabled/
+        - ../conf/apache/vhosts/:/etc/apache2/sites-enabled/

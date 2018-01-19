@@ -1,5 +1,9 @@
 projects/*
 !projects/phpinfo.php
 !projects/index.php
+conf/apache/vhosts/default.conf
+conf/nginx/vhosts/default.conf
+conf/apache/vhosts/envdev_home.conf
+conf/nginx/vhosts/envdev_home.conf
 conf/apache/vhosts/*
 conf/nginx/vhosts/*
