@@ -7,3 +7,4 @@ conf/nginx/vhosts/*
 projects/*
 !projects/index.php
 !projects/phpinfo.php
+.env

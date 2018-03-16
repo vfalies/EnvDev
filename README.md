@@ -17,7 +17,7 @@ PHP Stack run on Alpine version to keep a small size image.
 
 - Database
 
-Two different database are available : 
+Two different database are available :
 
     - [MySQL](https://www.mysql.com)
     - [MongoDB](https://www.mongodb.com)
@@ -53,7 +53,7 @@ All of them are in Alpine version
 
 - [MailDev](http://danfarrelly.nyc/MailDev) : SMTP Server + Web Interface for viewing and testing emails during development
 
-#### Composer 
+#### Composer
 
 - [Composer](https://getcomposer.org) : Dependency Manager for PHP
 
@@ -84,6 +84,9 @@ Two system dependencies are required :
 ```
 $ git clone git@github.com:vfalies/EnvDev.git
 ```
+
+Create a `.env` file to define your configuration.
+An example is available with `.env.dist` file.
 
 ## Usage
 
@@ -123,9 +126,9 @@ docker run --rm node npm -v
 
 ### Hosts
 
-You can add your own hosts file for all your projects. 
+You can add your own hosts file for all your projects.
 
-With NGinx 
+With NGinx
 
 In `conf/nginx/vhosts` directory, all your `yourhost.conf` file. A default host file is available for example : `/conf/nginx/vhosts/default.conf`.
 
@@ -168,7 +171,9 @@ In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host
 
 ## Configuration
 
-You can modify `.env` file to manage applications and tools.
+You can create `.env` file to manage applications and tools.
+An example is available with `.env.dist` file.
+
 The following versions, paths and ports can be configured :
 
 | Description | Variable name | Possible values | Default |
@@ -195,7 +200,7 @@ Apache configuration file is available at `/conf/apache/httpd.conf` to custom th
 
 ### PHP configuration
 
-A custom php.ini file is available at `/conf/php/php.ini`. The default PHP configuration is with these options: 
+A custom php.ini file is available at `/conf/php/php.ini`. The default PHP configuration is with these options:
 
 ```
 date.timezone = Europe/Paris
