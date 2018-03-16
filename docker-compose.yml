@@ -41,6 +41,7 @@ services:
         - db:db
         - maildev:maildev
         - cache:cache
+    working_dir: /var/www/html/projects
 
   # Cache server
   cache:
