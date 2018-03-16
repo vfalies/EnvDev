@@ -1,8 +1,11 @@
+# EnvDev
+
 ## Environment composition
 
 This environment provies the following tools to develop in PHP :
 
 ### Core
+
 - [PHP](http://php.net)
 
 Available version :
@@ -76,13 +79,14 @@ Image container : [`vfac/deployer`](https://hub.docker.com/r/vfac/deployer/)
 ## Requirements
 
 Two system dependencies are required :
+
 - Docker
 - Docker Compose
 
 ## Installation
 
-```
-$ git clone git@github.com:vfalies/EnvDev.git
+```shell
+git clone git@github.com:vfalies/EnvDev.git
 ```
 
 Create a `.env` file to define your configuration.
@@ -92,8 +96,8 @@ An example is available with `.env.dist` file.
 
 To start the environment, type the following command:
 
-```
-$ docker-compose up
+```shell
+make servers
 ```
 
 Several containers are created from `.env` configuration:
@@ -110,17 +114,17 @@ Several containers are created from `.env` configuration:
 
 `composer` is available through `php` container:
 
-```
+```shell
 docker exec php composer -v
 ```
 
 `node`, `npm` are available through `node` container:
 
-```
+```shell
 docker run --rm node node -v
 ```
 
-```
+```shell
 docker run --rm node npm -v
 ```
 
@@ -132,7 +136,7 @@ With NGinx
 
 In `conf/nginx/vhosts` directory, all your `yourhost.conf` file. A default host file is available for example : `/conf/nginx/vhosts/default.conf`.
 
-```
+```conf
 server {
 
     listen 80;
@@ -154,7 +158,7 @@ With Apache
 
 In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host file is available for example : `/conf/apache/vhosts/default.conf`.
 
-```
+```conf
 <VirtualHost *:80>
     ServerName localhost
     DocumentRoot /var/www/html/projects
@@ -164,7 +168,7 @@ In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host
     </Directory>
 
     <FilesMatch \.php$>
-    	SetHandler "proxy:fcgi://php:9000"
+        SetHandler "proxy:fcgi://php:9000"
     </FilesMatch>
 </VirtualHost>
 ```
@@ -202,7 +206,7 @@ Apache configuration file is available at `/conf/apache/httpd.conf` to custom th
 
 A custom php.ini file is available at `/conf/php/php.ini`. The default PHP configuration is with these options:
 
-```
+```conf
 date.timezone = Europe/Paris
 display_errors=1
 error_reporting=E_ALL
