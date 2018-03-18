@@ -37,6 +37,8 @@ services:
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
         - ~/.gitconfig:/root/.gitconfig
         - ~/.ssh:/root/.ssh
+        - ~/.ssh:/home/vfac/.ssh
+    user: "${USER_ID}:${GROUP_ID}"
     links:
         - db:db
         - maildev:maildev
