@@ -36,7 +36,7 @@ services:
         - ./home:/var/www/html/envdev_home/
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
         - ~/.gitconfig:/root/.gitconfig
-        - ~/.gitconfig:/vfac/.gitconfig
+        - ~/.gitconfig:/home/vfac/.gitconfig
         - ~/.ssh:/root/.ssh
         - ~/.ssh:/home/vfac/.ssh
     user: "${USER_ID}:${GROUP_ID}"
