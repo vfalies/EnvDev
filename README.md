@@ -92,6 +92,12 @@ git clone git@github.com:vfalies/EnvDev.git
 Create a `.env` file to define your configuration.
 An example is available with `.env.dist` file.
 
+To install environment
+
+```shell
+make install
+```
+
 ## Usage
 
 To start the environment, type the following command:
@@ -126,6 +132,12 @@ docker run --rm node node -v
 
 ```shell
 docker run --rm node npm -v
+```
+
+To open default home page in browser
+
+```shell
+make home
 ```
 
 ### Hosts
