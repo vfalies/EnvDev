@@ -71,7 +71,7 @@ class Home
         {
             $project       = new stdClass();
             $project->name = (array_reverse(explode('/', $directory)))[0];
-            $project->url  = '#';
+            $project->url  = 'http://localhost/' . $project->name;
 
             array_push($this->projects, $project);
         }
