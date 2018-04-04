@@ -5,17 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [2.1] - 2018-04-05
 
 ### Added
 
 - Share git config & ssh keys
 - Add `envdev` vhost configuration for Apache & Nginx
 - Rename `projects` directory to `home`
+- Add ``.env.dist` configuration example
+- Add Makefile
+- Use current UID & GID in container
 
 ### Changed
 
 - Rename conf/apache/vhost directory to conf/apache/vhosts
+- Update working directory for PHP container
+- Change PHP image
+- Refactoring Home page
+
+### Deleted
+
+- Remove NodeJs container (already include in PHP image)
 
 ## [2.0] - 2017-12-20
 
