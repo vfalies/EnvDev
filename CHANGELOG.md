@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add ``.env.dist` configuration example
 - Add Makefile
 - Use current UID & GID in container
+- Add Make action "stop" to stop all containers
+- Add Make action "homepage" to open envdev.localhost in default browser
 
 ### Changed
 
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Update working directory for PHP container
 - Change PHP image
 - Refactoring Home page
+- Set docker-compose make action with detached mode
 
 ### Deleted
 
