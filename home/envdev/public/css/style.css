@@ -1,0 +1,51 @@
+body{
+    margin-top:10px;
+    background: #e0e0e0;
+  }
+
+  a {
+    float: left;
+    margin-bottom: 20px;
+  }
+
+  .webblock {
+    margin-right: 10px;
+    line-height: 19px;
+  }
+
+  .webblock > .icon,
+  .webblock > a > .icon {
+    padding: 10px;
+    float: left;
+    background-color: #337ab7;
+    line-height: 19px;
+    color: white;
+    height: 40px;
+  }
+
+  .webblock > a {
+    padding-right: 0px;
+  }
+
+
+  .webblock > a:last-child {
+      padding-right: 10px;
+  }
+
+  .webblock > a.report_link {
+    padding-right: 5px;
+    /* min */
+  }
+
+  .webblock > .text,
+  .webblock > a > .text {
+    padding: 10px;
+    float: left;
+    line-height: 19px;
+    background-color: white;
+    height: 40px;
+  }
+
+  .webblock > .spacer {
+    width: 10px;
+  }

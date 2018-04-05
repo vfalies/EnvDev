@@ -1,8 +1,11 @@
+# EnvDev
+
 ## Environment composition
 
 This environment provies the following tools to develop in PHP :
 
 ### Core
+
 - [PHP](http://php.net)
 
 Available version :
@@ -17,7 +20,7 @@ PHP Stack run on Alpine version to keep a small size image.
 
 - Database
 
-Two different database are available : 
+Two different database are available :
 
     - [MySQL](https://www.mysql.com)
     - [MongoDB](https://www.mongodb.com)
@@ -53,7 +56,7 @@ All of them are in Alpine version
 
 - [MailDev](http://danfarrelly.nyc/MailDev) : SMTP Server + Web Interface for viewing and testing emails during development
 
-#### Composer 
+#### Composer
 
 - [Composer](https://getcomposer.org) : Dependency Manager for PHP
 
@@ -76,21 +79,31 @@ Image container : [`vfac/deployer`](https://hub.docker.com/r/vfac/deployer/)
 ## Requirements
 
 Two system dependencies are required :
+
 - Docker
 - Docker Compose
 
 ## Installation
 
+```shell
+git clone git@github.com:vfalies/EnvDev.git
 ```
-$ git clone git@github.com:vfalies/EnvDev.git
+
+Create a `.env` file to define your configuration.
+An example is available with `.env.dist` file.
+
+To install environment
+
+```shell
+make install
 ```
 
 ## Usage
 
 To start the environment, type the following command:
 
-```
-$ docker-compose up
+```shell
+make servers
 ```
 
 Several containers are created from `.env` configuration:
@@ -107,29 +120,35 @@ Several containers are created from `.env` configuration:
 
 `composer` is available through `php` container:
 
-```
+```shell
 docker exec php composer -v
 ```
 
 `node`, `npm` are available through `node` container:
 
-```
+```shell
 docker run --rm node node -v
 ```
 
-```
+```shell
 docker run --rm node npm -v
+```
+
+To open default home page in browser
+
+```shell
+make home
 ```
 
 ### Hosts
 
-You can add your own hosts file for all your projects. 
+You can add your own hosts file for all your projects.
 
-With NGinx 
+With NGinx
 
 In `conf/nginx/vhosts` directory, all your `yourhost.conf` file. A default host file is available for example : `/conf/nginx/vhosts/default.conf`.
 
-```
+```conf
 server {
 
     listen 80;
@@ -151,24 +170,26 @@ With Apache
 
 In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host file is available for example : `/conf/apache/vhosts/default.conf`.
 
-```
+```conf
 <VirtualHost *:80>
     ServerName localhost
-    DocumentRoot /var/www/html
+    DocumentRoot /var/www/html/projects
 
-    <Directory /var/www/html>
+    <Directory /var/www/html/projects>
         Require all granted
     </Directory>
 
     <FilesMatch \.php$>
-    	SetHandler "proxy:fcgi://php:9000"
+        SetHandler "proxy:fcgi://php:9000"
     </FilesMatch>
 </VirtualHost>
 ```
 
 ## Configuration
 
-You can modify `.env` file to manage applications and tools.
+You can create `.env` file to manage applications and tools.
+An example is available with `.env.dist` file.
+
 The following versions, paths and ports can be configured :
 
 | Description | Variable name | Possible values | Default |
@@ -176,14 +197,14 @@ The following versions, paths and ports can be configured :
 | PHP Version | PHP_VERSION | `5.6`, `7.0`, `7.1`, `7.2` | `7.2` |
 | Database type | DB | `mariadb`, `mysql`, `mongodb` | `mysql` |
 | Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
-| Projects Path | PROJECTS_PATH | any | `./projects` |
+| Projects Path | PROJECTS_PATH | any | `/your/projects/directory/path` |
 | HTTP web port | WEB_PORT | any | `80` |
 | MailDev port | MAILDEV_PORT | any | `1080` |
 | PHPMyAdmin port | PHPMYADMIN_PORT | any | `9090` |
 | MongoExpress port | MONGOEXPRESS_PORT | any | `8081` |
 | Cache server port | CACHE_PORT | any | `6380` |
 
-If you access to the url `http://localhost` a page summarizes all projets and propose access link to PHPMyAdmin, MailDev and PHPInfo.
+If you access to the url `http://envdev.localhost` a page summarizes all projets and propose access link to PHPMyAdmin, MailDev and PHPInfo.
 
 ### Nginx configuration
 
@@ -195,9 +216,9 @@ Apache configuration file is available at `/conf/apache/httpd.conf` to custom th
 
 ### PHP configuration
 
-A custom php.ini file is available at `/conf/php/php.ini`. The default PHP configuration is with these options: 
+A custom php.ini file is available at `/conf/php/php.ini`. The default PHP configuration is with these options:
 
-```
+```conf
 date.timezone = Europe/Paris
 display_errors=1
 error_reporting=E_ALL

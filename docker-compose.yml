@@ -9,13 +9,6 @@ services:
         - ${MAILDEV_PORT}:80
         - 1025:25
 
-  # NodeJS
-  nodejs:
-    image: node:9.2-alpine
-    container_name: node
-    volumes:
-        - ${PROJECTS_PATH}:/var/www/html
-        
   # Web Server
   web:
     extends:
@@ -24,19 +17,26 @@ services:
     links:
         - php:php
 
-  # PHP FPM
+  # PHP FPM with Composer & NodeJS (Npm)
   php:
-    image: vfac/envdevphpbase:${PHP_VERSION}    
+    image: vfac/envdevphpbase:${PHP_VERSION}
     container_name: php
-    env_file: 
+    env_file:
         - .env
     volumes:
-        - ${PROJECTS_PATH}:/var/www/html
+        - ${PROJECTS_PATH}:/var/www/html/projects/
+        - ./home:/var/www/html/envdev_home/
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+        - ~/.gitconfig:/root/.gitconfig
+        - ~/.gitconfig:/home/vfac/.gitconfig
+        - ~/.ssh:/root/.ssh
+        - ~/.ssh:/home/vfac/.ssh
+    user: "${USER_ID}:${GROUP_ID}"
     links:
         - db:db
         - maildev:maildev
         - cache:cache
+    working_dir: /var/www/html/projects
 
   # Cache server
   cache:
@@ -46,10 +46,10 @@ services:
 
   # Database
   db:
-    extends: 
+    extends:
         file: services/${DB}.yml
         service: db
-  
+
   # Database admin
   dbadmin:
     extends:
@@ -59,20 +59,20 @@ services:
         - ${DBADMIN_PORT}:80
     links:
         - db
-        
-volumes: 
+
+volumes:
   dbdata_mariadb:
-    labels: 
+    labels:
         com.vfac.description: "VFAC EnvDev Database MariaDB volume"
         com.vfac.owner: "VFAC"
         com.vfac.url: "https://vfac.fr"
   dbdata_mysql:
-    labels: 
+    labels:
         com.vfac.description: "VFAC EnvDev Database MySQL volume"
         com.vfac.owner: "VFAC"
-        com.vfac.url: "https://vfac.fr"        
+        com.vfac.url: "https://vfac.fr"
   dbdata_mongodb:
-    labels: 
+    labels:
         com.vfac.description: "VFAC EnvDev Database MongoDB volume"
         com.vfac.owner: "VFAC"
-        com.vfac.url: "https://vfac.fr"        
+        com.vfac.url: "https://vfac.fr"

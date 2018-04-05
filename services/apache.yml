@@ -6,6 +6,7 @@ services:
         - ${WEB_PORT}:80
     container_name: web
     volumes:
-        - ../${PROJECTS_PATH}:/var/www/html
+        - ${PROJECTS_PATH}:/var/www/html/projects/
+        - ../home:/var/www/html/envdev_home/
         - ../conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
-        - ../conf/apache/vhost/:/etc/apache2/sites-enabled/
+        - ../conf/apache/vhosts/:/etc/apache2/sites-enabled/
