@@ -10,3 +10,4 @@ services:
         - ../conf/nginx/nginx.conf:/etc/nginx/nginx.conf
         - ${PROJECTS_PATH}:/var/www/html/projects/
         - ../home:/var/www/html/envdev_home/
+        - ../conf:/envdevconf

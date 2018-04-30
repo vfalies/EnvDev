@@ -31,6 +31,7 @@ services:
         - ~/.gitconfig:/home/vfac/.gitconfig
         - ~/.ssh:/root/.ssh
         - ~/.ssh:/home/vfac/.ssh
+        - ./conf:/envdevconf
     user: "${USER_ID}:${GROUP_ID}"
     links:
         - db:db

@@ -8,8 +8,9 @@ $app->get('/', function ($request, $response, $args) {
     $Home = new Home();
 
     return $this->view->render($response, 'index.twig', [
-            'tools' => $Home->getTools(),
-            'projects' => $Home->getProjects()
+            'tools'    => $Home->getTools(),
+            'projects' => $Home->getProjects(),
+            'vhosts'   => $Home->getVHosts()
             ]
         );
 });

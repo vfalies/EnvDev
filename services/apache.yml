@@ -10,3 +10,4 @@ services:
         - ../home:/var/www/html/envdev_home/
         - ../conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
         - ../conf/apache/vhosts/:/etc/apache2/sites-enabled/
+        - ../conf:/envdevconf

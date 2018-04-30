@@ -6,35 +6,9 @@
             <h1>Web Development</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Tools</h3>
-
-            {% for tool in tools %}
-            <a href="{{ tool.url }}" target="_blank">
-              <div class="webblock">
-                <div class="icon"><i class="glyphicon {{ tool.icon }}"></i></div>
-                <div class="text">{{ tool.name }}</div>
-              </div>
-            </a>
-            {% endfor %}
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Projects</h3>
-
-            {% for project in projects %}
-            <a href="{{ project.url }}" target="_blank">
-                <div class="webblock">
-                    <div class="icon"><i class="glyphicon glyphicon-menu-right"></i></div>
-                    <div class="text">{{ project.name }}</div>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-    </div>
+    {% include 'partials/home/tools.twig'  %}
+    {% include 'partials/home/projects.twig' %}
+    {% include 'partials/home/vhosts.twig' %}
 </div>
 
 {% include 'partials/footer.twig' %}

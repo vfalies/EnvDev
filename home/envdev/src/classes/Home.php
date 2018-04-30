@@ -7,6 +7,7 @@ class Home
     private $port;
     private $tools    = [];
     private $projects = [];
+    private $vhosts   = [];
 
     /**
      * Constructor
@@ -97,5 +98,45 @@ class Home
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * Get VHosts list array
+     *
+     * @return array
+     */
+    public function getVHosts()
+    {
+        $this->loadVHosts();
+
+        return $this->vhosts;
+    }
+
+    private function loadVHosts()
+    {
+        // Load Apache VHosts
+        $directories = glob('/envdevconf/apache/vhosts/*');
+
+        $this->vhosts['apache'] = [];
+        foreach ($directories as $directory)
+        {
+            $vhost       = new stdClass();
+            $vhost->name = (array_reverse(explode('/', $directory)))[0];
+
+            array_push($this->vhosts['apache'], $vhost);
+        }
+
+        // Load NGinx VHosts
+        $directories = glob('/envdevconf/nginx/vhosts/*');
+
+        $this->vhosts['nginx'] = [];
+        foreach ($directories as $directory)
+        {
+            $vhost       = new stdClass();
+            $vhost->name = (array_reverse(explode('/', $directory)))[0];
+
+            array_push($this->vhosts['nginx'], $vhost);
+        }
+        return $this;
     }
 }

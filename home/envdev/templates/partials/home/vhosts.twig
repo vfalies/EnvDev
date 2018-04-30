@@ -1,0 +1,34 @@
+    <div class="row">
+        <div class="col-md-12">
+            <h3>VHosts</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h4>Apache</h4>
+            {% for vhost in vhosts['apache'] %}
+            <a href="/conf/apache/{{ vhost.name }}" target="_blank">
+              <div class="webblock">
+                <div class="icon"><i class="glyphicon glyphicon-link"></i></div>
+                <div class="text">{{ vhost.name }}</div>
+              </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Nginx</h4>
+            {% for vhost in vhosts['nginx'] %}
+            <a href="/conf/nginx/{{ vhost.name }}" target="_blank">
+              <div class="webblock">
+                <div class="icon"><i class="glyphicon glyphicon-link"></i></div>
+                <div class="text">{{ vhost.name }}</div>
+              </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>

@@ -1,0 +1,14 @@
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Projects</h3>
+
+            {% for project in projects %}
+            <a href="{{ project.url }}" target="_blank">
+                <div class="webblock">
+                    <div class="icon"><i class="glyphicon glyphicon-menu-right"></i></div>
+                    <div class="text">{{ project.name }}</div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
