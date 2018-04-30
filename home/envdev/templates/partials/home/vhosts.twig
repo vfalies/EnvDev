@@ -4,9 +4,9 @@
         </div>
     </div>
 
+    {% if servers.webserver == 'apache' %}
     <div class="row">
         <div class="col-md-12">
-
             <h4>Apache</h4>
             {% for vhost in vhosts['apache'] %}
             <a href="/conf/apache/{{ vhost.name }}" target="_blank">
@@ -18,7 +18,9 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
 
+    {% if servers.webserver == 'nginx' %}
     <div class="row">
         <div class="col-md-12">
             <h4>Nginx</h4>
@@ -32,3 +34,4 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
