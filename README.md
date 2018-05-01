@@ -137,7 +137,7 @@ docker run --rm node npm -v
 To open default home page in browser
 
 ```shell
-make home
+make homepage
 ```
 
 ### Hosts
