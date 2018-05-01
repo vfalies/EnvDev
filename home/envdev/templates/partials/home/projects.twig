@@ -7,6 +7,11 @@
                 <div class="webblock">
                     <div class="icon"><i class="glyphicon glyphicon-menu-right"></i></div>
                     <div class="text">{{ project.name }}</div>
+                    {% if project.hostname is not null %}
+                    <a href="//{{ project.hostname }}" target="_blank">
+                        <div class="icon"><i class="glyphicon glyphicon-globe"></i></div>
+                    </a>
+                    {% endif %}
                 </div>
             </a>
             {% endfor %}

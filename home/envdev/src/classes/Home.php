@@ -19,6 +19,7 @@ class Home
         $this->port = (isset($this->http_host[1])) ? $this->http_host[1] : 80;
 
         $this->setTools();
+        $this->loadVHosts();
         $this->setProjects();
     }
 
@@ -70,14 +71,70 @@ class Home
 
         foreach ($directories as $directory)
         {
-            $project       = new stdClass();
-            $project->name = (array_reverse(explode('/', $directory)))[0];
-            $project->url  = 'http://localhost/' . $project->name;
+            $project           = new stdClass();
+            $project->name     = (array_reverse(explode('/', $directory)))[0];
+            $project->url      = '//localhost/' . $project->name;
+            $project->hostname = $this->getProjectHostname($directory);
 
             array_push($this->projects, $project);
         }
 
         return $this;
+    }
+
+    /**
+     * Get project hostname if defined in vhost
+     *
+     * @param string $directory
+     * @return string|null
+     */
+    private function getProjectHostname($directory)
+    {
+        $webserver = getenv('WEB_SERVER');
+        foreach ($this->vhosts[$webserver] as $vhostfile)
+        {
+            $hostname = $this->readNGinxVHOst(file('/envdevconf/nginx/vhosts/'.$vhostfile->name), $directory);
+            if (!is_null($hostname))
+            {
+                return $hostname;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Read NGinx Vhosts
+     *
+     * @param string $vhost_content
+     * @param string $directory
+     * @return string|null
+     */
+    private function readNGinxVHOst($vhost_content, $directory)
+    {
+        $hostname = $server_name = null;
+        foreach ($vhost_content as $line)
+        {
+            if (strstr($line, 'server_name') !== false)
+            {
+                $server_name = str_replace('server_name', '', $line);
+                $server_name = str_replace(';', '', $server_name);
+                $server_name = trim($server_name);
+            }
+        }
+        if (!is_null($server_name))
+        {
+            foreach ($vhost_content as $line)
+            {
+                if (strstr($line, ' root') !== false)
+                {
+                    if (strstr($line, $directory) !== false)
+                    {
+                        $hostname = $server_name;
+                    }
+                }
+            }
+        }
+        return $hostname;
     }
 
     /**
@@ -107,8 +164,6 @@ class Home
      */
     public function getVHosts()
     {
-        $this->loadVHosts();
-
         return $this->vhosts;
     }
 
