@@ -93,7 +93,17 @@ class Home
         $webserver = getenv('WEB_SERVER');
         foreach ($this->vhosts[$webserver] as $vhostfile)
         {
-            $hostname = $this->readNGinxVHOst(file('/envdevconf/nginx/vhosts/'.$vhostfile->name), $directory);
+            switch ($webserver)
+            {
+                case 'nginx':
+                    $hostname = $this->readNGinxVHOst(file('/envdevconf/nginx/vhosts/'.$vhostfile->name), $directory);
+                    break;
+                case 'apache':
+                    $hostname = $this->readApacheVHOst(file('/envdevconf/apache/vhosts/'.$vhostfile->name), $directory);
+                    break;
+                default:
+                    throw new Exception('Unknown WebServer : '.$webserver);
+            }
             if (!is_null($hostname))
             {
                 return $hostname;
@@ -126,6 +136,32 @@ class Home
             foreach ($vhost_content as $line)
             {
                 if (strstr($line, ' root') !== false)
+                {
+                    if (strstr($line, $directory) !== false)
+                    {
+                        $hostname = $server_name;
+                    }
+                }
+            }
+        }
+        return $hostname;
+    }
+
+    private function readApacheVHost($vhost_content, $directory)
+    {
+        $hostname = $server_name = null;
+        foreach ($vhost_content as $line)
+        {
+            if (strstr($line,'ServerName') !== false)
+            {
+                $server_name = trim(str_replace('ServerName', '', $line));
+            }
+        }
+        if (!is_null($server_name))
+        {
+            foreach ($vhost_content as $line)
+            {
+                if (strstr($line, 'DocumentRoot') !== false)
                 {
                     if (strstr($line, $directory) !== false)
                     {
