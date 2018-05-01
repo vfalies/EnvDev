@@ -147,6 +147,13 @@ class Home
         return $hostname;
     }
 
+    /**
+     * Read Apache Vhosts
+     *
+     * @param string $vhost_content
+     * @param string $directory
+     * @return string|null
+     */
     private function readApacheVHost($vhost_content, $directory)
     {
         $hostname = $server_name = null;
