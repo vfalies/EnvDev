@@ -9,6 +9,15 @@ servers:
 stop:
 	docker-compose down
 
+restart:
+	$(MAKE) -s stop && $(MAKE) -s servers
+
+certificate_creation:
+	./scripts/certificate.sh
+
+certificate_regeneration:
+	./scripts/regenerate_certificate.sh
+
 install:
 	docker-compose build --force-rm --no-cache && docker run --rm -v $(shell pwd):/var/www/html -u "$(USER_ID):$(GROUP_ID)" vfac/envdevphpbase:$(PHP_VERSION) sh -c "cd /var/www/html/home/envdev; composer update --lock"
 
