@@ -184,6 +184,43 @@ In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host
 </VirtualHost>
 ```
 
+### SSL support
+
+The SSL support is possible during development. To activate it on one of your vhosts, you must follow steps:
+
+- Create the SSL self-signed certificate
+
+you can use the command:
+
+```shell
+make certificate_creation
+```
+
+- Add the activation of SSL in VHost file
+
+On Nginx:
+
+```
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/envdev.crt;
+    ssl_certificate_key /etc/nginx/ssl/envdev.key;
+```
+
+where `envdev` is the name chosen during the step of the certificate creation.
+
+Don't forget to restart `web` container to restart the web server
+
+```shell
+docker restart web
+```
+
+Tips: If you certificate is out of date, you can regenerate it with the command: 
+
+```shell
+make certificate_regeneration
+```
+
 ## Configuration
 
 You can create `.env` file to manage applications and tools.
