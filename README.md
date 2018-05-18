@@ -10,7 +10,6 @@ This environment provies the following tools to develop in PHP :
 
 Available version :
 
-    - `5.6`
     - `7.0`
     - `7.1`
     - `7.2`
@@ -194,7 +193,7 @@ The following versions, paths and ports can be configured :
 
 | Description | Variable name | Possible values | Default |
 |:-------------|:---------------:|:-----------------:|:---------:|
-| PHP Version | PHP_VERSION | `5.6`, `7.0`, `7.1`, `7.2` | `7.2` |
+| PHP Version | PHP_VERSION | `7.0`, `7.1`, `7.2` | `7.2` |
 | Database type | DB | `mariadb`, `mysql`, `mongodb` | `mysql` |
 | Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
 | Projects Path | PROJECTS_PATH | any | `/your/projects/directory/path` |
