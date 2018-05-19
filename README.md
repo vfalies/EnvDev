@@ -202,7 +202,7 @@ On Nginx:
 
 ```
     listen 443 ssl;
-    ssl on;
+    
     ssl_certificate /etc/nginx/ssl/envdev.crt;
     ssl_certificate_key /etc/nginx/ssl/envdev.key;
 ```
