@@ -248,6 +248,7 @@ The following versions, paths and ports can be configured :
 | Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
 | Projects Path | PROJECTS_PATH | any | `/your/projects/directory/path` |
 | HTTP web port | WEB_PORT | any | `80` |
+| HTTPS web port | WEBSSL_PORT | any | `443` |
 | MailDev port | MAILDEV_PORT | any | `1080` |
 | PHPMyAdmin port | PHPMYADMIN_PORT | any | `9090` |
 | MongoExpress port | MONGOEXPRESS_PORT | any | `8081` |

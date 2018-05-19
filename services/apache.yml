@@ -4,7 +4,7 @@ services:
     image: httpd:2.4-alpine
     ports:
         - ${WEB_PORT}:80
-        - 443:443
+        - ${WEBSSL_PORT}:443
     container_name: web
     volumes:
         - ${PROJECTS_PATH}:/var/www/html/projects/
