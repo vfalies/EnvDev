@@ -207,6 +207,19 @@ On Nginx:
     ssl_certificate_key /etc/nginx/ssl/envdev.key;
 ```
 
+On Apache:
+
+```
+<VirtualHost *:80 *:443>
+    ... 
+
+    SSLEngine on
+    SSLCertificateFile /usr/local/apache2/conf/custom/envdev.crt
+    SSLCertificateKeyFile /usr/local/apache2/conf/custom/envdev.key
+
+    ...
+```
+
 where `envdev` is the name chosen during the step of the certificate creation.
 
 Don't forget to restart `web` container to restart the web server
