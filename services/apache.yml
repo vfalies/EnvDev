@@ -9,7 +9,7 @@ services:
     volumes:
         - ${PROJECTS_PATH}:/var/www/html/projects/
         - ../home:/var/www/html/envdev_home/
-        - ../conf/ssl/certs:/usr/local/apache2/conf/custom
+        - ../conf/ssl:/usr/local/apache2/conf/custom
         - ../conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
         - ../conf/apache/vhosts/:/etc/apache2/sites-enabled/
         - ../conf:/envdevconf

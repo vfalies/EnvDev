@@ -5,9 +5,9 @@ conf/nginx/vhosts/*
 !conf/nginx/vhosts/default.conf
 !conf/nginx/vhosts/envdev_home.conf
 conf/ssl/*
-!conf/ssl/certs/envdev.crt
-!conf/ssl/certs/envdev.key
-!conf/ssl/csr/envdev.csr
+!conf/ssl/envdev.crt
+!conf/ssl/envdev.key
+!conf/ssl/envdev.csr
 projects/*
 !projects/index.php
 !projects/phpinfo.php

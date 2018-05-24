@@ -14,6 +14,7 @@ restart:
 
 certificate_creation:
 	./scripts/certificate.sh
+	docker run -ti --rm -v $(shell pwd)/conf/ssl:/app/ssl vfac/certificates /app/certificate.sh
 
 certificate_regeneration:
 	./scripts/regenerate_certificate.sh
