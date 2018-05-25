@@ -11,10 +11,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Add SSL support
 - Add script to create and renew self-signed certificate
+- Add EnvDev version on homepage
 
 ### Changed
 
 - Update Makefile actions and add help
+- Fix CSS homepage
 
 ## [2.1.1] - 2018-05-01
 

@@ -11,6 +11,8 @@ body{
   .webblock {
     margin-right: 10px;
     line-height: 19px;
+    white-space: nowrap;
+    display: inline;
   }
 
   .webblock > .icon,
