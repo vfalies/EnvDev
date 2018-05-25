@@ -10,7 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Add SSL support
-- Add script to create and regenerate self-signed certificate
+- Add script to create and renew self-signed certificate
+
+### Changed
+
+- Update Makefile actions and add help
 
 ## [2.1.1] - 2018-05-01
 
