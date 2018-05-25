@@ -63,6 +63,36 @@ All of them are in Alpine version
 
 - [NodeJs](https://nodejs.org/en) : JavaScript runtime
 
+#### Makefile
+
+A `Makefile` is available in command line to manage several actions.
+
+Type following command to display help :
+
+```shell
+make
+```
+
+or
+
+```shell
+make help
+```
+
+Output:
+
+```shell
+help:  Show this help
+servers:  Start all containers
+start:  Start all containers
+stop:  Stop all containers
+restart:  Restart all containers
+certificate:  Generate a SSL certificate
+renewal:  Renewal a knowed SSL certificate
+install:  Install EnvDev container environment
+homepage:  Launch EnvDev homepage in default browser
+```
+
 ### Optional tools
 
 Optional tools are available to use in EnvDev. They are not included by default but can be added easily.
@@ -103,6 +133,12 @@ To start the environment, type the following command:
 
 ```shell
 make servers
+```
+
+or
+
+```shell
+make start
 ```
 
 Several containers are created from `.env` configuration:
@@ -193,7 +229,7 @@ The SSL support is possible during development. To activate it on one of your vh
 you can use the command:
 
 ```shell
-make certificate_creation
+make certificate
 ```
 
 - Add the activation of SSL in VHost file
@@ -202,7 +238,7 @@ On Nginx:
 
 ```
     listen 443 ssl;
-    
+
     ssl_certificate /etc/nginx/ssl/envdev.crt;
     ssl_certificate_key /etc/nginx/ssl/envdev.key;
 ```
@@ -211,7 +247,7 @@ On Apache:
 
 ```
 <VirtualHost *:80 *:443>
-    ... 
+    ...
 
     SSLEngine on
     SSLCertificateFile /usr/local/apache2/conf/custom/envdev.crt
@@ -228,10 +264,10 @@ Don't forget to restart `web` container to restart the web server
 docker restart web
 ```
 
-Tips: If you certificate is out of date, you can regenerate it with the command: 
+Tips: If you certificate is out of date, you can renew it with the command:
 
 ```shell
-make certificate_regeneration
+make renewal
 ```
 
 ## Configuration
