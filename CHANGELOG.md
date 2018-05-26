@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.2] - 2018-05-18
+
+### Added
+
+- Add SSL support
+- Add script to create and renew self-signed certificate
+- Add EnvDev version on homepage
+
+### Changed
+
+- Update Makefile actions and add help
+- Fix CSS homepage
+
 ## [2.1.1] - 2018-05-01
 
 ### Added

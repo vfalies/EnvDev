@@ -10,7 +10,6 @@ This environment provies the following tools to develop in PHP :
 
 Available version :
 
-    - `5.6`
     - `7.0`
     - `7.1`
     - `7.2`
@@ -64,6 +63,36 @@ All of them are in Alpine version
 
 - [NodeJs](https://nodejs.org/en) : JavaScript runtime
 
+#### Makefile
+
+A `Makefile` is available in command line to manage several actions.
+
+Type following command to display help :
+
+```shell
+make
+```
+
+or
+
+```shell
+make help
+```
+
+Output:
+
+```shell
+help:  Show this help
+servers:  Start all containers
+start:  Start all containers
+stop:  Stop all containers
+restart:  Restart all containers
+certificate:  Generate a SSL certificate
+renewal:  Renewal a knowed SSL certificate
+install:  Install EnvDev container environment
+homepage:  Launch EnvDev homepage in default browser
+```
+
 ### Optional tools
 
 Optional tools are available to use in EnvDev. They are not included by default but can be added easily.
@@ -104,6 +133,12 @@ To start the environment, type the following command:
 
 ```shell
 make servers
+```
+
+or
+
+```shell
+make start
 ```
 
 Several containers are created from `.env` configuration:
@@ -185,6 +220,56 @@ In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host
 </VirtualHost>
 ```
 
+### SSL support
+
+The SSL support is possible during development. To activate it on one of your vhosts, you must follow steps:
+
+- Create the SSL self-signed certificate
+
+you can use the command:
+
+```shell
+make certificate
+```
+
+- Add the activation of SSL in VHost file
+
+On Nginx:
+
+```
+    listen 443 ssl;
+
+    ssl_certificate /etc/nginx/ssl/envdev.crt;
+    ssl_certificate_key /etc/nginx/ssl/envdev.key;
+```
+
+On Apache:
+
+```
+<VirtualHost *:80 *:443>
+    ...
+
+    SSLEngine on
+    SSLCertificateFile /usr/local/apache2/conf/custom/envdev.crt
+    SSLCertificateKeyFile /usr/local/apache2/conf/custom/envdev.key
+
+    ...
+```
+
+where `envdev` is the name chosen during the step of the certificate creation.
+
+Don't forget to restart `web` container to restart the web server
+
+```shell
+docker restart web
+```
+
+Tips: If you certificate is out of date, you can renew it with the command:
+
+```shell
+make renewal
+```
+
 ## Configuration
 
 You can create `.env` file to manage applications and tools.
@@ -194,11 +279,12 @@ The following versions, paths and ports can be configured :
 
 | Description | Variable name | Possible values | Default |
 |:-------------|:---------------:|:-----------------:|:---------:|
-| PHP Version | PHP_VERSION | `5.6`, `7.0`, `7.1`, `7.2` | `7.2` |
+| PHP Version | PHP_VERSION | `7.0`, `7.1`, `7.2` | `7.2` |
 | Database type | DB | `mariadb`, `mysql`, `mongodb` | `mysql` |
 | Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
 | Projects Path | PROJECTS_PATH | any | `/your/projects/directory/path` |
 | HTTP web port | WEB_PORT | any | `80` |
+| HTTPS web port | WEBSSL_PORT | any | `443` |
 | MailDev port | MAILDEV_PORT | any | `1080` |
 | PHPMyAdmin port | PHPMYADMIN_PORT | any | `9090` |
 | MongoExpress port | MONGOEXPRESS_PORT | any | `8081` |

@@ -3,14 +3,35 @@ export GROUP_ID=$(shell id -g)
 
 include .env
 
-servers:
-	docker-compose up -d --build --remove-orphans
+help: ## Show this help
+	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
-stop:
-	docker-compose down
+servers: ## Start all containers
+	@echo '******** Starting all containers... ********'
+	@docker-compose up -d --build --remove-orphans
 
-install:
-	docker-compose build --force-rm --no-cache && docker run --rm -v $(shell pwd):/var/www/html -u "$(USER_ID):$(GROUP_ID)" vfac/envdevphpbase:$(PHP_VERSION) sh -c "cd /var/www/html/home/envdev; composer update --lock"
+start: ## Start all containers
+start: servers
 
-homepage:
-	x-www-browser envdev.localhost
+stop: ## Stop all containers
+	@echo '******** Stopping all containers... ********'
+	@docker-compose down
+
+restart: ## Restart all containers
+restart: stop servers
+
+certificate: ## Generate a SSL certificate
+	@echo '******** Generate a SSL certificate ********'
+	@docker run -ti --rm -v $(shell pwd)/conf/ssl:/app/ssl vfac/certificates /app/certificate.sh
+
+renewal: ## Renewal a knowed SSL certificate
+	@echo '******** Renew a SSL certificate ********'
+	@docker run -ti --rm -v $(shell pwd)/conf/ssl:/app/ssl vfac/certificates /app/regenerate_certificate.sh
+
+install: ## Install EnvDev container environment
+	@echo '******** Install EnvDev container environment ********'
+	@docker-compose build --force-rm --no-cache && docker run --rm -v $(shell pwd):/var/www/html -u "$(USER_ID):$(GROUP_ID)" vfac/envdevphpbase:$(PHP_VERSION) sh -c "cd /var/www/html/home/envdev; composer update --lock"
+
+homepage: ## Launch EnvDev homepage in default browser
+	@echo '******** Launch Homepage in browser ********'
+	@x-www-browser envdev.localhost
