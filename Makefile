@@ -35,3 +35,7 @@ install: ## Install EnvDev container environment
 homepage: ## Launch EnvDev homepage in default browser
 	@echo '******** Launch Homepage in browser ********'
 	@x-www-browser envdev.localhost
+
+terminal: ## Create a terminal to php container
+	@echo '******** Launch terminal ********'
+	@docker exec -ti php /bin/bash
