@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Add make action terminal to create a ssh access to php container
+- Add make action terminal to create a ssh access to php container as root
 
 ## [2.2] - 2018-05-26
 

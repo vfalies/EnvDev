@@ -92,6 +92,7 @@ renewal:  Renewal a knowed SSL certificate
 install:  Install EnvDev container environment
 homepage:  Launch EnvDev homepage in default browser
 terminal:  Create a terminal to php container
+terminalroot: Create a terminal to php container as root
 ```
 
 ### Optional tools

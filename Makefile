@@ -39,3 +39,7 @@ homepage: ## Launch EnvDev homepage in default browser
 terminal: ## Create a terminal to php container
 	@echo '******** Launch terminal ********'
 	@docker exec -ti php /bin/bash
+
+terminalroot: ## Create a terminal to php container as root
+	@echo '******** Launch terminal as root ********'
+	@docker exec -ti -u 0 php /bin/bash
