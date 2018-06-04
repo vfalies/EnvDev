@@ -172,7 +172,8 @@ class Home
             {
                 if (strstr($line, 'DocumentRoot') !== false)
                 {
-                    if (strstr($line, $directory) !== false)
+                    $line = trim(str_replace('DocumentRoot', '', $line));
+                    if (strstr($line, $directory) !== false || strstr($line, $directory.'/') !== false)
                     {
                         $hostname = $server_name;
                     }
