@@ -122,6 +122,7 @@ class Home
     private function readNGinxVHOst($vhost_content, $directory)
     {
         $hostname = $server_name = null;
+        // Detect server name from vhost file
         foreach ($vhost_content as $line)
         {
             if (strstr($line, 'server_name') !== false)
@@ -135,9 +136,10 @@ class Home
         {
             foreach ($vhost_content as $line)
             {
-                if (strstr($line, ' root') !== false)
+                if (strstr($line, 'root ') !== false)
                 {
-                    if (strstr($line, $directory) !== false)
+                    $line = trim(str_replace('root ', '', $line));
+                    if (strstr($line, $directory.';') !== false || strstr($line, $directory.'/') !== false)
                     {
                         $hostname = $server_name;
                     }
