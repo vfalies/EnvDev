@@ -12,7 +12,7 @@ body{
     margin-right: 10px;
     line-height: 19px;
     white-space: nowrap;
-    display: inline;
+    display: inline-block;
   }
 
   .webblock > .icon,
