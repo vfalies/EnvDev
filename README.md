@@ -65,6 +65,22 @@ All of them are in Alpine version
 
 - [NodeJs](https://nodejs.org/en) : JavaScript runtime
 
+#### Npm
+
+- [Npm](https://www.npmjs.com/) : Package manager
+
+#### Grunt
+
+- [Grunt](https://gruntjs.com/) : Javascript task runner
+
+#### Gulp
+
+- [Gulp](https://gulpjs.com/) : Javascript task runner
+
+#### Yarn
+
+- [Yarn](https://yarnpkg.com/en/) : Package manager
+
 #### Makefile
 
 A `Makefile` is available in command line to manage several actions.
@@ -150,7 +166,6 @@ Several containers are created from `.env` configuration:
 | Description | Container's name |
 |-------------|------------------|
 | Maildev hub mail | `maildev` |
-| NodeJs | `nodejs` |
 | Web server ( Apache or Nginx ) | `web` |
 | PHP container | `php` |
 | Cache server | `cache` |
@@ -161,16 +176,6 @@ Several containers are created from `.env` configuration:
 
 ```shell
 docker exec php composer -v
-```
-
-`node`, `npm` are available through `node` container:
-
-```shell
-docker run --rm node node -v
-```
-
-```shell
-docker run --rm node npm -v
 ```
 
 To open default home page in browser
