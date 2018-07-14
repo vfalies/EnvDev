@@ -23,8 +23,8 @@ The version is configured in `.env` file. Default: `7.2-fpm`.
 
 Two different database are available :
 
-    - [MySQL](https://www.mysql.com)
-    - [MongoDB](https://www.mongodb.com)
+- [MySQL](https://www.mysql.com)
+- [MongoDB](https://www.mongodb.com)
 
 The database wished is configured in `.env` file. Default: `mysql`
 
@@ -32,8 +32,8 @@ The database wished is configured in `.env` file. Default: `mysql`
 
 Two web server are available :
 
-    - [Nginx](https://nginx.org)
-    - [Apache](https://httpd.apache.org/)
+- [Nginx](https://nginx.org)
+- [Apache](https://httpd.apache.org/)
 
 All of them are in Alpine version.
 
@@ -41,8 +41,8 @@ All of them are in Alpine version.
 
 Two cache server are available :
 
-    - [Redis](https://redis.io/)
-    - [Memcached](https://memcached.org/)
+- [Redis](https://redis.io/)
+- [Memcached](https://memcached.org/)
 
 All of them are in Alpine version
 
