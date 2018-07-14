@@ -10,12 +10,14 @@ This environment provies the following tools to develop in PHP :
 
 Available version :
 
-    - `7.0`
-    - `7.1`
-    - `7.2`
+    - `7.0-fpm`
+    - `7.1-fpm`
+    - `7.2-fpm`
+    - `7.0-fpm-alpine`
+    - `7.1-fpm-alpine`
+    - `7.2-fpm-alpine`
 
-The version is configured in `.env` file. Default: `7.2`
-PHP Stack run on Alpine version to keep a small size image.
+The version is configured in `.env` file. Default: `7.2-fpm`.
 
 - Database
 
@@ -281,7 +283,7 @@ The following versions, paths and ports can be configured :
 
 | Description | Variable name | Possible values | Default |
 |:-------------|:---------------:|:-----------------:|:---------:|
-| PHP Version | PHP_VERSION | `7.0-fpm`, `7.1-fpm`, `7.2-fpm`, `7.0-cli`, `7.1-cli`, `7.2-cli`, `7.0-fpm-alpine`, `7.1-fpm-alpine`, `7.2-fpm-alpine`, `7.0-cli-alpine`, `7.1-cli-alpine`, `7.2-cli-alpine` | `7.2-fpm-alpine` |
+| PHP Version | PHP_VERSION | `7.0-fpm`, `7.1-fpm`, `7.2-fpm`, `7.0-fpm-alpine`, `7.1-fpm-alpine`, `7.2-fpm-alpine` | `7.2-fpm-alpine` |
 | Web Server type | WEB_SERVER | `nginx`, `apache` | `nginx` |
 | Database type | DB | `mariadb`, `mysql`, `mongodb` | `mysql` |
 | Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
