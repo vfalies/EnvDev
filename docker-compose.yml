@@ -17,9 +17,9 @@ services:
     links:
         - php:php
 
-  # PHP FPM with Composer & NodeJS (Npm)
+  # PHP FPM with Composer & JS Tools
   php:
-    image: vfac/envdevphpbase:${PHP_VERSION}
+    image: vfac/envdevjs:${PHP_VERSION}
     container_name: php
     env_file:
         - .env
