@@ -1,17 +1,13 @@
 #!/bin/sh
 
-# export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' .env | xargs)
 
-# docker run \
-#     --rm \
-#     -i \
-#     --network=host \
-#     -v "${PROJECTS_PATH}":"/var/www/html/projects/":ro \
-#     vfac/envdevjs:${PHP_VERSION} \
-#     php "$@"
-
-# exit $?
-
-docker exec php php "$@"
+docker run \
+    --rm \
+    -i \
+    --network=host \
+    -v "$PWD":"$PWD":ro \
+    vfac/envdevjs:${PHP_VERSION} \
+    php "$@"
 
 exit $?
