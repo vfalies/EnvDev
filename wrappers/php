@@ -1,6 +1,7 @@
 #!/bin/sh
 
-export $(grep -v '^#' .env | xargs)
+CURRENTPATH=$(dirname "${0}");
+export $(grep -v '^#' $CURRENTPATH/../.env | xargs)
 
 docker run \
     --rm \
