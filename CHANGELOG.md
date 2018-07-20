@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Change default version of PHP in `.env.dist` file from 7.2 FPM alpine to 7.2 FPM
 - Change License date
 - Update README
+- Move PHP FileMatch from Apache VHost configuration to generic Apache configuration
 
 ### Added
 
