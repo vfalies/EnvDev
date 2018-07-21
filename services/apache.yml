@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   web:
-    image: httpd:2.4-alpine
+    image: httpd:${WEB_SERVER_VERSION}
     ports:
         - ${WEB_PORT}:80
         - ${WEBSSL_PORT}:443

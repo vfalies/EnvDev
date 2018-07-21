@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   web:
-    image: nginx:1.13-alpine
+    image: nginx:${WEB_SERVER_VERSION}
     ports:
         - ${WEB_PORT}:80
         - ${WEBSSL_PORT}:443
