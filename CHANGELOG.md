@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add JS Tools : NodeJS, Npm, Grunt, Gulp, Yarn
 - Add Bash in alpine versions
 - Add PHP wrapper to, for instance, IDE integration
+- Create a docker network
 
 ## [2.2.1] - 2018-06-19
 

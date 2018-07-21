@@ -16,6 +16,8 @@ services:
         service: web
     links:
         - php:php
+    networks:
+        - vfac
 
   # PHP FPM with Composer & JS Tools
   php:
@@ -38,6 +40,8 @@ services:
         - maildev:maildev
         - cache:cache
     working_dir: /var/www/html/projects
+    networks:
+        - vfac
 
   # Cache server
   cache:
@@ -50,6 +54,10 @@ services:
     extends:
         file: services/${DB}.yml
         service: db
+    networks:
+        vfac:
+            aliases:
+                - ${CONTAINER_DB_NAME}
 
   # Database admin
   dbadmin:
@@ -77,3 +85,6 @@ volumes:
         com.vfac.description: "VFAC EnvDev Database MongoDB volume"
         com.vfac.owner: "VFAC"
         com.vfac.url: "https://vfac.fr"
+
+networks:
+    vfac:
