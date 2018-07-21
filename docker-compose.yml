@@ -88,3 +88,6 @@ volumes:
 
 networks:
     vfac:
+networks:
+    vfac:
+        name: vfac
