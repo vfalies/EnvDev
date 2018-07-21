@@ -9,7 +9,7 @@ services:
       - dbdata_mysql:/var/lib/mysql
       - ${PROJECTS_PATH}:/var/www/html/projects/
   dbadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:${DBADMIN_VERSION}
     container_name: dbadmin
 
 

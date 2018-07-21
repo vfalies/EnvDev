@@ -9,6 +9,6 @@ services:
       - dbdata_mongodb:/data/db
       - ${PROJECTS_PATH}:/var/www/html/projects/
   dbadmin:
-    image: mongo-express
+    image: mongo-express:${DBADMIN_VERSION}
     container_name: dbadmin
 
