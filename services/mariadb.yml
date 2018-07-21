@@ -1,12 +1,13 @@
 version: '2.1'
 services:
   db:
-    image: mariadb
-    container_name: db    
-    env_file: 
-      - ../.env    
+    image: mariadb:${DB_VERSION}
+    container_name: db
+    env_file:
+      - ../.env
     volumes:
-      - dbdata_mariadb:/var/lib/mysql        
+      - dbdata_mariadb:/var/lib/mysql
+      - ${PROJECTS_PATH}:/var/www/html/projects/
   dbadmin:
     image: phpmyadmin/phpmyadmin
     container_name: dbadmin
