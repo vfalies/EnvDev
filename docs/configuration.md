@@ -78,6 +78,8 @@ In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host
 </VirtualHost>
 ```
 
+`/var/www/html/projects` can be defined with `PROJECTS_PATH_DEST` environment variable in `.env` file.
+
 ### SSL support
 
 The SSL support is possible during development. To activate it on one of your vhosts, you must follow steps:

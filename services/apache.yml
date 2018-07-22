@@ -7,7 +7,7 @@ services:
         - ${WEBSSL_PORT}:443
     container_name: web
     volumes:
-        - ${PROJECTS_PATH}:/var/www/html/projects/
+        - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
         - ../home:/var/www/html/envdev_home/
         - ../conf/ssl:/usr/local/apache2/conf/custom
         - ../conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf

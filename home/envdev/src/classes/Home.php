@@ -67,7 +67,8 @@ class Home
      */
     private function setProjects()
     {
-        $directories = glob('/var/www/html/projects/*', GLOB_ONLYDIR);
+        $projects_path = getenv('PROJECTS_PATH_DEST');
+        $directories = glob($projects_path.'/*', GLOB_ONLYDIR);
 
         foreach ($directories as $directory)
         {

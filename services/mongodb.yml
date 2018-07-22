@@ -7,7 +7,7 @@ services:
       - ../.env
     volumes:
       - dbdata_mongodb:/data/db
-      - ${PROJECTS_PATH}:/var/www/html/projects/
+      - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
   dbadmin:
     image: mongo-express:${DBADMIN_VERSION}
     container_name: dbadmin

@@ -7,7 +7,7 @@ services:
       - ../.env
     volumes:
       - dbdata_mariadb:/var/lib/mysql
-      - ${PROJECTS_PATH}:/var/www/html/projects/
+      - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
   dbadmin:
     image: phpmyadmin/phpmyadmin:${DBADMIN_VERSION}
     container_name: dbadmin
