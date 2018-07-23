@@ -25,6 +25,8 @@ Several containers are created from `.env` configuration:
 | Database server | `db` |
 | Database admin tool | `dbadmin` |
 
+You can customize database container name with `.env`'s variable `CONTAINER_DB_NAME`. By default `CONTAINER_DB_NAME` is setted to `db`.
+
 `composer` is available through `php` container:
 
 ```shell
@@ -141,17 +143,27 @@ The following versions, paths and ports can be configured :
 |:-------------|:---------------:|:-----------------:|:---------:|
 | PHP Version | PHP_VERSION | `7.0-fpm`, `7.1-fpm`, `7.2-fpm`, `7.0-fpm-alpine`, `7.1-fpm-alpine`, `7.2-fpm-alpine` | `7.2-fpm-alpine` |
 | Web Server type | WEB_SERVER | `nginx`, `apache` | `nginx` |
+| Web Server version | WEB_SERVER_VERSION | Apache: https://hub.docker.com/r/library/httpd/tags/, Nginx: https://hub.docker.com/r/library/nginx/tags/ | `1.15-alpine` |
 | Database type | DB | `mariadb`, `mysql`, `mongodb` | `mysql` |
-| Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
+| Database version | DB_VERSION | Mysql: https://hub.docker.com/r/library/mysql/tags/, MariaDB: https://hub.docker.com/r/library/mariadb/tags/, MongoDB: https://hub.docker.com/r/library/mongo/tags/ | `5.7` |
+| Database container name | CONTAINER_DB_NAME | any | `db` |
 | Projects Path | PROJECTS_PATH | any | `/your/projects/directory/path` |
+| Projects path destination | PROJECTS_PATH_DEST | any | `/var/www/html/projects` |
 | HTTP web port | WEB_PORT | any | `80` |
 | HTTPS web port | WEBSSL_PORT | any | `443` |
 | MailDev port | MAILDEV_PORT | any | `1080` |
-| PHPMyAdmin port | PHPMYADMIN_PORT | any | `9090` |
-| MongoExpress port | MONGOEXPRESS_PORT | any | `8081` |
+| DBAdmin tool port | DBADMIN_PORT | any | `9090` |
+| DBAdmin version | DBADMIN_VERSION | Phpmyadmin: https://hub.docker.com/r/phpmyadmin/phpmyadmin/tags/, MongoExpress: https://hub.docker.com/r/library/mongo-express/tags/ | `4.8` |
+| Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
 | Cache server port | CACHE_PORT | any | `6380` |
+| Cache server version | CACHE_VERSION | any | `4.0-alpine` |
 
 If you access to the url `http://envdev.localhost` a page summarizes all projets and propose access link to PHPMyAdmin, MailDev and PHPInfo.
+This page is also available with command :
+
+```shell
+make homepage
+```
 
 ### Nginx configuration
 
@@ -181,3 +193,9 @@ post_max_size = 40M
 To simplify projects source sharing between containers, you can install source projects in the path define in `.env` with variable `PROJECTS_PATH`.
 
 Naturally, you can change the default path. In this case, the default summary will not be available.
+
+The destination path in container is also available with variable `PROJECTS_PATH_DEST` in `.env`.
+
+### PHP Wrapper
+
+A PHP wrapper is available in `wrappers` directory. It can be used, for instance, to IDE integration.
