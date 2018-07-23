@@ -143,9 +143,9 @@ The following versions, paths and ports can be configured :
 |:-------------|:---------------:|:-----------------:|:---------:|
 | PHP Version | PHP_VERSION | `7.0-fpm`, `7.1-fpm`, `7.2-fpm`, `7.0-fpm-alpine`, `7.1-fpm-alpine`, `7.2-fpm-alpine` | `7.2-fpm-alpine` |
 | Web Server type | WEB_SERVER | `nginx`, `apache` | `nginx` |
-| Web Server version | WEB_SERVER_VERSION | Apache: https://hub.docker.com/r/library/httpd/tags/, Nginx: https://hub.docker.com/r/library/nginx/tags/ | `1.15-alpine` |
+| Web Server version | WEB_SERVER_VERSION | [Apache](https://hub.docker.com/r/library/httpd/tags/) / [Nginx](https://hub.docker.com/r/library/nginx/tags/) | `1.15-alpine` |
 | Database type | DB | `mariadb`, `mysql`, `mongodb` | `mysql` |
-| Database version | DB_VERSION | Mysql: https://hub.docker.com/r/library/mysql/tags/, MariaDB: https://hub.docker.com/r/library/mariadb/tags/, MongoDB: https://hub.docker.com/r/library/mongo/tags/ | `5.7` |
+| Database version | DB_VERSION | [Mysql](https://hub.docker.com/r/library/mysql/tags/) / [MariaDB](https://hub.docker.com/r/library/mariadb/tags/) / [MongoDB](https://hub.docker.com/r/library/mongo/tags/) | `5.7` |
 | Database container name | CONTAINER_DB_NAME | any | `db` |
 | Projects Path | PROJECTS_PATH | any | `/your/projects/directory/path` |
 | Projects path destination | PROJECTS_PATH_DEST | any | `/var/www/html/projects` |
@@ -153,7 +153,7 @@ The following versions, paths and ports can be configured :
 | HTTPS web port | WEBSSL_PORT | any | `443` |
 | MailDev port | MAILDEV_PORT | any | `1080` |
 | DBAdmin tool port | DBADMIN_PORT | any | `9090` |
-| DBAdmin version | DBADMIN_VERSION | Phpmyadmin: https://hub.docker.com/r/phpmyadmin/phpmyadmin/tags/, MongoExpress: https://hub.docker.com/r/library/mongo-express/tags/ | `4.8` |
+| DBAdmin version | DBADMIN_VERSION | [Phpmyadmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/tags/) / [MongoExpress](https://hub.docker.com/r/library/mongo-express/tags/) | `4.8` |
 | Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
 | Cache server port | CACHE_PORT | any | `6380` |
 | Cache server version | CACHE_VERSION | any | `4.0-alpine` |
