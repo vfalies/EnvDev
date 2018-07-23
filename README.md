@@ -26,7 +26,7 @@ To install environment
 make install
 ```
 
-## Documentation
+## Documentation
 
 All documentation is available in [docs directory](./docs)
 
