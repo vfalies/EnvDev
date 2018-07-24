@@ -196,6 +196,11 @@ Naturally, you can change the default path. In this case, the default summary wi
 
 The destination path in container is also available with variable `PROJECTS_PATH_DEST` in `.env`.
 
-### PHP Wrapper
+### Wrappers
 
-A PHP wrapper is available in `wrappers` directory. It can be used, for instance, to IDE integration.
+Wrappers are available in `wrappers` directory.
+
+They can be used, for instance, to IDE integration.
+
+- PHP Wrapper
+- Node Wrapper

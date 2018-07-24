@@ -19,7 +19,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Add JS Tools : NodeJS, Npm, Grunt, Gulp, Yarn
 - Add Bash in alpine versions
-- Add PHP wrapper to, for instance, IDE integration
+- Add PHP wrapper
+- Add Node wrapper
 - Create a docker `vfac` network
 - Fix image versions from `.env` configuration file (Database, Web server, Cache server, Database admin)
 - Add customization of projects path in container from `.env` file
