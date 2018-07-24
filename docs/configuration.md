@@ -202,5 +202,6 @@ Wrappers are available in `wrappers` directory.
 
 They can be used, for instance, to IDE integration.
 
-- PHP Wrapper
-- Node Wrapper
+- PHP wrapper
+- Node wrapper
+- Git wrapper
