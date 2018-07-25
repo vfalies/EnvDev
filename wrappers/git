@@ -7,7 +7,7 @@ docker run \
     --rm \
     -i \
     --network=host \
-    -v "$PWD":"$PWD":ro \
+    -v "$PWD":"$PWD" \
     vfac/envdevjs:${PHP_VERSION} \
     git "$@"
 
