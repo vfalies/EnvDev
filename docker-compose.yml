@@ -26,7 +26,7 @@ services:
     env_file:
         - .env
     volumes:
-        - ${PROJECTS_PATH}:/var/www/html/projects/
+        - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
         - ./home:/var/www/html/envdev_home/
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
         - ~/.gitconfig:/root/.gitconfig
@@ -39,7 +39,7 @@ services:
         - db:db
         - maildev:maildev
         - cache:cache
-    working_dir: /var/www/html/projects
+    working_dir: ${PROJECTS_PATH_DEST}
     networks:
         - vfac
 
