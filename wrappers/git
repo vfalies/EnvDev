@@ -2,12 +2,18 @@
 
 CURRENTPATH=$(dirname "${0}");
 export $(grep -v '^#' $CURRENTPATH/../.env | xargs)
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
 
 docker run \
     --rm \
     -i \
     --network=host \
     -v "$PWD":"$PWD" \
+    -v "~/.ssh":"/root/.ssh" \
+    -v "~/.ssh":"/home/vfac/.ssh" \
+    -w $PWD \
+    -u $USER_ID:$GROUP_ID \
     vfac/envdevjs:${PHP_VERSION} \
     git "$@"
 
