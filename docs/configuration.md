@@ -205,3 +205,8 @@ They can be used, for instance, to IDE integration.
 - PHP wrapper
 - Node wrapper
 - Git wrapper
+- Composer wrapper
+- Grunt wrapper
+- Gulp wrapper
+- Npm wrapper
+- Yarn wrapper
