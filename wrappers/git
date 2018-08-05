@@ -10,8 +10,8 @@ docker run \
     -i \
     --network=host \
     -v "$PWD":"$PWD" \
-    -v "~/.ssh":"/root/.ssh" \
-    -v "~/.ssh":"/home/vfac/.ssh" \
+    -v $(realpath ~/.ssh):"/root/.ssh" \
+    -v $(realpath ~/.ssh):"/home/vfac/.ssh" \
     -w $PWD \
     -u $USER_ID:$GROUP_ID \
     vfac/envdevjs:${PHP_VERSION} \
