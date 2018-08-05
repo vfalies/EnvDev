@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add Gulp wrapper
 - Add Npm wrapper
 - Add Yarn wrapper
+- Add Typescript wrapper
 - Create a docker `vfac` network
 - Fix image versions from `.env` configuration file (Database, Web server, Cache server, Database admin)
 - Add customization of projects path in container from `.env` file

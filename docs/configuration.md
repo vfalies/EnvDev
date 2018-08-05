@@ -210,3 +210,4 @@ They can be used, for instance, to IDE integration.
 - Gulp wrapper
 - Npm wrapper
 - Yarn wrapper
+- Typescript wrapper
