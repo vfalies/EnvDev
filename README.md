@@ -30,6 +30,10 @@ make install
 
 All documentation is available in [docs directory](./docs)
 
+## Troubleshooting
+
+2.3 version of EnvDev, has add new environment constants in `.env` file. If you use an older version, this file must be update with all constants presents in `.env.dist`.
+
 ## Open source
 
 EnvDev is licensed under the MIT License and published through [GitHub](https://github.com/vfalies/envdev/blob/master/LICENSE)
