@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   cache:
-    image: memcached:1.5-alpine
+    image: memcached:${CACHE_VERSION}
     ports:
         - ${CACHE_PORT}:6379
     container_name: cache

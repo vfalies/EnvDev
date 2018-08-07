@@ -1,14 +1,15 @@
 version: '2.1'
 services:
   db:
-    image: mysql
-    container_name: db    
-    env_file: 
-      - ../.env    
+    image: mysql:${DB_VERSION}
+    container_name: db
+    env_file:
+      - ../.env
     volumes:
-      - dbdata_mysql:/var/lib/mysql        
+      - dbdata_mysql:/var/lib/mysql
+      - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
   dbadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:${DBADMIN_VERSION}
     container_name: dbadmin
 
-    
+

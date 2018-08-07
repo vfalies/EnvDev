@@ -1,14 +1,14 @@
 version: '2.1'
 services:
   db:
-    image: mongo
-    container_name: db    
-    env_file: 
-      - ../.env    
+    image: mongo:${DB_VERSION}
+    container_name: db
+    env_file:
+      - ../.env
     volumes:
-      - dbdata_mongodb:/data/db     
+      - dbdata_mongodb:/data/db
+      - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
   dbadmin:
-    image: mongo-express
+    image: mongo-express:${DBADMIN_VERSION}
     container_name: dbadmin
 
-    

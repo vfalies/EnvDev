@@ -1,0 +1,14 @@
+#!/bin/sh
+
+CURRENTPATH=$(dirname "${0}");
+export $(grep -v '^#' $CURRENTPATH/../.env | xargs)
+
+docker run \
+    --rm \
+    -i \
+    --network=host \
+    -v "$PWD":"$PWD":ro \
+    vfac/envdevjs:${PHP_VERSION} \
+    php "$@"
+
+exit $?

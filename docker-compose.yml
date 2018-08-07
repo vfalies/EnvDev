@@ -16,15 +16,17 @@ services:
         service: web
     links:
         - php:php
+    networks:
+        - vfac
 
-  # PHP FPM with Composer & NodeJS (Npm)
+  # PHP FPM with Composer & JS Tools
   php:
-    image: vfac/envdevphpbase:${PHP_VERSION}
+    image: vfac/envdevjs:${PHP_VERSION}
     container_name: php
     env_file:
         - .env
     volumes:
-        - ${PROJECTS_PATH}:/var/www/html/projects/
+        - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
         - ./home:/var/www/html/envdev_home/
         - ./conf/php/php.ini:/usr/local/etc/php/php.ini
         - ~/.gitconfig:/root/.gitconfig
@@ -37,7 +39,9 @@ services:
         - db:db
         - maildev:maildev
         - cache:cache
-    working_dir: /var/www/html/projects
+    working_dir: ${PROJECTS_PATH_DEST}
+    networks:
+        - vfac
 
   # Cache server
   cache:
@@ -50,6 +54,10 @@ services:
     extends:
         file: services/${DB}.yml
         service: db
+    networks:
+        vfac:
+            aliases:
+                - ${CONTAINER_DB_NAME}
 
   # Database admin
   dbadmin:
@@ -77,3 +85,7 @@ volumes:
         com.vfac.description: "VFAC EnvDev Database MongoDB volume"
         com.vfac.owner: "VFAC"
         com.vfac.url: "https://vfac.fr"
+
+networks:
+    vfac:
+        name: vfac
