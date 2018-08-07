@@ -2,7 +2,7 @@
 
 ## Environment composition
 
-This environment provies the following tools to develop in PHP :
+This environment provies the following tools to develop in PHP / JS :
 
 ## Requirements
 
