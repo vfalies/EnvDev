@@ -1,0 +1,7 @@
+version: '2.1'
+services:
+  queuer:
+    image: rabbitmq:3-management
+    container_name: queuer
+    ports:
+      - 15672:15672

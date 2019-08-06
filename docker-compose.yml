@@ -3,11 +3,13 @@ version: '2.1'
 services:
   # To create email during development
   maildev:
-      container_name: maildev
-      image: djfarrelly/maildev
-      ports:
-        - ${MAILDEV_PORT}:80
+    container_name: maildev
+    image: djfarrelly/maildev
+    ports:
         - 1025:25
+        - ${MAILDEV_PORT}:80
+    networks:
+        - vfac
 
   # Web Server
   web:
@@ -39,6 +41,7 @@ services:
         - db:db
         - maildev:maildev
         - cache:cache
+        - queuer:queuer
     working_dir: ${PROJECTS_PATH_DEST}
     networks:
         - vfac
@@ -48,6 +51,16 @@ services:
     extends:
         file: services/${CACHE_SERVER}.yml
         service: cache
+    networks:
+        - vfac
+
+  # Queuer
+  queuer:
+    extends:
+        file: services/rabbitmq.yml
+        service: queuer
+    networks:
+        - vfac
 
   # Database
   db:
@@ -68,6 +81,10 @@ services:
         - ${DBADMIN_PORT}:80
     links:
         - db
+    depends_on:
+        - db
+    networks:
+        - vfac
 
 volumes:
   dbdata_mariadb:
