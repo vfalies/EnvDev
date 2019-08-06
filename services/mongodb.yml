@@ -8,7 +8,11 @@ services:
     volumes:
       - dbdata_mongodb:/data/db
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
+    ports:
+      - 27017:27017
   dbadmin:
     image: mongo-express:${DBADMIN_VERSION}
     container_name: dbadmin
+    environment:
+      - ME_CONFIG_MONGODB_SERVER="db"
 
