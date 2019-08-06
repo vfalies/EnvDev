@@ -57,7 +57,7 @@ services:
   # Queuer
   queuer:
     extends:
-        file: services/rabbitmq.yml
+        file: services/${QUEUER_SERVER}.yml
         service: queuer
     networks:
         - vfac

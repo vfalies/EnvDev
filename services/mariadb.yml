@@ -8,6 +8,8 @@ services:
     volumes:
       - dbdata_mariadb:/var/lib/mysql
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
+    ports:
+      - 3306:3306
   dbadmin:
     image: phpmyadmin/phpmyadmin:${DBADMIN_VERSION}
     container_name: dbadmin

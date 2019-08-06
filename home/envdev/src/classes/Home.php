@@ -33,7 +33,10 @@ class Home
         // Setting tools
         $this->addTool('Database Admin', getenv('DBADMIN_PORT'), 'glyphicon-th-list')
              ->addTool('MailDev', getenv('MAILDEV_PORT'), 'glyphicon-envelope')
-             ->addTool('PhpInfo', $this->port, 'glyphicon-info-sign', '/phpinfo' );
+             ->addTool('PhpInfo', $this->port, 'glyphicon-info-sign', '/phpinfo' )
+             ->addTool('Queuer', getenv('QUEUER_PORT'), 'glyphicon-align-justify
+             ')
+             ;
 
         return $this;
     }
