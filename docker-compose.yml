@@ -6,8 +6,8 @@ services:
     container_name: maildev
     image: djfarrelly/maildev
     ports:
-        - 1025:25
         - ${MAILDEV_PORT}:80
+        - "25:25"
     networks:
         - vfac
 
