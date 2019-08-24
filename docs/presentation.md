@@ -13,11 +13,13 @@ Available version :
     - `7.0-fpm`
     - `7.1-fpm`
     - `7.2-fpm`
+    - `7.3-fpm`
     - `7.0-fpm-alpine`
     - `7.1-fpm-alpine`
     - `7.2-fpm-alpine`
+    - `7.3-fpm-alpine`
 
-The version is configured in `.env` file. Default: `7.2-fpm`.
+The version is configured in `.env` file. Default: `7.3-fpm`.
 
 - Database
 
@@ -43,6 +45,10 @@ Two cache server are available :
 
 - [Redis](https://redis.io/)
 - [Memcached](https://memcached.org/)
+
+- Queuer server
+
+- [RabbitMQ](https://www.rabbitmq.com/)
 
 All of them are in Alpine version
 

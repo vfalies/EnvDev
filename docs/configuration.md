@@ -157,6 +157,8 @@ The following versions, paths and ports can be configured :
 | Cache server type | CACHE_SERVER | `redis`, `memcached` | `redis` |
 | Cache server port | CACHE_PORT | any | `6380` |
 | Cache server version | CACHE_VERSION | any | `4.0-alpine` |
+| Queuer server | QUEUER_SERVER | `rabbitmq` | `rabbitmq` |
+| Queuer server port | QUEUER_PORT | any | `15672` |
 
 If you access to the url `http://envdev.localhost` a page summarizes all projets and propose access link to PHPMyAdmin, MailDev and PHPInfo.
 This page is also available with command :
