@@ -13,3 +13,6 @@ services:
   dbadmin:
     image: phpmyadmin/phpmyadmin:${DBADMIN_VERSION}
     container_name: dbadmin
+    ports:
+        - "${DBADMIN_PORT}:80"
+
