@@ -32,11 +32,10 @@ class Home
     {
         // Setting tools
         $this->addTool('Database Admin', getenv('DBADMIN_PORT'), 'glyphicon-th-list')
-             ->addTool('MailDev', getenv('MAILDEV_PORT'), 'glyphicon-envelope')
-             ->addTool('PhpInfo', $this->port, 'glyphicon-info-sign', '/phpinfo' )
-             ->addTool('Queuer', getenv('QUEUER_PORT'), 'glyphicon-align-justify
-             ')
-             ;
+            ->addTool('MailDev', getenv('MAILDEV_PORT'), 'glyphicon-envelope')
+            ->addTool('PhpInfo', $this->port, 'glyphicon-info-sign', '/phpinfo')
+            ->addTool('Queuer', getenv('QUEUER_PORT'), 'glyphicon-align-justify
+             ');
 
         return $this;
     }
@@ -71,12 +70,14 @@ class Home
     private function setProjects()
     {
         $projects_path = getenv('PROJECTS_PATH_DEST');
-        $directories = glob($projects_path.'/*', GLOB_ONLYDIR);
+        $directories = glob($projects_path . '/*', GLOB_ONLYDIR);
 
-        foreach ($directories as $directory)
-        {
+        foreach ($directories as $directory) {
+            $exploded_directories = explode('/', $directory);
+            $reversed_ditectories = array_reverse($exploded_directories);
+
             $project           = new stdClass();
-            $project->name     = (array_reverse(explode('/', $directory)))[0];
+            $project->name     = $reversed_ditectories[0];
             $project->url      = '//localhost/' . $project->name;
             $project->hostname = $this->getProjectHostname($directory);
 
@@ -95,21 +96,18 @@ class Home
     private function getProjectHostname($directory)
     {
         $webserver = getenv('WEB_SERVER');
-        foreach ($this->vhosts[$webserver] as $vhostfile)
-        {
-            switch ($webserver)
-            {
+        foreach ($this->vhosts[$webserver] as $vhostfile) {
+            switch ($webserver) {
                 case 'nginx':
-                    $hostname = $this->readNGinxVHOst(file('/envdevconf/nginx/vhosts/'.$vhostfile->name), $directory);
+                    $hostname = $this->readNGinxVHOst(file('/envdevconf/nginx/vhosts/' . $vhostfile->name), $directory);
                     break;
                 case 'apache':
-                    $hostname = $this->readApacheVHOst(file('/envdevconf/apache/vhosts/'.$vhostfile->name), $directory);
+                    $hostname = $this->readApacheVHOst(file('/envdevconf/apache/vhosts/' . $vhostfile->name), $directory);
                     break;
                 default:
-                    throw new Exception('Unknown WebServer : '.$webserver);
+                    throw new Exception('Unknown WebServer : ' . $webserver);
             }
-            if (!is_null($hostname))
-            {
+            if (!is_null($hostname)) {
                 return $hostname;
             }
         }
@@ -127,24 +125,18 @@ class Home
     {
         $hostname = $server_name = null;
         // Detect server name from vhost file
-        foreach ($vhost_content as $line)
-        {
-            if (strstr($line, 'server_name') !== false)
-            {
+        foreach ($vhost_content as $line) {
+            if (strstr($line, 'server_name') !== false) {
                 $server_name = str_replace('server_name', '', $line);
                 $server_name = str_replace(';', '', $server_name);
                 $server_name = trim($server_name);
             }
         }
-        if (!is_null($server_name))
-        {
-            foreach ($vhost_content as $line)
-            {
-                if (strstr($line, 'root ') !== false)
-                {
+        if (!is_null($server_name)) {
+            foreach ($vhost_content as $line) {
+                if (strstr($line, 'root ') !== false) {
                     $line = trim(str_replace('root ', '', $line));
-                    if (strstr($line, $directory.';') !== false || strstr($line, $directory.'/') !== false)
-                    {
+                    if (strstr($line, $directory . ';') !== false || strstr($line, $directory . '/') !== false) {
                         $hostname = $server_name;
                     }
                 }
@@ -163,22 +155,16 @@ class Home
     private function readApacheVHost($vhost_content, $directory)
     {
         $hostname = $server_name = null;
-        foreach ($vhost_content as $line)
-        {
-            if (strstr($line,'ServerName') !== false)
-            {
+        foreach ($vhost_content as $line) {
+            if (strstr($line, 'ServerName') !== false) {
                 $server_name = trim(str_replace('ServerName', '', $line));
             }
         }
-        if (!is_null($server_name))
-        {
-            foreach ($vhost_content as $line)
-            {
-                if (strstr($line, 'DocumentRoot') !== false)
-                {
+        if (!is_null($server_name)) {
+            foreach ($vhost_content as $line) {
+                if (strstr($line, 'DocumentRoot') !== false) {
                     $line = trim(str_replace('DocumentRoot', '', $line));
-                    if (strstr($line, $directory) !== false || strstr($line, $directory.'/') !== false)
-                    {
+                    if (strstr($line, $directory) !== false || strstr($line, $directory . '/') !== false) {
                         $hostname = $server_name;
                     }
                 }
@@ -223,8 +209,7 @@ class Home
         $directories = glob('/envdevconf/apache/vhosts/*');
 
         $this->vhosts['apache'] = [];
-        foreach ($directories as $directory)
-        {
+        foreach ($directories as $directory) {
             $vhost       = new stdClass();
             $vhost->name = (array_reverse(explode('/', $directory)))[0];
 
@@ -235,8 +220,7 @@ class Home
         $directories = glob('/envdevconf/nginx/vhosts/*');
 
         $this->vhosts['nginx'] = [];
-        foreach ($directories as $directory)
-        {
+        foreach ($directories as $directory) {
             $vhost       = new stdClass();
             $vhost->name = (array_reverse(explode('/', $directory)))[0];
 
