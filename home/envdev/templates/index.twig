@@ -1,15 +1,23 @@
 {% include 'partials/header.twig' %}
 
-<div class="container">
+<div class="container-fluid">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">EnvDev (2.5)</a>
+            </div>
+        </div>
+    </nav>
     <div class="row">
-        <div class="col-md-12 text-center">
-            <h1>EnvDev (2.4)</h1>
+        <div class="col-md-4">
+            {% include 'partials/home/servers.twig'  %}
+            {% include 'partials/home/tools.twig'  %}
+            {% include 'partials/home/vhosts.twig' %}
+        </div>
+        <div class="col-md-8">
+            {% include 'partials/home/projects.twig' %}
         </div>
     </div>
-    {% include 'partials/home/servers.twig'  %}
-    {% include 'partials/home/tools.twig'  %}
-    {% include 'partials/home/projects.twig' %}
-    {% include 'partials/home/vhosts.twig' %}
 </div>
 
 {% include 'partials/footer.twig' %}

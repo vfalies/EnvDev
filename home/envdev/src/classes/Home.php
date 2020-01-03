@@ -21,6 +21,7 @@ class Home
         $this->setTools();
         $this->loadVHosts();
         $this->setProjects();
+        $this->readComposer();
     }
 
     /**
@@ -31,10 +32,10 @@ class Home
     private function setTools()
     {
         // Setting tools
-        $this->addTool('Database Admin', getenv('DBADMIN_PORT'), 'glyphicon-th-list')
-            ->addTool('MailDev', getenv('MAILDEV_PORT'), 'glyphicon-envelope')
-            ->addTool('PhpInfo', $this->port, 'glyphicon-info-sign', '/phpinfo')
-            ->addTool('Queuer', getenv('QUEUER_PORT'), 'glyphicon-align-justify
+        $this->addTool('Database Admin', getenv('DBADMIN_PORT'), 'fa-list')
+            ->addTool('MailDev', getenv('MAILDEV_PORT'), 'fa-envelope')
+            ->addTool('PhpInfo', $this->port, 'fa-info-circle', '/phpinfo')
+            ->addTool('Queuer', getenv('QUEUER_PORT'), 'fa-align-justify
              ');
 
         return $this;
@@ -65,7 +66,7 @@ class Home
     /**
      * Set projects from disk
      *
-     * @return Home
+     * @return self
      */
     private function setProjects()
     {
@@ -74,14 +75,40 @@ class Home
 
         foreach ($directories as $directory) {
             $exploded_directories = explode('/', $directory);
-            $reversed_ditectories = array_reverse($exploded_directories);
+            $reversed_directories = array_reverse($exploded_directories);
 
-            $project           = new stdClass();
-            $project->name     = $reversed_ditectories[0];
-            $project->url      = '//localhost/' . $project->name;
-            $project->hostname = $this->getProjectHostname($directory);
+            $project            = new stdClass();
+            $project->path      = $directory;
+            $project->directory = $reversed_directories[0];
+            $project->url       = '//localhost/' . $project->directory;
+            $project->hostname  = $this->getProjectHostname($directory);
 
             array_push($this->projects, $project);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Read composer file if exist, to extract name & description
+     *
+     * @return self
+     */
+    private function readComposer()
+    {
+        for ($i = 0; $i < count($this->projects); $i++) {
+            $composer = ($this->projects[$i])->path . DIRECTORY_SEPARATOR . 'composer.json';
+            if (file_exists($composer)) {
+                $json_file = file_get_contents($composer);
+                $json = json_decode($json_file);
+
+                if (isset($json->name)) {
+                    ($this->projects[$i])->name = $json->name;
+                }
+                if (isset($json->description)) {
+                    ($this->projects[$i])->description = $json->description;
+                }
+            }
         }
 
         return $this;

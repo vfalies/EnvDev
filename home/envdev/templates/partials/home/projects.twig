@@ -1,19 +1,35 @@
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Projects</h3>
-
-            {% for project in projects %}
-            <a href="{{ project.url }}" target="_blank">
-                <div class="webblock">
-                    <div class="icon"><i class="glyphicon glyphicon-menu-right"></i></div>
-                    <div class="text">{{ project.name }}</div>
-                    {% if project.hostname is not null %}
-                    <a href="//{{ project.hostname }}" target="_blank">
-                        <div class="icon"><i class="glyphicon glyphicon-globe"></i></div>
-                    </a>
-                    {% endif %}
-                </div>
-            </a>
-            {% endfor %}
-        </div>
+<div class="col-md-12 card shadow mb-4 p-0">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Projects ({{ projects|length }})</h6>
     </div>
+    <div class="card-body">
+        <table class="table table-bordered" width="100%" cellspacing="0" role="grid" style="width: 100%">
+            <thead>
+                <tr role="row">
+                    <th>#</th>
+                    <th>Directory</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set project_count = 1 %}
+                {% for project in projects %}
+                <tr role="row">
+                    <td>{{ project_count }}</td>
+                    <td><a href="{{ project.url }}" target="_blank">{{ project.directory }}</a></td>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.description }}</td>
+                    {% if project.hostname is not null %}
+                        <td style="text-align: center"><a href="//{{ project.hostname }}" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-external-link-alt"></i></a></td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
+                {% set project_count = project_count + 1 %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

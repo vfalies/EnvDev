@@ -1,26 +1,27 @@
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Servers</h3>
-
-            <div class="row">
-                <div class="col-md-2">Web Server</div>
-                <div class="col-md-10">{{ servers.webserver }} ({{ servers.webserver_version }})</div>
+        <div class="col-md-12 card shadow mb-4 p-0">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Servers</h6>
             </div>
-            <div class="row">
-                <div class="col-md-2">PHP Version</div>
-                <div class="col-md-10">{{ servers.php }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">Cache Server</div>
-                <div class="col-md-10">{{ servers.cache }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">Queuer Server</div>
-                <div class="col-md-10">{{ servers.queuer }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">Database Server</div>
-                <div class="col-md-10">{{ servers.db }}</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">Web Server</div>
+                    <div class="col-md-8">{{ servers.webserver }} ({{ servers.webserver_version }})</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">PHP Version</div>
+                    <div class="col-md-8">{{ servers.php }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Cache Server</div>
+                    <div class="col-md-8">{{ servers.cache }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Queuer Server</div>
+                    <div class="col-md-8">{{ servers.queuer }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Database Server</div>
+                    <div class="col-md-8">{{ servers.db }}</div>
+                </div>
             </div>
         </div>
-    </div>
