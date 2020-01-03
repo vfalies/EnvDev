@@ -3,25 +3,41 @@
                 <h6 class="m-0 font-weight-bold text-primary">Servers</h6>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">Web Server</div>
-                    <div class="col-md-8">{{ servers.webserver }} ({{ servers.webserver_version }})</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">PHP Version</div>
-                    <div class="col-md-8">{{ servers.php }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">Cache Server</div>
-                    <div class="col-md-8">{{ servers.cache }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">Queuer Server</div>
-                    <div class="col-md-8">{{ servers.queuer }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">Database Server</div>
-                    <div class="col-md-8">{{ servers.db }}</div>
-                </div>
+                <table class="table table-bordered" width="100%" cellspacing="0" role="grid" style="width: 100%">
+                    <thead>
+                        <tr role="row">
+                            <th>Server</th>
+                            <th>Name</th>
+                            <th>Version</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr role="row">
+                            <td>Web</td>
+                            <td>{{ servers.webserver|capitalize }}</td>
+                            <td>{{ servers.webserver_version }}</td>
+                        </tr>
+                        <tr role="row">
+                            <td>PHP</td>
+                            <td>PHP</td>
+                            <td>{{ servers.php }}</td>
+                        </tr>
+                        <tr role="row">
+                            <td>Cache</td>
+                            <td>{{ servers.cache|capitalize }}</td>
+                            <td>{{ servers.cache_version }}</td>
+                        </tr>
+                        <tr role="row">
+                            <td>Queuer</td>
+                            <td>{{ servers.queuer|capitalize }}</td>
+                            <td></td>
+                        </tr>
+                        <tr role="row">
+                            <td>Database</td>
+                            <td>{{ servers.db|capitalize }}</td>
+                            <td>{{ servers.db_version }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
