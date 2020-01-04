@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.5] - 2020-01-04
+
+### Changed
+
+- Change default version of PHP in `.env.dist` file from 7.3 FPM to 7.4 FPM
+- Change License date
+- Update README
+- Rebuild home interface
+- Remove orphans containers when restart/stop action used by makefile
+
+### Added
+
+- Add static IP to all containers
+- Add new environment variables in `.env.dist` file (for static IP)
+
 ## [2.4] - 2019-08-24
 
 ### Changed
