@@ -1,5 +1,5 @@
 # Web development environment
-version: "2.2"
+version: "2.1"
 services:
   # To create email during development
   maildev:
