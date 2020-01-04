@@ -15,7 +15,7 @@ start: servers
 
 stop: ## Stop all containers
 	@echo '******** Stopping all containers... ********'
-	@docker-compose down
+	@docker-compose down --remove-orphans
 
 restart: ## Restart all containers
 restart: stop servers
