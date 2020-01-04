@@ -32,7 +32,7 @@ All documentation is available in [docs directory](./docs)
 
 ## Troubleshooting
 
-2.4 version of EnvDev, has add new environment constants in `.env` file. If you use an older version, this file must be update with all constants presents in `.env.dist`.
+2.4 & 2.5 version of EnvDev, has add new environment constants in `.env` file. If you use an older version, this file must be update with all constants presents in `.env.dist`.
 
 ## Open source
 

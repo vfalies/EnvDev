@@ -10,7 +10,7 @@ services:
       - "25:25"
     networks:
       vfac:
-        ipv4_address: 172.16.238.10
+        ipv4_address: ${MAILDEV_STATIC_IP}
 
   # Web Server
   web:
@@ -21,7 +21,7 @@ services:
       - php:php
     networks:
       vfac:
-        ipv4_address: 172.16.238.11
+        ipv4_address: ${WEB_STATIC_IP}
 
   # PHP FPM with Composer & JS Tools
   php:
@@ -47,7 +47,7 @@ services:
     working_dir: ${PROJECTS_PATH_DEST}
     networks:
       vfac:
-        ipv4_address: 172.16.238.12
+        ipv4_address: ${PHP_STATIC_IP}
 
   # Cache server
   cache:
@@ -56,7 +56,7 @@ services:
       service: cache
     networks:
       vfac:
-        ipv4_address: 172.16.238.14
+        ipv4_address: ${CACHE_STATIC_IP}
 
   # Queuer
   queuer:
@@ -65,7 +65,7 @@ services:
       service: queuer
     networks:
       vfac:
-        ipv4_address: 172.16.238.15
+        ipv4_address: ${QUEUER_STATIC_IP}
 
   # Database
   db:
@@ -74,7 +74,7 @@ services:
       service: "db"
     networks:
       vfac:
-        ipv4_address: 172.16.238.16
+        ipv4_address: ${DB_STATIC_IP}
         aliases:
           - ${CONTAINER_DB_NAME}
 
@@ -89,7 +89,7 @@ services:
       - "db"
     networks:
       vfac:
-        ipv4_address: 172.16.238.17
+        ipv4_address: ${DBADMIN_STATIC_IP}
 
 volumes:
   dbdata_mariadb:
