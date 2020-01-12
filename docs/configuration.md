@@ -22,8 +22,8 @@ Several containers are created from `.env` configuration:
 | Web server ( Apache or Nginx ) | `web`            |
 | PHP container                  | `php`            |
 | Cache server                   | `cache`          |
-| Database server                |  `db`            |
-| Database admin tool            | `dbadmin`        |
+| Database server                | `db`             |
+| Database admin tool            | `dbadmin`        |
 
 You can customize database container name with `.env`'s variable `CONTAINER_DB_NAME`. By default `CONTAINER_DB_NAME` is setted to `db`.
 
@@ -141,12 +141,12 @@ The following versions, paths and ports can be configured :
 
 | Description                      |   Variable name    |                                                                               Possible values                                                                               |             Default             |
 | :------------------------------- | :----------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------: |
-| PHP Version                      |    PHP_VERSION     |                                            `7.0-fpm`, `7.1-fpm`, `7.2-fpm`, `7.0-fpm-alpine`, `7.1-fpm-alpine`, `7.2-fpm-alpine`                                            |        `7.2-fpm-alpine`         |
+| PHP Version                      |    PHP_VERSION     |                                            `7.0-fpm`, `7.1-fpm`, `7.2-fpm`, `7.0-fpm-alpine`, `7.1-fpm-alpine`, `7.2-fpm-alpine`                                            |        `7.2-fpm-alpine`         |
 | PHP Static Container IP          |   PHP_STATIC_IP    |                                                                               172.16.238.0/24                                                                               |          172.16.238.12          |
 | Web Server type                  |     WEB_SERVER     |                                                                              `nginx`, `apache`                                                                              |             `nginx`             |
-| Web Server version               | WEB_SERVER_VERSION |                               [Apache](https://hub.docker.com/r/library/httpd/tags/) / [Nginx](https://hub.docker.com/r/library/nginx/tags/)                                |          `1.15-alpine`          |
+| Web Server version               |    WEB_VERSION     |                               [Apache](https://hub.docker.com/r/library/httpd/tags/) / [Nginx](https://hub.docker.com/r/library/nginx/tags/)                                |          `1.15-alpine`          |
 | Web Server Static Container IP   |   WEB_STATIC_IP    |                                                                               172.16.238.0/24                                                                               |          172.16.238.14          |
-| Database type                    |         DB         |                                                                        `mariadb`, `mysql`, `mongodb`                                                                        |             `mysql`             |
+| Database type                    |     DB_SERVER      |                                                                        `mariadb`, `mysql`, `mongodb`                                                                        |             `mysql`             |
 | Database version                 |     DB_VERSION     | [Mysql](https://hub.docker.com/r/library/mysql/tags/) / [MariaDB](https://hub.docker.com/r/library/mariadb/tags/) / [MongoDB](https://hub.docker.com/r/library/mongo/tags/) |              `5.7`              |
 | Database container name          | CONTAINER_DB_NAME  |                                                                                     any                                                                                     |              `db`               |
 | Database Static Container IP     |    DB_STATIC_IP    |                                                                               172.16.238.0/24                                                                               |          172.16.238.13          |
@@ -164,7 +164,7 @@ The following versions, paths and ports can be configured :
 | Cache server version             |   CACHE_VERSION    |                                                                                     any                                                                                     |          `4.0-alpine`           |
 | Cache server Static Container IP |  CACHE_STATIC_IP   |                                                                               172.16.238.0/24                                                                               |          172.16.238.15          |
 | Queuer server                    |   QUEUER_SERVER    |                                                                                 `rabbitmq`                                                                                  |           `rabbitmq`            |
-| Queuer server port               |     QUEUER_PORT    |                                                                                     any                                                                                     |             `15672`             |
+| Queuer server port               |    QUEUER_PORT     |                                                                                     any                                                                                     |             `15672`             |
 | Queuer Static Container IP       |  QUEUER_STATIC_IP  |                                                                               172.16.238.0/24                                                                               |          172.16.238.16          |
 
 If you access to the url `http://envdev.localhost` a page summarizes all projets and propose access link to PHPMyAdmin, MailDev and PHPInfo.

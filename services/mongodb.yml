@@ -1,19 +1,32 @@
-version: '2.1'
+version: "3.6"
 services:
   db:
     image: mongo:${DB_VERSION}
     container_name: mongo
     env_file:
-      - ../.env
+      - ./.env
     volumes:
       - dbdata_mongodb:/data/db
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
     ports:
       - "27017:27017"
+    links:
+      - php:php
+    networks:
+      vfac:
+        ipv4_address: ${DB_STATIC_IP}
+        aliases:
+          - ${CONTAINER_DB_NAME}
   dbadmin:
     image: mongo-express:${DBADMIN_VERSION}
     container_name: dbadmin
     restart: always
     ports:
-        - "${DBADMIN_PORT}:8081"
-
+      - "${DBADMIN_PORT}:8081"
+    links:
+      - "db:db"
+    depends_on:
+      - "db"
+    networks:
+      vfac:
+        ipv4_address: ${DBADMIN_STATIC_IP}

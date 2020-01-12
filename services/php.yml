@@ -1,0 +1,24 @@
+version: "3.6"
+services:
+  # PHP FPM with Composer & JS Tools
+  php:
+    image: vfac/envdevjs:${PHP_VERSION}
+    container_name: php
+    env_file:
+      - .env
+    volumes:
+      - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
+      - ./home:/var/www/html/envdev_home/
+      - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.gitconfig:/home/vfac/.gitconfig
+      - ~/.ssh:/root/.ssh
+      - ~/.ssh:/home/vfac/.ssh
+      - ./conf:/envdevconf
+      - ./conf/hosts:/etc/hosts
+    user: "${USER_ID}:${GROUP_ID}"
+
+    working_dir: ${PROJECTS_PATH_DEST}
+    networks:
+      vfac:
+        ipv4_address: ${PHP_STATIC_IP}

@@ -8,7 +8,7 @@ help: ## Show this help
 
 servers: ## Start all containers
 	@echo '******** Starting all containers... ********'
-	@docker-compose up -d --build --remove-orphans
+	@sh -c scripts/containers.sh
 
 start: ## Start all containers
 start: servers
@@ -36,10 +36,10 @@ homepage: ## Launch EnvDev homepage in default browser
 	@echo '******** Launch Homepage in browser ********'
 	@x-www-browser envdev.localhost
 
-terminal: ## Create a terminal
+terminal: ## Create a terminal on PHP container
 	@echo '******** Launch terminal ********'
 	@docker exec -ti php /bin/bash
 
-terminalroot: ## Create a terminal as root
+terminalroot: ## Create a terminal on PHP container as root
 	@echo '******** Launch terminal as root ********'
 	@docker exec -ti -u 0 php /bin/bash
