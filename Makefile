@@ -6,9 +6,18 @@ include .env
 help: ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
+run: ## Run a profile
+run: stop
+	@echo '******** Running a saved profile **********'
+	@sh -c scripts/run.sh
+
+profile: ## Create new profile
+	@echo '******** Create new profile ********'
+	@sh -c scripts/profile.sh
+
 servers: ## Start all containers
 	@echo '******** Starting all containers... ********'
-	@sh -c scripts/containers.sh
+	@sh -c scripts/servers.sh
 
 start: ## Start all containers
 start: servers
