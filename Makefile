@@ -6,28 +6,28 @@ include .env
 help: ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
-run: ## Run a profile
-run: stop
-	@echo '******** Running a saved profile **********'
-	@sh -c scripts/run.sh
-
 profile: ## Create new profile
 	@echo '******** Create new profile ********'
 	@sh -c scripts/profile.sh
 
-servers: ## Start all containers
+run: ## Run a saved profile
+run: stop
+	@echo '******** Running a saved profile **********'
+	@sh -c scripts/run.sh
+
+servers: ## Start default containers
 	@echo '******** Starting all containers... ********'
 	@sh -c scripts/servers.sh
 
-start: ## Start all containers
+start: ## Start default containers
 start: servers
 
 stop: ## Stop all containers
 	@echo '******** Stopping all containers... ********'
 	@docker-compose down --remove-orphans
 
-restart: ## Restart all containers
-restart: stop servers
+restart: ## Restart containers
+restart: stop run
 
 certificate: ## Generate a SSL certificate
 	@echo '******** Generate a SSL certificate ********'
