@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.6] -
+
+### Added
+
+- Create one environment file by container
+- Add profile creation by make command
+- Add profile running by make command
+
+### Changed
+
+- Update docker compose file to 3.6 version
+- Explode docker compose files in multiple files
+
 ## [2.5] - 2020-01-04
 
 ### Changed
