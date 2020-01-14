@@ -144,3 +144,5 @@ echo ""
 echo "Profile generated."
 printf "You can customized it : "
 realpath ./profiles/${config}.env
+echo ""
+echo "To run a saved profile type: make run"
