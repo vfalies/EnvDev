@@ -53,7 +53,7 @@ printf "\n> ${response} version ?\n"
 # Configuration if PHP Base
 if [ ${base} = "php" ]; then
     # PHP version
-    select response in 5.6 7.0 7.1 7.2 7.3 7.4; do
+    select response in 7.4 7.3 7.2 7.1 7.0 5.6; do
         if [[ "$response" =~ ^(5.6|7.0|7.1|7.2|7.3|7.4)$ ]]; then
             version=${response}
             break
@@ -75,7 +75,7 @@ if [ ${base} = "php" ]; then
 
     # Web server
     printf "\n> Web server ?\n"
-    select response in Apache Nginx; do
+    select response in Nginx Apache; do
         if [[ "$response" =~ ^(Apache|Nginx)$ ]]; then
             webserver=${response,,}
             break
@@ -139,10 +139,48 @@ if [ ! $queuerserver = 'none' ]; then
     cat ./environments/${queuerserver}.env >> ./profiles/${config}.env
 fi
 
+# Default profile
+printf "\n> This profile must be the default profile ?\n"
+select response in Yes No; do
+    if [ "$response" = "Yes" ]; then
+        default=''
+        response='Yes'
+        while [[ $default == '' ]]; do
+            if test -f ".env"; then
+                printf "\n> Default profile already exist, would you overwrite it ? \n"
+                select responseow in Yes No; do
+                    if [ "$responseow" = "Yes" ]; then
+                        echo "Default profile will be overwritten."
+                        default='yes'
+                        cp ./profiles/${config}.env .env
+                        break
+                    elif [ "$responseow" = "No" ]; then
+                        default='no'
+                        echo "Default profile not changed"
+                        break
+                    else
+                        echo "Incorrect choice"
+                    fi
+                done
+                echo ""
+            else
+                default='yes'
+                cp ./profiles/${config}.env .env
+            fi
+        done
+        break
+    elif [ "$response" = "No" ]; then
+        break
+    else
+        echo "Incorrect choice"
+    fi
+done
+
 # Display generation result
 echo ""
 echo "Profile generated."
 printf "You can customized it : "
 realpath ./profiles/${config}.env
 echo ""
-echo "To run a saved profile type: make run"
+echo "To run a saved profile: make run"
+echo "To run default profile: make servers"
