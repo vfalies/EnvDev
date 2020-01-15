@@ -1,8 +1,6 @@
 export USER_ID=$(shell id -u)
 export GROUP_ID=$(shell id -g)
 
-include .env
-
 help: ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
@@ -39,6 +37,7 @@ renewal: ## Renewal a knowed SSL certificate
 
 install: ## Install EnvDev container environment
 	@echo '******** Install EnvDev container environment ********'
+	include .env
 	@docker-compose build --force-rm --no-cache && docker run --rm -v $(shell pwd):/var/www/html -u "$(USER_ID):$(GROUP_ID)" vfac/envdevphpbase:$(PHP_VERSION) sh -c "cd /var/www/html/home/envdev; composer update --lock"
 
 homepage: ## Launch EnvDev homepage in default browser
