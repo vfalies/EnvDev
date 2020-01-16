@@ -32,11 +32,16 @@ class Home
     private function setTools()
     {
         // Setting tools
-        $this->addTool('Database Admin', getenv('DBADMIN_PORT'), 'fa-list')
-            ->addTool('MailDev', getenv('MAILDEV_PORT'), 'fa-envelope')
-            ->addTool('PhpInfo', $this->port, 'fa-info-circle', '/phpinfo')
-            ->addTool('Queuer', getenv('QUEUER_PORT'), 'fa-align-justify
-             ');
+        if (getenv('DB_SERVER')) {
+            $this->addTool('Database Admin', getenv('DBADMIN_PORT'), 'fa-list');
+        }
+        $this->addTool('MailDev', getenv('MAILDEV_PORT'), 'fa-envelope');
+        if (getenv('PHP_VERSION')) {
+            $this->addTool('PhpInfo', $this->port, 'fa-info-circle', '/phpinfo');
+        }
+        if (getenv('QUEUER_SERVER')) {
+            $this->addTool('Queuer', getenv('QUEUER_PORT'), 'fa-align-justify');
+        }
 
         return $this;
     }

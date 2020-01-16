@@ -1,4 +1,4 @@
-
+{% if servers.webserver == 'apache' %}
 <div class="col-md-12 card shadow mb-4 p-0">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">VHosts Apache ({{ vhosts['apache']|length }})</h6>
@@ -19,7 +19,8 @@
         </div>
     </div>
 </div>
-
+{% endif %}
+{% if servers.webserver == 'nginx' %}
 <div class="col-md-12 card shadow mb-4 p-0">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">VHosts Nginx ({{ vhosts['nginx']|length }})</h6>
@@ -40,3 +41,4 @@
         </div>
     </div>
 </div>
+{% endif %}
