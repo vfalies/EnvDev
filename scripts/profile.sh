@@ -8,20 +8,25 @@ config=''
 response='Yes'
 while [[ $config == '' ]]; do
     read -p "> Profile name: " config
-    if test -f "./profiles/${config}.env"; then
-        printf "\nProfile already exist, would you overwrite it ? \n"
-        select response in Yes No; do
-            if [ "$response" = "Yes" ]; then
-                echo "Old profile will be overwritten."
-                break
-            elif [ "$response" = "No" ]; then
-                config=''
-                break
-            else
-                echo "Incorrect choice"
-            fi
-        done
-        echo ""
+    if [ $config = 'default' ]; then
+        echo "'default' is a reserved word"
+        config=''
+    else
+        if test -f "./profiles/${config}.env"; then
+            printf "\nProfile already exist, would you overwrite it ? \n"
+            select response in Yes No; do
+                if [ "$response" = "Yes" ]; then
+                    echo "Old profile will be overwritten."
+                    break
+                elif [ "$response" = "No" ]; then
+                    config=''
+                    break
+                else
+                    echo "Incorrect choice"
+                fi
+            done
+            echo ""
+        fi
     fi
 done
 
@@ -146,13 +151,13 @@ select response in Yes No; do
         default=''
         response='Yes'
         while [[ $default == '' ]]; do
-            if test -f ".env"; then
+            if test -f "./profiles/defult.env"; then
                 printf "\n> Default profile already exist, would you overwrite it ? \n"
                 select responseow in Yes No; do
                     if [ "$responseow" = "Yes" ]; then
                         echo "Default profile will be overwritten."
                         default='yes'
-                        cp ./profiles/${config}.env .env
+                        cp ./profiles/${config}.env ./profiles/default.env
                         break
                     elif [ "$responseow" = "No" ]; then
                         default='no'
@@ -165,7 +170,7 @@ select response in Yes No; do
                 echo ""
             else
                 default='yes'
-                cp ./profiles/${config}.env .env
+                cp ./profiles/${config}.env ./profiles/default.env
             fi
         done
         break

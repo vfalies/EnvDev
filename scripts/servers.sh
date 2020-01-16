@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if test -f ".env"; then
-    ./scripts/containers.sh .env
+if test -f "./profiles/default.env"; then
+    ./scripts/containers.sh ./profiles/default.env
 else
-    echo "No default profile found (.env file). Type the command 'make profile' to create it."
+    echo "No default profile found. Type the command 'make profile' to create it."
 fi

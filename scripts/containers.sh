@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source $1
+ENV_FILE=$1
 
 CONTAINERS_STRING=""
 
@@ -24,7 +25,7 @@ if [ "${MAIL_SERVER}" = 'maildev' ]; then
 fi
 
 start_containers() {
-    docker-compose -f docker-compose.yml ${CONTAINERS_STRING} up -d --build --remove-orphans
+    cp ${ENV_FILE} ./.env
+    docker-compose -f docker-compose.yml ${CONTAINERS_STRING} up -d --build --remove-orphans --force-recreate
 }
-
 start_containers

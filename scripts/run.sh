@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List all profiles
-files='default'
+files=''
 for file in ./profiles/*; do
     if [[ -f $file ]]; then
         t="$(basename -- $file)"
@@ -10,11 +10,7 @@ for file in ./profiles/*; do
     fi
 done
 select response in $files; do
-    echo "Running $response profile..."
-    if [ $response = 'default' ];then
-        ./scripts/containers.sh .env
-    else
-        ./scripts/containers.sh ./profiles/$response.env
-    fi
+    printf "\nRunning '$response' profile..."
+    ./scripts/containers.sh ./profiles/$response.env
     break
 done

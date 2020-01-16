@@ -9,7 +9,6 @@ profile: ## Create new profile
 	@sh -c scripts/profile.sh
 
 run: ## Run a saved profile
-run: stop
 	@echo '******** Running a saved profile **********'
 	@sh -c scripts/run.sh
 
