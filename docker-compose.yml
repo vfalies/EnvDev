@@ -23,22 +23,6 @@ version: "3.6"
 #     vfac:
 #       ipv4_address: ${NODE_STATIC_IP}
 
-volumes:
-  dbdata_mariadb:
-    labels:
-      com.vfac.description: "VFAC EnvDev Database MariaDB volume"
-      com.vfac.owner: "VFAC"
-      com.vfac.url: "https://vfac.fr"
-  dbdata_mysql:
-    labels:
-      com.vfac.description: "VFAC EnvDev Database MySQL volume"
-      com.vfac.owner: "VFAC"
-      com.vfac.url: "https://vfac.fr"
-  dbdata_mongodb:
-    labels:
-      com.vfac.description: "VFAC EnvDev Database MongoDB volume"
-      com.vfac.owner: "VFAC"
-      com.vfac.url: "https://vfac.fr"
 
 networks:
   vfac:

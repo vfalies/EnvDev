@@ -29,3 +29,9 @@ services:
     networks:
       vfac:
         ipv4_address: ${DBADMIN_STATIC_IP}
+volumes:
+  dbdata_mariadb:
+    labels:
+      com.vfac.description: "VFAC EnvDev Database MariaDB volume"
+      com.vfac.owner: "VFAC"
+      com.vfac.url: "https://vfac.fr"
