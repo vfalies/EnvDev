@@ -1,5 +1,4 @@
 #!/bin/bash
-source .env
 
 printf "EnvDev profile creator 1.0\n\n"
 
@@ -124,6 +123,9 @@ if [ ${base} = "php" ]; then
 fi
 
 # Profile file generation
+if ! test -d "./profiles"; then
+    mkdir profiles
+fi
 > ./profiles/${config}.env
 echo "PROJECTS_PATH=${project_path}" >> ./profiles/${config}.env
 echo "PROJECTS_PATH_DEST=/var/www/html/projects" >> ./profiles/${config}.env
