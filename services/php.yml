@@ -15,7 +15,7 @@ services:
       - ~/.ssh:/root/.ssh
       - ~/.ssh:/home/vfac/.ssh
       - ./conf:/envdevconf
-      - ./conf/hosts:/etc/hosts
+      # - ./conf/hosts:/etc/hosts
     user: "${USER_ID}:${GROUP_ID}"
 
     working_dir: ${PROJECTS_PATH_DEST}

@@ -2,6 +2,12 @@
 
 printf "EnvDev profile creator 1.0\n\n"
 
+# Init
+webserver='none'
+dbserver='none'
+cacheserver='none'
+queuerserver='none'
+
 # Profile name
 config=''
 response='Yes'
@@ -135,7 +141,9 @@ cat ./environments/${base}.env >> ./profiles/${config}.env
 if [ ${base} = 'php' ]; then
     sed -i -e "s/PHP_VERSION=7.4-fpm/PHP_VERSION=${version}-${archi}/g" ./profiles/${config}.env
 fi
-cat ./environments/${webserver}.env >> ./profiles/${config}.env
+if [ ! $webserver = 'none' ]; then
+    cat ./environments/${webserver}.env >> ./profiles/${config}.env
+fi
 if [ ! $dbserver = 'none' ]; then
     cat ./environments/${dbserver}.env >> ./profiles/${config}.env
 fi

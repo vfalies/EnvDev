@@ -14,3 +14,4 @@ select response in $files; do
     ./scripts/containers.sh ./profiles/$response.env
     break
 done
+./scripts/homepage.sh
