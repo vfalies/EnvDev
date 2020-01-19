@@ -1,6 +1,9 @@
 #!/bin/bash
 
-printf "Profile creator - EnvDev 2.6\n\n"
+# Version
+envdev_version=`cat ./version`
+
+printf "Profile creator - EnvDev $envdev_version\n\n"
 
 # Init
 webserver='none'

@@ -4,6 +4,9 @@ export GROUP_ID=$(shell id -g)
 help: ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
+envdev: ## Get EnvDev version
+	@cat ./version
+
 profile: ## Create new profile
 	@echo '******** Create new profile ********'
 	@sh -c scripts/profile.sh
