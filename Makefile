@@ -11,8 +11,12 @@ profile: ## Create new profile
 	@echo '******** Create new profile ********'
 	@sh -c scripts/profile.sh
 
-run: ## Run a saved profile
-	@echo '******** Running a saved profile **********'
+delete: ## Delete profile
+	@echo '******** Delete profile ********'
+	@sh -c scripts/delete.sh
+
+run: ## Run a profile
+	@echo '******** Running a profile **********'
 	@sh -c scripts/run.sh
 
 servers: ## Start default containers
