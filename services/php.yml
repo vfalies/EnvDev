@@ -14,7 +14,6 @@ services:
       - ~/.gitconfig:/home/vfac/.gitconfig
       - ~/.ssh:/root/.ssh
       - ~/.ssh:/home/vfac/.ssh
-      - ./conf:/envdevconf
       # - ./conf/hosts:/etc/hosts
     user: "${USER_ID}:${GROUP_ID}"
 
