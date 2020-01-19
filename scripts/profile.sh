@@ -1,6 +1,6 @@
 #!/bin/bash
 
-printf "EnvDev profile creator 1.0\n\n"
+printf "Profile creator - EnvDev 2.6\n\n"
 
 # Init
 webserver='none'
