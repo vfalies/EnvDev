@@ -9,6 +9,7 @@ services:
     env_file: .env
     volumes:
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
+      - ./version:/var/www/html/envdev/version
     ports:
       - '1234:80'
     networks:
