@@ -1,27 +1,19 @@
 # Web development environment
 version: "3.6"
-#services:
+services:
 
-# Node
-# node:
-#   image: node:${NODE_VERSION}
-#   container_name: node
-#   env_file:
-#     - .env
-#   volumes:
-#     - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
-#     - ~/.gitconfig:/root/.gitconfig
-#     - ~/.gitconfig:/home/vfac/.gitconfig
-#     - ~/.ssh:/root/.ssh
-#     - ~/.ssh:/home/vfac/.ssh
-#   user: "${USER_ID}:${GROUP_ID}"
-#   links:
-#     - db:db
-#     - cache:cache
-#   working_dir: ${PROJECTS_PATH_DEST}
-#   networks:
-#     vfac:
-#       ipv4_address: ${NODE_STATIC_IP}
+  home:
+    image: vfac/envdevhome
+    # build: /var/www/docker/EnvDevHome
+    container_name: home
+    env_file: .env
+    volumes:
+      - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
+    ports:
+      - '1234:80'
+    networks:
+      vfac:
+        ipv4_address: 172.16.238.18
 
 
 networks:
