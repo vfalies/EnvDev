@@ -13,7 +13,7 @@ run: ## Run a saved profile
 	@sh -c scripts/run.sh
 
 servers: ## Start default containers
-	@echo '******** Starting all containers... ********'
+	@echo '******** Starting default profile containers... ********'
 	@sh -c scripts/servers.sh
 
 start: ## Start default containers
