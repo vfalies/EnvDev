@@ -96,40 +96,80 @@ if [ ${base} = "php" ]; then
             echo "Incorrect choice"
         fi
     done
+fi
 
-    # Database
-    printf "\n> Database ?\n"
-    select response in MySQL MariaDB MongoDB None; do
-        if [[ "$response" =~ ^(MySQL|MariaDB|MongoDB|None)$ ]]; then
-            dbserver=${response,,}
+# Configuration if Node Base
+if [ ${base} = "node" ]; then
+    # Node version
+    select response in 13.6 12.14 10.18; do
+        if [[ "$response" =~ ^(13.6|12.14|10.18)$ ]]; then
+            version=${response}
             break
         else
             echo "Incorrect choice"
         fi
     done
-
-    # Cache server
-    printf "\n> Cache server ?\n"
-    select response in Redis MemCached None; do
-        if [[ "$response" =~ ^(Redis|MemCached|None)$ ]]; then
-            cacheserver=${response,,}
-            break
-        else
-            echo "Incorrect choice"
-        fi
-    done
-
-    # Queuer server
-    printf "\n> Queuer server ?\n"
-    select response in RabbitMQ None; do
-        if [[ "$response" =~ ^(RabbitMQ|None)$ ]]; then
-            queuerserver=${response,,}
+    # Node architecture
+    printf "\n> Alpine version ?\n"
+    select response in Yes No; do
+        if [[ "$response" =~ ^(Yes|No)$ ]]; then
+            if [ "$response" = "Yes" ]; then
+                archi="alpine"
+            else
+                archi="classic"
+            fi
             break
         else
             echo "Incorrect choice"
         fi
     done
 fi
+
+# Common configuration
+
+# Database
+printf "\n> Database ?\n"
+select response in MySQL MariaDB MongoDB None; do
+    if [[ "$response" =~ ^(MySQL|MariaDB|MongoDB|None)$ ]]; then
+        dbserver=${response,,}
+        break
+    else
+        echo "Incorrect choice"
+    fi
+done
+
+# Cache server
+printf "\n> Cache server ?\n"
+select response in Redis MemCached None; do
+    if [[ "$response" =~ ^(Redis|MemCached|None)$ ]]; then
+        cacheserver=${response,,}
+        break
+    else
+        echo "Incorrect choice"
+    fi
+done
+
+# Queuer server
+printf "\n> Queuer server ?\n"
+select response in RabbitMQ None; do
+    if [[ "$response" =~ ^(RabbitMQ|None)$ ]]; then
+        queuerserver=${response,,}
+        break
+    else
+        echo "Incorrect choice"
+    fi
+done
+
+# Maildev
+printf "\n> Mail catcher ?\n"
+select response in Maildev None; do
+    if [[ "$response" =~ ^(Maildev|None)$ ]]; then
+        mailcatcher=${response,,}
+        break
+    else
+        echo "Incorrect choice"
+    fi
+done
 
 # Profile file generation
 if ! test -d "./profiles"; then
@@ -155,6 +195,9 @@ if [ ! $cacheserver = 'none' ]; then
 fi
 if [ ! $queuerserver = 'none' ]; then
     cat ./environments/${queuerserver}.env >> ./profiles/${config}.env
+fi
+if [ ! $mailcatcher = 'none' ]; then
+    cat ./environments/${mailcatcher}.env >> ./profiles/${config}.env
 fi
 
 # Default profile
