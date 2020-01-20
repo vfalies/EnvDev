@@ -6,7 +6,7 @@ services:
       - ${CACHE_PORT}:6379
     container_name: cache
     links:
-      - php
+      - base:base
     networks:
       vfac:
         ipv4_address: ${CACHE_STATIC_IP}

@@ -1,7 +1,7 @@
 version: "3.6"
 services:
   # PHP FPM with Composer & JS Tools
-  php:
+  base:
     image: vfac/envdevjs:${PHP_VERSION}
     container_name: php
     env_file:

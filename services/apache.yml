@@ -12,7 +12,7 @@ services:
       - ./conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./conf/apache/vhosts/:/etc/apache2/sites-enabled/
     links:
-      - php:php
+      - base:base
     networks:
       vfac:
         ipv4_address: ${WEB_STATIC_IP}

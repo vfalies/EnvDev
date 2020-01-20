@@ -12,7 +12,7 @@ services:
       - ./conf/ssl:/etc/nginx/ssl/
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
     links:
-      - php:php
+      - base:base
     networks:
       vfac:
         ipv4_address: ${WEB_STATIC_IP}
