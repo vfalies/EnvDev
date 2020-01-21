@@ -16,7 +16,7 @@ if [ $i = 0 ]; then
     exit
 fi
 select response in $files; do
-    printf "\nRunning '$response' profile..."
+    printf "\nRunning '$response' profile...\n"
     ./scripts/containers.sh ./profiles/$response.env
     break
 done
