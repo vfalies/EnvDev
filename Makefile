@@ -44,8 +44,8 @@ homepage: ## Launch EnvDev homepage in default browser
 
 terminal: ## Create a terminal on PHP container
 	@echo '******** Launch terminal ********'
-	@docker exec -ti php /bin/bash
+	@docker exec -ti base /bin/bash
 
 terminalroot: ## Create a terminal on PHP container as root
 	@echo '******** Launch terminal as root ********'
-	@docker exec -ti -u 0 php /bin/bash
+	@docker exec -ti -u 0 base /bin/bash
