@@ -2,7 +2,7 @@ version: "3.6"
 services:
   base:
     image: node:${NODE_VERSION}
-    container_name: node
+    container_name: base
     env_file:
       - .env
     volumes:

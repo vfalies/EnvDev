@@ -3,7 +3,7 @@ services:
   # PHP FPM with Composer & JS Tools
   base:
     image: vfac/envdevjs:${PHP_VERSION}
-    container_name: php
+    container_name: base
     env_file:
       - .env
     volumes:
