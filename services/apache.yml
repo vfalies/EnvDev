@@ -8,6 +8,7 @@ services:
     container_name: web
     volumes:
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
+      - ./tools/phpinfo:/var/www/html/phpinfo
       - ./conf/ssl:/usr/local/apache2/conf/custom
       - ./conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./conf/apache/vhosts/:/etc/apache2/sites-enabled/

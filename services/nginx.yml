@@ -11,6 +11,7 @@ services:
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./conf/ssl:/etc/nginx/ssl/
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
+      - ./tools/phpinfo:/var/www/html/phpinfo
     links:
       - base:base
     networks:

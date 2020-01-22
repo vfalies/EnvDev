@@ -8,13 +8,12 @@ services:
       - .env
     volumes:
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
-      - ./home:/var/www/html/envdev_home/
+      - ./tools/phpinfo:/var/www/html/phpinfo
       - ./conf/php/php.ini:/usr/local/etc/php/php.ini
       - ~/.gitconfig:/root/.gitconfig
       - ~/.gitconfig:/home/vfac/.gitconfig
       - ~/.ssh:/root/.ssh
       - ~/.ssh:/home/vfac/.ssh
-      # - ./conf/hosts:/etc/hosts
     user: "${USER_ID}:${GROUP_ID}"
 
     working_dir: ${PROJECTS_PATH_DEST}
