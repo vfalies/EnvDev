@@ -12,6 +12,8 @@ services:
       - ./version:/var/www/html/envdev/version
     ports:
       - '1234:80'
+    links:
+      - base:base
     networks:
       vfac:
         ipv4_address: 172.16.238.18
