@@ -12,5 +12,4 @@ projects/*
 !projects/index.php
 !projects/phpinfo.php
 .env
-conf/hosts
 profiles/*
