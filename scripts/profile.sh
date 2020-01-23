@@ -176,6 +176,7 @@ if ! test -d "./profiles"; then
     mkdir profiles
 fi
 > ./profiles/${config}.env
+echo "PROFILE_NAME="${config} >> ./profiles/${config}.env
 echo "PROJECTS_PATH=${project_path}" >> ./profiles/${config}.env
 echo "PROJECTS_PATH_DEST=/var/www/html/projects" >> ./profiles/${config}.env
 echo "LANGUAGE_SERVER=${base}" >> ./profiles/${config}.env
