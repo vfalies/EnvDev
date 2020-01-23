@@ -16,24 +16,29 @@ config=''
 response='Yes'
 while [[ $config == '' ]]; do
     read -p "> Profile name: " config
-    if [ $config = 'default' ]; then
-        echo "'default' is a reserved word"
+    if ! [[ $config =~ ^[a-zA-Z0-9_-]+$ ]]; then
+        echo "Profile name can contains only : alphanumeric characters, dash, underline"
         config=''
     else
-        if test -f "./profiles/${config}.env"; then
-            printf "\nProfile already exist, would you overwrite it ? \n"
-            select response in Yes No; do
-                if [ "$response" = "Yes" ]; then
-                    echo "Old profile will be overwritten."
-                    break
-                elif [ "$response" = "No" ]; then
-                    config=''
-                    break
-                else
-                    echo "Incorrect choice"
-                fi
-            done
-            echo ""
+        if [ $config = 'default' ]; then
+            echo "'default' is a reserved word"
+            config=''
+        else
+            if test -f "./profiles/${config}.env"; then
+                printf "\nProfile already exist, would you overwrite it ? \n"
+                select response in Yes No; do
+                    if [ "$response" = "Yes" ]; then
+                        echo "Old profile will be overwritten."
+                        break
+                    elif [ "$response" = "No" ]; then
+                        config=''
+                        break
+                    else
+                        echo "Incorrect choice"
+                    fi
+                done
+                echo ""
+            fi
         fi
     fi
 done
