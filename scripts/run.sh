@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Stop all running container
+./scripts/stop.sh
+
 # List all profiles
 files=''
 i=0

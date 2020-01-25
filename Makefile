@@ -26,9 +26,9 @@ servers: ## Start default containers
 start: ## Start default containers
 start: servers
 
-stop: ## Stop all containers
-	@echo '******** Stopping all containers... ********'
-	@docker-compose down --remove-orphans
+stop: ## Stop all running containers
+	@echo '******** Stopping all running containers... ********'
+	@sh -c scripts/stop.sh
 
 certificate: ## Generate a SSL certificate
 	@echo '******** Generate a SSL certificate ********'
