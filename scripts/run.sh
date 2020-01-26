@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Stop all running container
-./scripts/stop.sh
-
 # List all profiles
 files=''
 i=0
@@ -18,7 +15,11 @@ if [ $i = 0 ]; then
     echo "No profile found. Type the command 'make profile' to create it."
     exit
 fi
+
 select response in $files; do
+    # Stop all running container
+    printf "\nStopping all running containers...\n"
+    ./scripts/stop.sh
     printf "\nRunning '$response' profile...\n"
     ./scripts/containers.sh ./profiles/$response.env
     break
