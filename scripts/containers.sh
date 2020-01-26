@@ -5,9 +5,9 @@ ENV_FILE=$1
 
 CONTAINERS_STRING=""
 
-if [ "${LANGUAGE_SERVER}" = "php" -o "${LANGUAGE_SERVER}" = "node" ]; then
-    CONTAINERS_STRING="${CONTAINERS_STRING} -f services/${LANGUAGE_SERVER}.yml"
-fi
+# if [ "${LANGUAGE_SERVER}" = "php" -o "${LANGUAGE_SERVER}" = "node" ]; then
+#     CONTAINERS_STRING="${CONTAINERS_STRING} -f services/${LANGUAGE_SERVER}.yml"
+# fi
 if [ "${DB_SERVER}" = "mariadb" -o "${DB_SERVER}" = "mysql" -o "${DB_SERVER}" = 'mongodb' ]; then
     CONTAINERS_STRING="${CONTAINERS_STRING} -f services/${DB_SERVER}.yml"
 fi

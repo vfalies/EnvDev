@@ -12,6 +12,7 @@ services:
       - 3306:3306
     links:
       - base:base
+      - home:home
     networks:
       vfac:
         ipv4_address: ${DB_STATIC_IP}

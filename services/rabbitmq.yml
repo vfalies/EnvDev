@@ -5,6 +5,7 @@ services:
     container_name: queuer
     links:
       - base:base
+      - home:home
     ports:
       - ${QUEUER_PORT}:15672
     networks:

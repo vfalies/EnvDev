@@ -14,6 +14,7 @@ services:
       - ./tools/phpinfo:/var/www/html/phpinfo
     links:
       - base:base
+      - home:home
     networks:
       vfac:
         ipv4_address: ${WEB_STATIC_IP}

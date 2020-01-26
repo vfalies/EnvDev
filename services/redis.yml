@@ -7,6 +7,7 @@ services:
     container_name: cache
     links:
       - base:base
+      - home:home
     networks:
       vfac:
         ipv4_address: ${CACHE_STATIC_IP}

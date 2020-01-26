@@ -188,7 +188,7 @@ echo "LANGUAGE_SERVER=${base}" >> ./profiles/${config}.env
 cat ./environments/${base}.env >> ./profiles/${config}.env
 # Custom PHP Version in profile file
 if [ ${base} = 'php' ]; then
-    sed -i -e "s/PHP_VERSION=7.4-fpm/PHP_VERSION=${version}-${archi}/g" ./profiles/${config}.env
+    sed -i -e "s/BASE_VERSION=7.4-fpm/BASE_VERSION=${version}-${archi}/g" ./profiles/${config}.env
 fi
 if [ ! $webserver = 'none' ]; then
     cat ./environments/${webserver}.env >> ./profiles/${config}.env

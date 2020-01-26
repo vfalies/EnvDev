@@ -9,6 +9,7 @@ services:
       - "25:25"
     links:
       - base:base
+      - home:home
     networks:
       vfac:
         ipv4_address: ${MAILDEV_STATIC_IP}

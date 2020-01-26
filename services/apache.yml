@@ -14,6 +14,7 @@ services:
       - ./conf/apache/vhosts/:/etc/apache2/sites-enabled/
     links:
       - base:base
+      - home:home
     networks:
       vfac:
         ipv4_address: ${WEB_STATIC_IP}
