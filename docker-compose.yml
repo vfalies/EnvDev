@@ -3,8 +3,7 @@ version: "3.6"
 services:
 
   home:
-    #image: vfac/envdevhome:1.0
-    build: /var/www/docker/EnvDevHome
+    image: vfac/envdevhome:1.1
     container_name: home
     env_file: .env
     volumes:
