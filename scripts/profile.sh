@@ -119,9 +119,9 @@ if [ ${base} = "node" ]; then
     select response in Yes No; do
         if [[ "$response" =~ ^(Yes|No)$ ]]; then
             if [ "$response" = "Yes" ]; then
-                archi="alpine"
+                archi="-alpine"
             else
-                archi="classic"
+                archi=""
             fi
             break
         else
@@ -189,6 +189,9 @@ cat ./environments/${base}.env >> ./profiles/${config}.env
 # Custom PHP Version in profile file
 if [ ${base} = 'php' ]; then
     sed -i -e "s/BASE_VERSION=7.4-fpm/BASE_VERSION=${version}-${archi}/g" ./profiles/${config}.env
+fi
+if [ ${base} = 'node' ]; then
+    sed -i -e "s/BASE_VERSION=13.6/BASE_VERSION=${version}${archi}/g" ./profiles/${config}.env
 fi
 if [ ! $webserver = 'none' ]; then
     cat ./environments/${webserver}.env >> ./profiles/${config}.env
