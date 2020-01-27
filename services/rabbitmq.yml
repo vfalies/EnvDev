@@ -1,7 +1,13 @@
-version: '2.1'
+version: "3.6"
 services:
   queuer:
     image: rabbitmq:3-management
     container_name: queuer
+    links:
+      - base:base
+      - home:home
     ports:
       - ${QUEUER_PORT}:15672
+    networks:
+      vfac:
+        ipv4_address: ${QUEUER_STATIC_IP}

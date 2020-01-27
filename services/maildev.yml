@@ -1,0 +1,15 @@
+version: "3.6"
+services:
+  # To create email during development
+  maildev:
+    container_name: maildev
+    image: djfarrelly/maildev
+    ports:
+      - ${MAILDEV_PORT}:80
+      - "25:25"
+    links:
+      - base:base
+      - home:home
+    networks:
+      vfac:
+        ipv4_address: ${MAILDEV_STATIC_IP}

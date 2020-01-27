@@ -2,7 +2,7 @@
 
 ## Environment composition
 
-This environment provies the following tools to develop in PHP :
+This environment provides the following tools to develop in PHP or in NodeJS via profiles.
 
 ### Core
 
@@ -14,12 +14,24 @@ Available version :
     - `7.1-fpm`
     - `7.2-fpm`
     - `7.3-fpm`
+    - `7.4-fpm`
     - `7.0-fpm-alpine`
     - `7.1-fpm-alpine`
     - `7.2-fpm-alpine`
     - `7.3-fpm-alpine`
+    - `7.4-fpm-alpine`
 
-The version is configured in `.env` file. Default: `7.3-fpm`.
+Default: `7.4-fpm`.
+
+- [Node](https://nodejs.org/)
+
+Available version :
+
+    - `10.18`
+    - `12.14`
+    - `13.6`
+
+Default: `13.6`
 
 - Database
 
@@ -59,7 +71,7 @@ All of them are in Alpine version
 - [MongoExpress](https://github.com/mongo-express/mongo-express) : Manage Mongo database instances
 - [PHPMyAdmin](https://www.phpmyadmin.net/) : Manage MySql/MariaDB database instances
 
-#### Mail hub
+#### Mail catcher
 
 - [MailDev](http://danfarrelly.nyc/MailDev) : SMTP Server + Web Interface for viewing and testing emails during development
 
@@ -107,16 +119,18 @@ Output:
 
 ```shell
 help:  Show this help
-servers:  Start all containers
-start:  Start all containers
-stop:  Stop all containers
-restart:  Restart all containers
+envdev:  Get EnvDev version
+profile:  Create new profile
+delete:  Delete profile
+run:  Run a profile
+servers:  Start default containers
+start:  Start default containers
+stop:  Stop all running containers
 certificate:  Generate a SSL certificate
 renewal:  Renewal a knowed SSL certificate
-install:  Install EnvDev container environment
 homepage:  Launch EnvDev homepage in default browser
-terminal:  Create a terminal to php container
-terminalroot: Create a terminal to php container as root
+terminal:  Create a terminal on PHP container
+terminalroot:  Create a terminal on PHP container as root
 ```
 
 ### Optional tools

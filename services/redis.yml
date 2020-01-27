@@ -1,7 +1,13 @@
-version: '2.1'
+version: "3.6"
 services:
   cache:
     image: redis:${CACHE_VERSION}
     ports:
-        - ${CACHE_PORT}:6379
+      - ${CACHE_PORT}:6379
     container_name: cache
+    links:
+      - base:base
+      - home:home
+    networks:
+      vfac:
+        ipv4_address: ${CACHE_STATIC_IP}

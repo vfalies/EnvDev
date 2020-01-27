@@ -1,15 +1,20 @@
-version: '2.1'
+version: "3.6"
 services:
   web:
-    image: httpd:${WEB_SERVER_VERSION}
+    image: httpd:${WEB_VERSION}
     ports:
-        - ${WEB_PORT}:80
-        - ${WEBSSL_PORT}:443
+      - ${WEB_PORT}:80
+      - ${WEBSSL_PORT}:443
     container_name: web
     volumes:
-        - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
-        - ../home:/var/www/html/envdev_home/
-        - ../conf/ssl:/usr/local/apache2/conf/custom
-        - ../conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
-        - ../conf/apache/vhosts/:/etc/apache2/sites-enabled/
-        - ../conf:/envdevconf
+      - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
+      - ./tools/phpinfo:/var/www/html/phpinfo
+      - ./conf/ssl:/usr/local/apache2/conf/custom
+      - ./conf/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./conf/apache/vhosts/:/etc/apache2/sites-enabled/
+    links:
+      - base:base
+      - home:home
+    networks:
+      vfac:
+        ipv4_address: ${WEB_STATIC_IP}

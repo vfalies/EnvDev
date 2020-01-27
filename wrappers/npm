@@ -5,16 +5,30 @@ export $(grep -v '^#' $CURRENTPATH/../.env | xargs)
 export USER_ID=$(id -u)
 export GROUP_ID=$(id -g)
 
-docker run \
-    --rm \
-    -i \
-    --network=host \
-    -v "$PWD":"$PWD":ro \
-    -v $(realpath ~/.ssh):"/root/.ssh" \
-    -v $(realpath ~/.ssh):"/home/vfac/.ssh" \
-    -w $PWD \
-    -u $USER_ID:$GROUP_ID \
-    vfac/envdevjs:${PHP_VERSION} \
-    npm "$@"
-
+if [ "${LANGUAGE_SERVER}" = "php" ]; then
+    docker run \
+        --rm \
+        -i \
+        --network=host \
+        -v "$PWD":"$PWD":ro \
+        -v $(realpath ~/.ssh):"/root/.ssh" \
+        -v $(realpath ~/.ssh):"/home/vfac/.ssh" \
+        -w $PWD \
+        -u $USER_ID:$GROUP_ID \
+        vfac/envdevjs:${PHP_VERSION} \
+        npm "$@"
+fi
+if [ "${LANGUAGE_SERVER}" = "node" ]; then
+    docker exec \
+        --rm \
+        -i \
+        --network=host \
+        -v "$PWD":"$PWD":ro \
+        -v $(realpath ~/.ssh):"/root/.ssh" \
+        -v $(realpath ~/.ssh):"/home/vfac/.ssh" \
+        -w $PWD \
+        -u $USER_ID:$GROUP_ID \
+        vfac/envdevnodebase:${NODE_VERSION} \
+        npm "$@"
+fi
 exit $?

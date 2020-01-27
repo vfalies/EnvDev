@@ -12,3 +12,4 @@ projects/*
 !projects/index.php
 !projects/phpinfo.php
 .env
+profiles/*

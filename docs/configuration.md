@@ -2,30 +2,39 @@
 
 ## Usage
 
+To create a new environment, type the following command:
+
+```shell
+make profile
+```
+
 To start the environment, type the following command:
+
+For default configuration
 
 ```shell
 make servers
 ```
 
-or
+For specific configuration
 
 ```shell
-make start
+make run
 ```
 
-Several containers are created from `.env` configuration:
+Several containers are created from profile configuration:
 
 | Description                    | Container's name |
 | ------------------------------ | ---------------- |
 | Maildev hub mail               | `maildev`        |
 | Web server ( Apache or Nginx ) | `web`            |
-| PHP container                  | `php`            |
+| PHP or Node container          | `base`           |
 | Cache server                   | `cache`          |
-| Database server                |  `db`            |
-| Database admin tool            | `dbadmin`        |
+| Database server                | `db`             |
+| Database admin tool            | `dbadmin`        |
+| Queuer server                  | `queuer`         |
 
-You can customize database container name with `.env`'s variable `CONTAINER_DB_NAME`. By default `CONTAINER_DB_NAME` is setted to `db`.
+You can customize database container name with profile's variable `CONTAINER_DB_NAME`. By default `CONTAINER_DB_NAME` is setted to `db`.
 
 `composer` is available through `php` container:
 
@@ -57,7 +66,7 @@ server {
 
     location ~* \.PHP$ {
         fastcgi_index   index.php;
-        fastcgi_pass   php:9000;
+        fastcgi_pass   base:9000;
         include         fastcgi_params;
         fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
     }
@@ -80,7 +89,7 @@ In `conf/apache/vhosts` directory, all your `yourhost.conf` file. A default host
 </VirtualHost>
 ```
 
-`/var/www/html/projects` can be defined with `PROJECTS_PATH_DEST` environment variable in `.env` file.
+`/var/www/html/projects` can be defined with `PROJECTS_PATH_DEST` environment variable in profile file in `profiles` directory.
 
 ### SSL support
 
@@ -134,19 +143,23 @@ make renewal
 
 ## Customization
 
-You can create `.env` file to manage applications and tools.
-An example is available with `.env.dist` file.
+You can create profile file to manage applications and tools with the command:
+
+```shell
+make profile
+```
 
 The following versions, paths and ports can be configured :
 
 | Description                      |   Variable name    |                                                                               Possible values                                                                               |             Default             |
 | :------------------------------- | :----------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------: |
-| PHP Version                      |    PHP_VERSION     |                                            `7.0-fpm`, `7.1-fpm`, `7.2-fpm`, `7.0-fpm-alpine`, `7.1-fpm-alpine`, `7.2-fpm-alpine`                                            |        `7.2-fpm-alpine`         |
-| PHP Static Container IP          |   PHP_STATIC_IP    |                                                                               172.16.238.0/24                                                                               |          172.16.238.12          |
+| Language                      |    LANGUAGE_SERVER     |                                            `php`, `node`                                            |        N/A         |
+| Language Version                      |    BASE_VERSION     |                                            `7.0-fpm`, `7.1-fpm`, `7.2-fpm`, `7.0-fpm-alpine`, `7.1-fpm-alpine`, `7.2-fpm-alpine`, `7.3-fpm`, `7.3-fpm-alpine`, `7.4-fpm`, `7.4-fpm-alpine`, `13.6`, `12.14`, `10.18`                                            |        `7.4-fpm` for PHP, `13.6` for Node         |
+| Language Static Container IP          |   BASE_STATIC_IP    |                                                                               172.16.238.0/24                                                                               |          172.16.238.12          |
 | Web Server type                  |     WEB_SERVER     |                                                                              `nginx`, `apache`                                                                              |             `nginx`             |
-| Web Server version               | WEB_SERVER_VERSION |                               [Apache](https://hub.docker.com/r/library/httpd/tags/) / [Nginx](https://hub.docker.com/r/library/nginx/tags/)                                |          `1.15-alpine`          |
+| Web Server version               |    WEB_VERSION     |                               [Apache](https://hub.docker.com/r/library/httpd/tags/) / [Nginx](https://hub.docker.com/r/library/nginx/tags/)                                |          `1.15-alpine`          |
 | Web Server Static Container IP   |   WEB_STATIC_IP    |                                                                               172.16.238.0/24                                                                               |          172.16.238.14          |
-| Database type                    |         DB         |                                                                        `mariadb`, `mysql`, `mongodb`                                                                        |             `mysql`             |
+| Database type                    |     DB_SERVER      |                                                                        `mariadb`, `mysql`, `mongodb`                                                                        |             `mysql`             |
 | Database version                 |     DB_VERSION     | [Mysql](https://hub.docker.com/r/library/mysql/tags/) / [MariaDB](https://hub.docker.com/r/library/mariadb/tags/) / [MongoDB](https://hub.docker.com/r/library/mongo/tags/) |              `5.7`              |
 | Database container name          | CONTAINER_DB_NAME  |                                                                                     any                                                                                     |              `db`               |
 | Database Static Container IP     |    DB_STATIC_IP    |                                                                               172.16.238.0/24                                                                               |          172.16.238.13          |
@@ -164,10 +177,10 @@ The following versions, paths and ports can be configured :
 | Cache server version             |   CACHE_VERSION    |                                                                                     any                                                                                     |          `4.0-alpine`           |
 | Cache server Static Container IP |  CACHE_STATIC_IP   |                                                                               172.16.238.0/24                                                                               |          172.16.238.15          |
 | Queuer server                    |   QUEUER_SERVER    |                                                                                 `rabbitmq`                                                                                  |           `rabbitmq`            |
-| Queuer server port               |     QUEUER_PORT    |                                                                                     any                                                                                     |             `15672`             |
+| Queuer server port               |    QUEUER_PORT     |                                                                                     any                                                                                     |             `15672`             |
 | Queuer Static Container IP       |  QUEUER_STATIC_IP  |                                                                               172.16.238.0/24                                                                               |          172.16.238.16          |
 
-If you access to the url `http://envdev.localhost` a page summarizes all projets and propose access link to PHPMyAdmin, MailDev and PHPInfo.
+If you access to the url `http://envdev.localhost` a page summarizes all projets and propose access link to tools (PHPMyAdmin, MailDev, PHPInfo).
 This page is also available with command :
 
 ```shell
@@ -199,11 +212,11 @@ post_max_size = 40M
 
 ### Projects configuration
 
-To simplify projects source sharing between containers, you can install source projects in the path define in `.env` with variable `PROJECTS_PATH`.
+To simplify projects source sharing between containers, you can install source projects in the path define in `profiles` directory with variable `PROJECTS_PATH`.
 
 Naturally, you can change the default path. In this case, the default summary will not be available.
 
-The destination path in container is also available with variable `PROJECTS_PATH_DEST` in `.env`.
+The destination path in container is also available with variable `PROJECTS_PATH_DEST` in `profiles` directory.
 
 ### Wrappers
 
