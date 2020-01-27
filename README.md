@@ -17,13 +17,10 @@ Two system dependencies are required :
 git clone git@github.com:vfalies/EnvDev.git
 ```
 
-Create a `.env` file to define your configuration.
-An example is available with `.env.dist` file.
-
-To install environment
+Create a new profile to define your configuration.
 
 ```shell
-make install
+make profile
 ```
 
 ## Documentation
@@ -32,7 +29,9 @@ All documentation is available in [docs directory](./docs)
 
 ## Troubleshooting
 
-2.4 & 2.5 version of EnvDev, has add new environment constants in `.env` file. If you use an older version, this file must be update with all constants presents in `.env.dist`.
+- 3.0 version of EnvDev, store configuration in `profiles` directory.
+
+- 2.4 & 2.5 version of EnvDev, has add new environment constants in `.env` file. If you use an older version, this file must be update with all constants presents in `.env.dist`.
 
 ## Open source
 

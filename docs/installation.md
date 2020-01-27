@@ -13,11 +13,8 @@ Two system dependencies are required :
 git clone git@github.com:vfalies/EnvDev.git
 ```
 
-Create a `.env` file to define your configuration.
-An example is available with `.env.dist` file.
-
-To install environment
+Create a new profile to define your configuration.
 
 ```shell
-make install
+make profile
 ```
