@@ -3,7 +3,7 @@ services:
   cache:
     image: redis:${CACHE_VERSION}
     ports:
-      - ${CACHE_PORT}:6379
+      - 6379:6379
     container_name: cache
     links:
       - base:base
@@ -11,3 +11,19 @@ services:
     networks:
       vfac:
         ipv4_address: ${CACHE_STATIC_IP}
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    depends_on: 
+      - cache
+    environment:
+      - REDIS_HOSTS=local:${CACHE_STATIC_IP}:6379
+    ports:
+      - "${CACHEADMIN_PORT}:8081"
+    networks:
+      vfac:
+        ipv4_address: ${CACHEADMIN_STATIC_IP}
+
