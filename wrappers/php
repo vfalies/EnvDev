@@ -8,7 +8,7 @@ docker run \
     -i \
     --network=host \
     -v "$PWD":"$PWD":ro \
-    vfac/envdevjs:${PHP_VERSION} \
+    vfac/envdevjs:${BASE_VERSION} \
     php "$@"
 
 exit $?

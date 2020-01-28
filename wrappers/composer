@@ -14,7 +14,7 @@ docker run \
     -v $(realpath ~/.ssh):"/home/vfac/.ssh" \
     -w $PWD \
     -u $USER_ID:$GROUP_ID \
-    vfac/envdevjs:${PHP_VERSION} \
+    vfac/envdevjs:${BASE_VERSION} \
     composer "$@"
 
 exit $?
