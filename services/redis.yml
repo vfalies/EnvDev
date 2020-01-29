@@ -17,12 +17,12 @@ services:
     hostname: redis-commander
     image: rediscommander/redis-commander:latest
     restart: always
-    depends_on: 
+    depends_on:
       - cache
     environment:
       - REDIS_HOSTS=local:${CACHE_STATIC_IP}:6379
     ports:
-      - "${CACHEADMIN_PORT}:8081"
+      - '${CACHEADMIN_PORT}:8081'
     networks:
       vfac:
         ipv4_address: ${CACHEADMIN_STATIC_IP}
