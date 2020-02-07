@@ -30,6 +30,7 @@ services:
       - ${PROJECTS_PATH}:${PROJECTS_PATH_DEST}
       - ./tools/phpinfo:/var/www/html/phpinfo
       - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+      - ./outputs/profiler:/outputs/profiler
       - ~/.gitconfig:/root/.gitconfig
       - ~/.gitconfig:/home/vfac/.gitconfig
       - ~/.ssh:/root/.ssh
