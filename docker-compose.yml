@@ -3,7 +3,7 @@ version: "3.6"
 services:
 
   home:
-    image: vfac/envdevhome:1.1
+    image: vfac/envdevhome:1.2
     container_name: home
     env_file: .env
     volumes:
@@ -36,7 +36,6 @@ services:
       - ~/.ssh:/home/vfac/.ssh
     user: "${USER_ID}:${GROUP_ID}"
     ports:
-      - '9000:9000'
       - '22:22'
 
     working_dir: ${PROJECTS_PATH_DEST}
