@@ -16,8 +16,8 @@ config=''
 response='Yes'
 while [[ $config == '' ]]; do
     read -p "> Profile name: " config
-    if ! [[ $config =~ ^[a-zA-Z0-9_-.]+$ ]]; then
-        echo "Profile name can contains only : alphanumeric characters, dash, underline"
+    if ! [[ $config =~ [a-zA-Z0-9] ]]; then
+        echo "Profile name can contains only : alphanumeric characters"
         config=''
     else
         if [ $config = 'default' ]; then
